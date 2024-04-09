@@ -121,7 +121,10 @@ function LogProcessor() {
             {Object.keys(skillInfo).length > 0 ? (
               <div>
                 {Object.entries(skillInfo)
-                  .filter(([skill]) => skill !== "Unknown") // This will filter out the "Unknown" skill
+                  .filter(
+                    ([skill, details]) =>
+                      skill !== "Unknown" && details.hits > 0
+                  ) // Exclude "Unknown" and skills with no hits
                   .map(
                     ([
                       skill,
@@ -136,8 +139,12 @@ function LogProcessor() {
                           {visibleSkills[skill] ? "-" : "+"} {skill}
                         </div>
                         <div className="skillDetails">
-                          Min: {min}, Max: {max}, Hits: {hits}, Critical Hits:{" "}
-                          {criticalHits}, Critical Hit Rate:{" "}
+                          Min:{" "}
+                          {min.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                          | Max:{" "}
+                          {max.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                          | Hits: {hits}, Critical Hits: {criticalHits},
+                          Critical Hit Rate:{" "}
                           {hits > 0
                             ? ((criticalHits / hits) * 100).toFixed(2)
                             : 0}
