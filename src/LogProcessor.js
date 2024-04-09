@@ -116,56 +116,62 @@ function LogProcessor() {
               {dps.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </span>
           </div>
-          <div className="skillDetails">
-            {/* Render skill details with conditional className for showing/hiding */}
-            {Object.keys(skillInfo).length > 0 ? (
-              <div>
-                {Object.entries(skillInfo)
-                  .filter(
-                    ([skill, details]) =>
-                      skill !== "Unknown" && details.hits > 0
-                  ) // Exclude "Unknown" and skills with no hits
-                  .map(
-                    ([
-                      skill,
-                      { min, max, criticalHits, hits, damageLines },
-                    ]) => (
-                      <div key={skill} className="skillEntry">
-                        {/* Make the skill name and toggle icon clickable */}
-                        <div
-                          onClick={() => toggleSkillDetails(skill)}
-                          className="skillName"
-                        >
-                          {visibleSkills[skill] ? "-" : "+"} {skill}
-                        </div>
-                        <div className="skillDetails">
-                          Min:{" "}
-                          {min.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                          | Max:{" "}
-                          {max.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                          | Hits: {hits}, Critical Hits: {criticalHits},
-                          Critical Hit Rate:{" "}
-                          {hits > 0
-                            ? ((criticalHits / hits) * 100).toFixed(2)
-                            : 0}
-                          %
-                        </div>
-                        {visibleSkills[skill] && (
-                          <div className="scrollableContent">
-                            <ul>
-                              {damageLines.map((line, index) => (
-                                <li key={index}>{line}</li>
-                              ))}
-                            </ul>
+          <div className="scrollableContent">
+            <div className="skillDetails">
+              {/* Render skill details with conditional className for showing/hiding */}
+              {Object.keys(skillInfo).length > 0 ? (
+                <div>
+                  {Object.entries(skillInfo)
+                    .filter(
+                      ([skill, details]) =>
+                        skill !== "Unknown" && details.hits > 0
+                    ) // Exclude "Unknown" and skills with no hits
+                    .map(
+                      ([
+                        skill,
+                        { min, max, criticalHits, hits, damageLines },
+                      ]) => (
+                        <div key={skill} className="skillEntry">
+                          {/* Make the skill name and toggle icon clickable */}
+                          <div
+                            onClick={() => toggleSkillDetails(skill)}
+                            className="skillName"
+                          >
+                            {visibleSkills[skill] ? "-" : "+"} {skill}
                           </div>
-                        )}
-                      </div>
-                    )
-                  )}
-              </div>
-            ) : (
-              <p>No skill damage information available.</p>
-            )}
+                          <div className="skillDetails">
+                            Min:{" "}
+                            {min
+                              .toFixed(0)
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                            | Max:{" "}
+                            {max
+                              .toFixed(0)
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                            | Hits: {hits}, Critical Hits: {criticalHits},
+                            Critical Hit Rate:{" "}
+                            {hits > 0
+                              ? ((criticalHits / hits) * 100).toFixed(2)
+                              : 0}
+                            %
+                          </div>
+                          {visibleSkills[skill] && (
+                            <div className="scrollableContent">
+                              <ul>
+                                {damageLines.map((line, index) => (
+                                  <li key={index}>{line}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    )}
+                </div>
+              ) : (
+                <p>No skill damage information available.</p>
+              )}
+            </div>
           </div>
         </div>
       )}
