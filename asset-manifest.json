@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/l2-dps-calculator/static/css/main.850ba105.css",
-    "main.js": "/l2-dps-calculator/static/js/main.a3389ff2.js",
+    "main.js": "/l2-dps-calculator/static/js/main.4765810e.js",
     "static/js/453.77f683a9.chunk.js": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js",
     "index.html": "/l2-dps-calculator/index.html",
     "main.850ba105.css.map": "/l2-dps-calculator/static/css/main.850ba105.css.map",
-    "main.a3389ff2.js.map": "/l2-dps-calculator/static/js/main.a3389ff2.js.map",
+    "main.4765810e.js.map": "/l2-dps-calculator/static/js/main.4765810e.js.map",
     "453.77f683a9.chunk.js.map": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.850ba105.css",
-    "static/js/main.a3389ff2.js"
+    "static/js/main.4765810e.js"
   ]
 }
