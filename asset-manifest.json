@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.582dc6ef.css",
-    "main.js": "/static/js/main.1c2d9156.js",
-    "static/js/453.77f683a9.chunk.js": "/static/js/453.77f683a9.chunk.js",
-    "index.html": "/index.html",
-    "main.582dc6ef.css.map": "/static/css/main.582dc6ef.css.map",
-    "main.1c2d9156.js.map": "/static/js/main.1c2d9156.js.map",
-    "453.77f683a9.chunk.js.map": "/static/js/453.77f683a9.chunk.js.map"
+    "main.css": "/l2-dps-calculator/static/css/main.582dc6ef.css",
+    "main.js": "/l2-dps-calculator/static/js/main.1c96eb4e.js",
+    "static/js/453.77f683a9.chunk.js": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js",
+    "index.html": "/l2-dps-calculator/index.html",
+    "main.582dc6ef.css.map": "/l2-dps-calculator/static/css/main.582dc6ef.css.map",
+    "main.1c96eb4e.js.map": "/l2-dps-calculator/static/js/main.1c96eb4e.js.map",
+    "453.77f683a9.chunk.js.map": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.582dc6ef.css",
-    "static/js/main.1c2d9156.js"
+    "static/js/main.1c96eb4e.js"
   ]
 }
