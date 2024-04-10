@@ -34,6 +34,34 @@
   background-color: #005691;
 }
 
+.logProcessorButtonv2 {
+  background-color: #15b500a8; /* A shade of blue for buttons */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logProcessorButtonv2:hover {
+  background-color: #0f7901a8;
+}
+
+.logProcessorButtonv3 {
+  background-color: #741ee5; /* A shade of blue for buttons */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logProcessorButtonv3:hover {
+  background-color: #5615ac;
+}
+
 .skillDetails {
   margin-top: 15px;
 }
@@ -90,4 +118,185 @@
 
 .dpsValue {
   font-weight: lighter;
+}
+
+.savedResultEntry {
+  padding: 10px;
+  border-bottom: 1px solid #2c3e50; /* Adds a subtle line between items */
+  display: flex;
+  justify-content: space-between; /* Separates the DPS result and delete button */
+  align-items: center;
+}
+
+.deleteResultButton {
+  background-color: #e63946; /* A reddish tone for deletion */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.deleteResultButton:hover {
+  background-color: #d62839; /* Darker shade on hover */
+}
+.logProcessorInput {
+  width: calc(100% - 22px); /* Adjust width to account for padding and border */
+  background-color: #112240;
+  color: #8892b0;
+  border: 1px solid #2c3e50;
+  border-radius: 4px;
+  padding: 8px; /* Slightly less padding than the textarea for a refined look */
+  margin-bottom: 10px; /* Space between the input and the next element */
+  font-family: inherit; /* Ensures the font matches the rest of the UI */
+  font-size: 0.9rem; /* Slightly smaller font size than the textarea */
+}
+
+.savedResultsTable {
+  width: 100%;
+  border-collapse: collapse; /* Ensures that table borders are collapsed into a single border */
+}
+
+.savedResultsTable th,
+.savedResultsTable td {
+  text-align: left; /* Align text to the left side of the cell */
+  padding: 10px; /* Padding inside each cell */
+  border-bottom: 1px solid #2c3e50; /* A subtle line between rows */
+}
+
+.savedResultsTable .dpsNameColumn {
+  width: 60%; /* Allocate 60% width to the DPS name column */
+}
+
+.savedResultsTable .dpsValueColumn {
+  width: 30%; /* Allocate 30% width to the DPS value column */
+}
+
+.savedResultsTable .dpsDeleteColumn {
+  width: 10%; /* Allocate 10% width to the delete button column */
+  text-align: right; /* Align the delete button to the right */
+}
+
+.deleteResultButton {
+  background-color: #e63946; /* A reddish tone for deletion */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.savedResultsTable tr {
+  cursor: pointer; /* Shows a pointer cursor to indicate the row is clickable */
+  transition: background-color 0.3s ease;
+}
+
+.savedResultsTable tr:hover {
+  background-color: #112240; /* A subtle hover effect */
+}
+
+/* Ensure that the delete button cell doesn't show pointer cursor */
+.savedResultsTable .dpsDeleteColumn {
+  cursor: default;
+}
+
+.deleteResultButton:hover {
+  background-color: #d62839; /* Darker shade on hover */
+}
+
+h2 {
+  color: #fcaf01;
+}
+.helpIcon {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 10px;
+  background-color: #2c3e50;
+  padding: 20px;
+  border-radius: 20%;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.helpTooltip {
+  position: absolute;
+  z-index: 100;
+  width: 200px; /* Adjust width as needed */
+  bottom: 100%; /* Position above the help icon */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  /* Hide the tooltip when not hovered */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.helpIcon:hover .helpTooltip {
+  /* Show the tooltip when hovering over the icon */
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast {
+  visibility: hidden; /* Hidden by default */
+  min-width: 250px; /* Set a minimum width */
+  margin-left: -125px; /* Displace to the left by half of the width */
+  background-color: #333; /* Dark background for visibility */
+  color: #fff; /* Light text color */
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%; /* Center horizontally */
+  bottom: 50%; /* Lift from bottom */
+  font-size: 17px;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+
+.toast.show {
+  visibility: visible; /* Show the toast */
+  opacity: 1; /* From transparent to opaque */
+}
+
+.toast.hide {
+  visibility: hidden; /* Hide the toast */
+  opacity: 0; /* From opaque to transparent */
+}
+
+.uploadLogDiv {
+  margin-bottom: 30px;
+}
+
+.fightDurationInput {
+  width: 5em; /* Adjust the width to fit 3-4 digits */
+  margin-bottom: 10px; /* Space below the input */
+  color: #8892b0; /* Light grey text color for consistency */
+  background-color: #112240; /* Dark background color */
+  border: 1px solid #2c3e50; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  padding: 8px; /* Padding inside the input */
+  font-family: inherit; /* Inherit the font from the body */
+  font-size: 0.9rem; /* Font size */
+}
+.fightDurationDisplay {
+  color: #8892b0; /* Light grey text for contrast */
+  font-size: 0.8rem; /* Smaller font size */
+  margin-top: 0.5em; /* Space from the name */
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LogProcessor.css"; // Import the stylesheet
 
 function LogProcessor() {
@@ -7,6 +7,48 @@ function LogProcessor() {
   //const [damageLines, setDamageLines] = useState([]);
   const [skillInfo, setSkillInfo] = useState({});
   const [visibleSkills, setVisibleSkills] = useState({});
+  const [saveName, setSaveName] = useState("");
+  const [savedDPSResults, setSavedDPSResults] = useState([]);
+  const [selectedDPSName, setSelectedDPSName] = useState("");
+  const [showHelp, setShowHelp] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [fightDuration, setFightDuration] = useState(60); // Default to 60 seconds
+
+  const showToast = (message) => {
+    setToastMessage(message);
+    setToastVisible(true);
+    setTimeout(() => {
+      setToastVisible(false);
+    }, 3000); // The toast message will hide after 3 seconds
+  };
+
+  const toggleHelp = () => {
+    setShowHelp((prev) => !prev);
+  };
+
+  const fetchSavedDPSResults = () => {
+    const results = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const value = localStorage.getItem(key);
+      try {
+        const dpsData = JSON.parse(value);
+        results.push({ key, ...dpsData });
+      } catch (e) {
+        console.error("Error parsing DPS data from localStorage", e);
+      }
+    }
+
+    // Sort results by DPS in descending order
+    results.sort((a, b) => b.dps - a.dps);
+
+    setSavedDPSResults(results);
+  };
+
+  useEffect(() => {
+    fetchSavedDPSResults();
+  }, []);
 
   const handleCalculateDPS = () => {
     console.log("Calculating DPS...");
@@ -16,10 +58,26 @@ function LogProcessor() {
     setSkillInfo(skillDamageInfo); // Update state with new skill damage info
   };
 
+  const handleSaveDPSResult = () => {
+    const dpsData = {
+      dps,
+      skillInfo,
+      saveName, // The custom name given by the user
+      fightDuration,
+    };
+
+    // Save the DPS data to local storage
+    localStorage.setItem(saveName, JSON.stringify(dpsData));
+    // alert("DPS Result Saved!");
+    showToast("DPS Result Saved!");
+    setSaveName(""); // Clear the save name field
+    fetchSavedDPSResults(); // Refresh the list of saved results
+  };
+
   function calculateDPS(logs) {
     const lines = logs.split("\n");
     let totalDamage = 0;
-    let fightDurationSeconds = 60; // Assuming a fixed duration for simplicity
+    let fightDurationSeconds = fightDuration; // Assuming a fixed duration for simplicity
     let lastSkillUsed = "Unknown"; // Default skill name
     let nextHitIsCritical = false;
     let skillDamageInfo = {
@@ -96,26 +154,129 @@ function LogProcessor() {
     }));
   };
 
+  const removeDPSResult = (key) => {
+    localStorage.removeItem(key);
+    fetchSavedDPSResults(); // Refresh the list
+  };
+
+  const handleRowClick = (dpsData) => {
+    setLogs(dpsData.logs); // Assuming `logs` is part of the saved data structure
+    setDPS(dpsData.dps);
+    setSkillInfo(dpsData.skillInfo);
+    setSelectedDPSName(dpsData.saveName);
+    // Add other state settings as needed
+  };
+
+  //   const handleFileUpload = (event) => {
+  //     const file = event.target.files[0];
+  //     if (file) {
+  //       const reader = new FileReader();
+  //       reader.onload = (e) => {
+  //         const content = e.target.result;
+  //         // Assuming the content of the .log file is suitable for your `logs` state
+  //         setLogs(content);
+  //       };
+  //       reader.readAsText(file);
+  //     }
+  //   };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file && file.name.endsWith(".log")) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target.result;
+        setLogs(content);
+      };
+      reader.readAsText(file);
+    } else {
+      showToast("Please upload a valid .log file");
+    }
+  };
+
   return (
     <div className="logProcessorContainer">
+      <div className={`toast ${toastVisible ? "show" : ""}`}>
+        {toastMessage}
+      </div>
+      <div className="helpIcon" onClick={toggleHelp}>
+        ?
+        {showHelp && (
+          <div className="helpTooltip">
+            <p>
+              <strong>Keep this in mind:</strong>
+            </p>
+            <p>
+              Your DPS might vary from gear, build, skill rotation and how good
+              you are.
+            </p>
+            <p>You could be doing less DPS than you should.</p>
+          </div>
+        )}
+      </div>
+      <div className="uploadLogDiv">
+        <label className="logProcessorButtonv2">
+          Upload Log File
+          <input
+            type="file"
+            accept=".log"
+            onChange={handleFileUpload}
+            style={{ display: "none" }}
+          />
+        </label>
+      </div>
+
       <textarea
         className="logProcessorTextarea"
         value={logs}
         onChange={(e) => setLogs(e.target.value)}
         placeholder="Paste your combat logs here..."
       ></textarea>
+      <p>Enter the fight duration in seconds</p>
+      <input
+        type="number"
+        className="fightDurationInput"
+        value={fightDuration}
+        onChange={(e) => setFightDuration(Number(e.target.value))}
+        placeholder="Secs"
+        min="1"
+        required
+      />
+      <br></br>
       <button className="logProcessorButton" onClick={handleCalculateDPS}>
         Calculate DPS
       </button>
+
       {dps > 0 && (
         <div>
-          <div className="dpsOutput">
-            <span className="dpsLabel">DPS:</span>
-            {/* <span className="dpsValue">{dps.toFixed(2)}</span> */}
-            <span className="dpsValue">
-              {dps.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-            </span>
+          <div className="dpsResultContainer">
+            {selectedDPSName && (
+              <>
+                <h2>{selectedDPSName}</h2>
+                <div>Duration: {fightDuration} seconds</div>
+              </>
+            )}
+            <div className="dpsOutput">
+              <span className="dpsLabel">DPS:</span>
+              <span className="dpsValue">
+                {dps.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </span>
+            </div>
           </div>
+          <input
+            type="text"
+            className="logProcessorInput"
+            value={saveName}
+            onChange={(e) => setSaveName(e.target.value)}
+            placeholder="Enter a name for your DPS result..."
+          />
+          <button
+            className="logProcessorButtonv3"
+            onClick={handleSaveDPSResult}
+          >
+            Save DPS Result locally
+          </button>
+
           <div className="scrollableContent">
             <div className="skillDetails">
               {/* Render skill details with conditional className for showing/hiding */}
@@ -175,6 +336,43 @@ function LogProcessor() {
           </div>
         </div>
       )}
+      <div className="savedResultsContainer">
+        <div className="scrollableContent">
+          <h2>Saved DPS Results</h2>
+          {savedDPSResults.length > 0 ? (
+            <table className="savedResultsTable">
+              <tbody>
+                {savedDPSResults.map((result, index) => (
+                  <tr key={index} onClick={() => handleRowClick(result)}>
+                    <td className="dpsNameColumn">
+                      {result.saveName}
+                      <div className="fightDurationDisplay">
+                        Duration: {result.fightDuration || "60"} seconds
+                      </div>
+                    </td>
+                    <td className="dpsValueColumn">
+                      {result.dps
+                        .toFixed(2)
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                      DPS
+                    </td>
+                    <td className="dpsDeleteColumn">
+                      <button
+                        className="deleteResultButton"
+                        onClick={() => removeDPSResult(result.key)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No saved DPS results.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

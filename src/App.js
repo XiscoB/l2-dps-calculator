@@ -5,7 +5,11 @@ import LogProcessor from "./LogProcessor";
 function App() {
   return (
     <div className="App">
+      <header className="App-header">
+        <h1>L2 DPS Calculator</h1>
+      </header>
       <LogProcessor />
+      <footer className="App-footer">Made by @Xiscoteon</footer>
     </div>
   );
 }
