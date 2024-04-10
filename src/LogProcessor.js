@@ -200,17 +200,37 @@ function LogProcessor() {
         {toastMessage}
       </div>
       <div className="helpIcon" onClick={toggleHelp}>
-        ?
+        Help
         {showHelp && (
           <div className="helpTooltip">
             <p>
               <strong>Keep this in mind:</strong>
             </p>
             <p>
-              Your DPS might vary from gear, build, skill rotation and how good
-              you are.
+              Command <strong>///textcapture on</strong> will start recording
+              the chat/systemchat
             </p>
-            <p>You could be doing less DPS than you should.</p>
+            <p>
+              Once you're done with it, use{" "}
+              <p>
+                <strong>///textcapture off</strong>
+              </p>
+            </p>
+            <p>
+              You will be able to find the log file in: Lineage2/system folder,
+              under a name like this:{" "}
+              <strong>CharacterName_L2_04_09_23_36.log</strong>
+              <p>You can upload it directly to the L2 DPS Calculator.</p>
+            </p>
+            <p>
+              <strong>
+                Your DPS might vary from gear, build, skill rotation and how
+                good you are.
+              </strong>
+            </p>
+            <p>
+              <strong>You could be doing less DPS than you should.</strong>
+            </p>
           </div>
         )}
       </div>

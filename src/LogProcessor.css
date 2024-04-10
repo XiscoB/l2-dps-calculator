@@ -229,12 +229,12 @@ h2 {
 }
 
 .helpTooltip {
-  position: absolute;
+  position: fixed; /* Position relative to the viewport */
   z-index: 100;
-  width: 200px; /* Adjust width as needed */
-  bottom: 100%; /* Position above the help icon */
-  left: 50%;
-  transform: translateX(-50%);
+  width: 300px; /* Adjust width as needed */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the position correctly */
   background-color: #f9f9f9;
   color: #333;
   padding: 10px;
