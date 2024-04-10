@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/l2-dps-calculator/static/css/main.582dc6ef.css",
-    "main.js": "/l2-dps-calculator/static/js/main.1c96eb4e.js",
+    "main.css": "/l2-dps-calculator/static/css/main.3474f35b.css",
+    "main.js": "/l2-dps-calculator/static/js/main.8c0e9986.js",
     "static/js/453.77f683a9.chunk.js": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js",
+    "static/media/logo.png": "/l2-dps-calculator/static/media/logo.4965a81423248eab0e92.png",
     "index.html": "/l2-dps-calculator/index.html",
-    "main.582dc6ef.css.map": "/l2-dps-calculator/static/css/main.582dc6ef.css.map",
-    "main.1c96eb4e.js.map": "/l2-dps-calculator/static/js/main.1c96eb4e.js.map",
+    "main.3474f35b.css.map": "/l2-dps-calculator/static/css/main.3474f35b.css.map",
+    "main.8c0e9986.js.map": "/l2-dps-calculator/static/js/main.8c0e9986.js.map",
     "453.77f683a9.chunk.js.map": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.582dc6ef.css",
-    "static/js/main.1c96eb4e.js"
+    "static/css/main.3474f35b.css",
+    "static/js/main.8c0e9986.js"
   ]
 }
