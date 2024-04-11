@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./LogProcessor.css"; // Import the stylesheet
 
 function LogProcessor() {
@@ -194,6 +194,30 @@ function LogProcessor() {
     }
   };
 
+  const exportResultsToClipboard = useCallback(() => {
+    let resultsText = "**Saved DPS Results**\n\n";
+    resultsText += savedDPSResults
+      .map(
+        (result, index) =>
+          `- ${index + 1}: ${result.saveName}, Duration: ${
+            result.fightDuration || "60"
+          } seconds, DPS: ${result.dps
+            .toFixed(2)
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
+      )
+      .join("\n");
+
+    navigator.clipboard.writeText(resultsText).then(
+      () => {
+        showToast("Results copied to clipboard!");
+      },
+      (err) => {
+        showToast("Failed to copy results.");
+        console.error("Could not copy text: ", err);
+      }
+    );
+  }, [savedDPSResults]);
+
   return (
     <div className="logProcessorContainer">
       <div className={`toast ${toastVisible ? "show" : ""}`}>
@@ -359,35 +383,44 @@ function LogProcessor() {
       <div className="savedResultsContainer">
         <div className="scrollableContent">
           <h2>Saved DPS Results</h2>
+
           {savedDPSResults.length > 0 ? (
-            <table className="savedResultsTable">
-              <tbody>
-                {savedDPSResults.map((result, index) => (
-                  <tr key={index} onClick={() => handleRowClick(result)}>
-                    <td className="dpsNameColumn">
-                      {result.saveName}
-                      <div className="fightDurationDisplay">
-                        Duration: {result.fightDuration || "60"} seconds
-                      </div>
-                    </td>
-                    <td className="dpsValueColumn">
-                      {result.dps
-                        .toFixed(2)
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                      DPS
-                    </td>
-                    <td className="dpsDeleteColumn">
-                      <button
-                        className="deleteResultButton"
-                        onClick={() => removeDPSResult(result.key)}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div>
+              <button
+                className="logProcessorButton"
+                onClick={exportResultsToClipboard}
+              >
+                Copy DPS Results Table to clipboard
+              </button>
+              <table className="savedResultsTable">
+                <tbody>
+                  {savedDPSResults.map((result, index) => (
+                    <tr key={index} onClick={() => handleRowClick(result)}>
+                      <td className="dpsNameColumn">
+                        {result.saveName}
+                        <div className="fightDurationDisplay">
+                          Duration: {result.fightDuration || "60"} seconds
+                        </div>
+                      </td>
+                      <td className="dpsValueColumn">
+                        {result.dps
+                          .toFixed(2)
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                        DPS
+                      </td>
+                      <td className="dpsDeleteColumn">
+                        <button
+                          className="deleteResultButton"
+                          onClick={() => removeDPSResult(result.key)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
             <p>No saved DPS results.</p>
           )}
