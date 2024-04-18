@@ -384,7 +384,7 @@ function LogProcessor() {
       </button>
 
       {comparisonData.length > 0 && (
-        <button onClick={displayComparison} className="logProcessorButton">
+        <button onClick={displayComparison} className="logProcessorButtonv3">
           Show Comparison Results
         </button>
       )}
@@ -452,11 +452,12 @@ function LogProcessor() {
                           >
                             {visibleSkills[skill] ? "-" : "+"} {skill}
                           </div>
+                          <br></br>
                           <button
                             onClick={() =>
                               toggleComparison(skill, selectedDPSName)
                             }
-                            className={`compareButton ${
+                            className={`logProcessorButtonv2 compareButton ${
                               comparisonData.some(
                                 (data) =>
                                   data.skill === skill &&
@@ -474,6 +475,7 @@ function LogProcessor() {
                               ? "Remove from Compare"
                               : "Add to Compare"}
                           </button>
+
                           <div className="skillDetails">
                             Min:{" "}
                             {min
