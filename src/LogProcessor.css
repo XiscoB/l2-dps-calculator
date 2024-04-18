@@ -48,6 +48,22 @@
   background-color: #0f7901a8;
 }
 
+.dragDropText {
+  color: #8892b0;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.dragDropOverlay {
+  border: 2px dashed #8892b0;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
 .logProcessorButtonv3 {
   background-color: #741ee5; /* A shade of blue for buttons */
   color: white;

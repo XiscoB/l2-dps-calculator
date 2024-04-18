@@ -78,3 +78,21 @@ h1 {
   color: #ffffff; /* White text for the title */
   font-size: 2rem; /* Larger font size for the title */
 }
+
+.ComponentSwitch {
+  margin-bottom: 20px;
+}
+
+.ComponentSwitch button {
+  padding: 10px;
+  margin-right: 5px;
+  background-color: #0077b5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ComponentSwitch button:hover {
+  background-color: #005691;
+}

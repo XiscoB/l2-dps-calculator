@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./LogProcessor.css"; // Import the stylesheet
+import ComparisonDisplay from "./ComparisonDisplay";
 
 function LogProcessor() {
   const [logs, setLogs] = useState("");
@@ -14,6 +15,9 @@ function LogProcessor() {
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [fightDuration, setFightDuration] = useState(60); // Default to 60 seconds
+  const [dragActive, setDragActive] = useState(false);
+  const [comparisonSkills, setComparisonSkills] = useState([]);
+  const [comparisonData, setComparisonData] = useState([]);
 
   const showToast = (message) => {
     setToastMessage(message);
@@ -180,6 +184,39 @@ function LogProcessor() {
   //     }
   //   };
 
+  const handleDragOver = (event) => {
+    event.preventDefault(); // Necessary to allow the drop
+    // Set state to indicate the drag is occurring, if you want to change styles or effects
+    setDragActive(true);
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0]; // Assuming single file drop, adjust as necessary
+    if (file && file.name.endsWith(".log")) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target.result;
+        setLogs(content);
+      };
+      reader.readAsText(file);
+    } else {
+      showToast("Please upload a valid .log file");
+    }
+    setDragActive(false);
+  };
+
+  const handleDragEnter = (event) => {
+    event.preventDefault();
+    // Optional: Adjust state to show visual feedback
+  };
+
+  const handleDragLeave = (event) => {
+    event.preventDefault();
+    setDragActive(false);
+    // Optional: Revert visual feedback state
+  };
+
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.name.endsWith(".log")) {
@@ -217,6 +254,51 @@ function LogProcessor() {
       }
     );
   }, [savedDPSResults]);
+
+  const toggleComparison = (skill, resultKey) => {
+    setComparisonData((prev) => {
+      const existingSkillIndex = prev.findIndex(
+        (data) => data.skill === skill && data.key === resultKey
+      );
+      if (existingSkillIndex >= 0) {
+        // Skill is already in the comparison data, remove it
+        return prev.filter((_, index) => index !== existingSkillIndex);
+      } else {
+        // Add new skill data
+        const result = savedDPSResults.find((res) => res.key === resultKey);
+        if (!result) return prev;
+        return [
+          ...prev,
+          { key: resultKey, skill, data: result.skillInfo[skill] },
+        ];
+      }
+    });
+  };
+
+  const performComparison = () => {
+    const comparisonData = savedDPSResults.map((result) => ({
+      saveName: result.saveName,
+      skills: comparisonSkills.map((skill) => ({
+        skill,
+        data: result.skillInfo[skill],
+      })),
+    }));
+    console.log(comparisonData); // Or display this data in a suitable UI element
+  };
+
+  const displayComparison = () => {
+    // Logic to display or process the comparison data
+    console.log("Comparison Data:", comparisonData);
+    // Further UI rendering logic here
+  };
+
+  const removeFromComparison = (index) => {
+    setComparisonData((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const clearComparisonData = () => {
+    setComparisonData([]);
+  };
 
   return (
     <div className="logProcessorContainer">
@@ -258,7 +340,13 @@ function LogProcessor() {
           </div>
         )}
       </div>
-      <div className="uploadLogDiv">
+      <div
+        className="uploadLogDiv"
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+      >
         <label className="logProcessorButtonv2">
           Upload Log File
           <input
@@ -268,14 +356,18 @@ function LogProcessor() {
             style={{ display: "none" }}
           />
         </label>
-      </div>
+        {/* Optional: Add the class for the div for drag and drop depending on dragActive  */}
+        <div className={`dragDropText ${dragActive ? "dragDropOverlay" : ""}`}>
+          {dragActive ? "Drop the file here" : "or drag and drop the file here"}
 
-      <textarea
-        className="logProcessorTextarea"
-        value={logs}
-        onChange={(e) => setLogs(e.target.value)}
-        placeholder="Paste your combat logs here..."
-      ></textarea>
+          <textarea
+            className="logProcessorTextarea"
+            value={logs}
+            onChange={(e) => setLogs(e.target.value)}
+            placeholder="Paste your combat logs here..."
+          ></textarea>
+        </div>
+      </div>
       <p>Enter the fight duration in seconds</p>
       <input
         type="number"
@@ -290,6 +382,22 @@ function LogProcessor() {
       <button className="logProcessorButton" onClick={handleCalculateDPS}>
         Calculate DPS
       </button>
+
+      {comparisonData.length > 0 && (
+        <button onClick={displayComparison} className="logProcessorButton">
+          Show Comparison Results
+        </button>
+      )}
+
+      <div>
+        {comparisonData.length > 0 && (
+          <ComparisonDisplay
+            comparisonData={comparisonData}
+            removeFromComparison={removeFromComparison}
+            clearComparisonData={clearComparisonData}
+          />
+        )}
+      </div>
 
       {dps > 0 && (
         <div>
@@ -344,6 +452,28 @@ function LogProcessor() {
                           >
                             {visibleSkills[skill] ? "-" : "+"} {skill}
                           </div>
+                          <button
+                            onClick={() =>
+                              toggleComparison(skill, selectedDPSName)
+                            }
+                            className={`compareButton ${
+                              comparisonData.some(
+                                (data) =>
+                                  data.skill === skill &&
+                                  data.key === selectedDPSName
+                              )
+                                ? "selected"
+                                : ""
+                            }`}
+                          >
+                            {comparisonData.some(
+                              (data) =>
+                                data.skill === skill &&
+                                data.key === selectedDPSName
+                            )
+                              ? "Remove from Compare"
+                              : "Add to Compare"}
+                          </button>
                           <div className="skillDetails">
                             Min:{" "}
                             {min

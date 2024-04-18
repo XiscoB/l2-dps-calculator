@@ -1,0 +1,94 @@
+h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: yellowgreen;
+}
+
+/* lets add a border to the main div, so it does look like a box */
+
+.comparisonContainer {
+  border: 1px solid yellowgreen;
+  padding: 10px;
+  margin: 10px;
+}
+
+/* let's update the comparisonTable to have a border and some padding */
+.comparisonTable {
+  padding: 10px;
+  width: 100%;
+}
+
+.comparisonContainer {
+  margin-top: 20px;
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+
+  text-align: center;
+  vertical-align: middle;
+}
+
+.comparisonTable th {
+  background-color: #15b500a8;
+}
+
+.clearAllButton,
+.removeRowButton {
+  cursor: pointer;
+  background-color: #f44336; /* Red */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.clearAllButton {
+  float: right;
+  margin-right: 20px;
+}
+
+.removeRowButton {
+  color: #fff;
+  background-color: #f44336;
+}
+
+.comparisonContainer {
+  margin-top: 20px;
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  padding: 8px;
+}
+
+.detailRow .detailsContainer {
+  display: none;
+}
+
+.detailRow.visible .detailsContainer {
+  display: block;
+}
+
+.detailsButton {
+  cursor: pointer;
+  background-color: #0077b5;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
