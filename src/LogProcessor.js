@@ -258,6 +258,7 @@ function LogProcessor() {
   }, [savedDPSResults]);
 
   const toggleComparison = (skill, resultKey) => {
+    console.log("Toggling comparison for", skill, resultKey);
     setComparisonData((prev) => {
       const existingSkillIndex = prev.findIndex(
         (data) => data.skill === skill && data.key === resultKey
@@ -385,11 +386,11 @@ function LogProcessor() {
         Calculate DPS
       </button>
 
-      {comparisonData.length > 0 && (
+      {/* {comparisonData.length > 0 && (
         <button onClick={displayComparison} className="logProcessorButtonv3">
           Show Comparison Results
         </button>
-      )}
+      )} */}
 
       <div>
         {comparisonData.length > 0 && (

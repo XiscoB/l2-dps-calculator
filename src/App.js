@@ -5,7 +5,7 @@ import BuffDebuffChecker from "./BuffDebuffChecker";
 import logo from "./logo.png"; // Import the logo
 
 function App() {
-  const version = "1.0.3";
+  const version = "1.0.4";
   const [activeComponent, setActiveComponent] = useState("logProcessor"); // This state controls which component is displayed
   return (
     <div className="App">

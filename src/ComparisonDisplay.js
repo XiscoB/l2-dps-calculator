@@ -39,7 +39,7 @@ function ComparisonDisplay({
         </thead>
         <tbody>
           {comparisonData.map((item, index) => (
-            <>
+            <React.Fragment key={index}>
               <tr key={index}>
                 <td>{item.skill}</td>
                 <td>{item.key}</td>
@@ -99,7 +99,7 @@ function ComparisonDisplay({
                   </td>
                 </tr>
               )}
-            </>
+            </React.Fragment>
           ))}
         </tbody>
       </table>
