@@ -126,6 +126,8 @@ function LogProcessor() {
       // Critical hit detection
       if (line.includes("landed a critical hit")) {
         nextHitIsCritical = true;
+      } else if (line.includes("M. Critical!")) {
+        nextHitIsCritical = true;
       }
 
       // Damage line processing
