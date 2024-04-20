@@ -79,6 +79,10 @@ h1 {
   font-size: 2rem; /* Larger font size for the title */
 }
 
+p {
+  color: #8892b0; /* Light grey text for contrast */
+}
+
 .ComponentSwitch {
   margin-bottom: 20px;
 }

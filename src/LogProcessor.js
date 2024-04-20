@@ -31,6 +31,25 @@ function LogProcessor() {
     setShowHelp((prev) => !prev);
   };
 
+  // const fetchSavedDPSResults = () => {
+  //   const results = [];
+  //   for (let i = 0; i < localStorage.length; i++) {
+  //     const key = localStorage.key(i);
+  //     const value = localStorage.getItem(key);
+  //     try {
+  //       const dpsData = JSON.parse(value);
+  //       results.push({ key, ...dpsData });
+  //     } catch (e) {
+  //       console.error("Error parsing DPS data from localStorage", e);
+  //     }
+  //   }
+
+  //   // Sort results by DPS in descending order
+  //   results.sort((a, b) => b.dps - a.dps);
+
+  //   setSavedDPSResults(results);
+  // };
+
   const fetchSavedDPSResults = () => {
     const results = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -38,6 +57,28 @@ function LogProcessor() {
       const value = localStorage.getItem(key);
       try {
         const dpsData = JSON.parse(value);
+        let dataUpdated = false;
+
+        // Check each skill for an average; if not present, calculate it
+        Object.keys(dpsData.skillInfo).forEach((skill) => {
+          const details = dpsData.skillInfo[skill];
+          if (
+            details.validDamages &&
+            details.validDamages.length > 0 &&
+            details.average === undefined
+          ) {
+            details.average =
+              details.validDamages.reduce((acc, val) => acc + val, 0) /
+              details.validDamages.length;
+            dataUpdated = true;
+          }
+        });
+
+        // If any data was updated, save the modified result back to local storage
+        if (dataUpdated) {
+          localStorage.setItem(key, JSON.stringify(dpsData));
+        }
+
         results.push({ key, ...dpsData });
       } catch (e) {
         console.error("Error parsing DPS data from localStorage", e);
@@ -88,63 +129,70 @@ function LogProcessor() {
       Unknown: {
         min: Infinity,
         max: 0,
+        average: 0,
         criticalHits: 0,
         hits: 0,
         damageLines: [],
+        validDamages: [],
       },
     };
 
     lines.forEach((line) => {
-      // Skill usage detection
-      //const skillUsedMatch = line.match(/You have used (\w+)/);
       const skillUsedMatch = line.match(/You have used (.+?)[.]/);
 
       if (skillUsedMatch && skillUsedMatch[1]) {
         lastSkillUsed = skillUsedMatch[1].trim();
-
-        // if (!skillDamageInfo[lastSkillUsed]) {
-        //   skillDamageInfo[lastSkillUsed] = {
-        //     min: Infinity,
-        //     max: 0,
-        //     criticalHits: 0,
-        //     hits: 0,
-        //     damageLines: [],
-        //   };
-        // }
-        if (lastSkillUsed && !skillDamageInfo[lastSkillUsed]) {
-          // Initialize the skill in the skillDamageInfo object if it doesn't exist
+        if (!skillDamageInfo[lastSkillUsed]) {
           skillDamageInfo[lastSkillUsed] = {
             min: Infinity,
             max: 0,
+            average: 0,
             criticalHits: 0,
             hits: 0,
             damageLines: [],
+            validDamages: [],
           };
         }
       }
 
-      // Critical hit detection
-      if (line.includes("landed a critical hit")) {
-        nextHitIsCritical = true;
-      } else if (line.includes("M. Critical!")) {
+      if (
+        line.includes("landed a critical hit") ||
+        line.includes("M. Critical!")
+      ) {
         nextHitIsCritical = true;
       }
 
-      // Damage line processing
       const damageInfo = line.match(/has dealt ([\d,]+) damage/i);
       if (damageInfo) {
         const damage = parseInt(damageInfo[1].replace(/,/g, ""), 10);
         totalDamage += damage;
         skillDamageInfo[lastSkillUsed].damageLines.push(line);
-        skillDamageInfo[lastSkillUsed].hits += 1; // Increment hits
+        skillDamageInfo[lastSkillUsed].hits += 1;
 
-        let skillData = skillDamageInfo[lastSkillUsed];
-        skillData.min = Math.min(skillData.min, damage);
-        skillData.max = Math.max(skillData.max, damage);
+        if (damage > 1) {
+          // Ignore damages of 1 and 0 for min and average calculations
+          let skillData = skillDamageInfo[lastSkillUsed];
+          skillData.validDamages.push(damage);
+          skillData.min = Math.min(skillData.min, damage);
+          skillData.max = Math.max(skillData.max, damage);
+        }
         if (nextHitIsCritical) {
-          skillData.criticalHits += 1;
+          skillDamageInfo[lastSkillUsed].criticalHits += 1;
           nextHitIsCritical = false;
         }
+      }
+    });
+
+    // Update average calculations
+    Object.keys(skillDamageInfo).forEach((skill) => {
+      const data = skillDamageInfo[skill];
+      if (data.validDamages.length > 0) {
+        data.average =
+          data.validDamages.reduce((acc, val) => acc + val, 0) /
+          data.validDamages.length;
+      } else {
+        data.average = 0; // If no valid damages, average is 0
+        data.min = 0; // If no valid damages, set min to 0
       }
     });
 
@@ -445,7 +493,7 @@ function LogProcessor() {
                     .map(
                       ([
                         skill,
-                        { min, max, criticalHits, hits, damageLines },
+                        { min, max, criticalHits, hits, damageLines, average },
                       ]) => (
                         <div key={skill} className="skillEntry">
                           {/* Make the skill name and toggle icon clickable */}
@@ -488,6 +536,12 @@ function LogProcessor() {
                             {max
                               .toFixed(0)
                               .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                            | Average:{" "}
+                            {average
+                              ? average
+                                  .toFixed(0)
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                              : "N/A"}{" "}
                             | Hits: {hits}, Critical Hits: {criticalHits},
                             Critical Hit Rate:{" "}
                             {hits > 0
