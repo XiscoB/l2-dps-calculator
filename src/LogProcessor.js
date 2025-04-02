@@ -165,11 +165,13 @@ function LogProcessor() {
       const damageInfo = line.match(/has dealt ([\d,]+) damage/i);
       if (damageInfo) {
         const damage = parseInt(damageInfo[1].replace(/,/g, ""), 10);
-        totalDamage += damage;
-        skillDamageInfo[lastSkillUsed].damageLines.push(line);
-        skillDamageInfo[lastSkillUsed].hits += 1;
 
+        // console.log("Damage before applying valid damages:", damage);
         if (damage > 1) {
+          totalDamage += damage;
+          skillDamageInfo[lastSkillUsed].damageLines.push(line);
+          skillDamageInfo[lastSkillUsed].hits += 1;
+          // console.log("Damage:", damage);
           // Ignore damages of 1 and 0 for min and average calculations
           let skillData = skillDamageInfo[lastSkillUsed];
           skillData.validDamages.push(damage);
