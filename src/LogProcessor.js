@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
-import "./LogProcessor.css"; // Import the stylesheet
+import "./LogProcessor.css";
 import ComparisonDisplay from "./ComparisonDisplay";
+import html2canvas from "html2canvas";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 function LogProcessor() {
   const [logs, setLogs] = useState("");
   const [dps, setDPS] = useState(0);
-  //const [damageLines, setDamageLines] = useState([]);
   const [skillInfo, setSkillInfo] = useState({});
   const [visibleSkills, setVisibleSkills] = useState({});
   const [saveName, setSaveName] = useState("");
@@ -14,9 +16,8 @@ function LogProcessor() {
   const [showHelp, setShowHelp] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-  const [fightDuration, setFightDuration] = useState(60); // Default to 60 seconds
+  const [fightDuration, setFightDuration] = useState(60);
   const [dragActive, setDragActive] = useState(false);
-  const [comparisonSkills, setComparisonSkills] = useState([]);
   const [comparisonData, setComparisonData] = useState([]);
 
   const showToast = (message) => {
@@ -24,31 +25,12 @@ function LogProcessor() {
     setToastVisible(true);
     setTimeout(() => {
       setToastVisible(false);
-    }, 3000); // The toast message will hide after 3 seconds
+    }, 3000);
   };
 
   const toggleHelp = () => {
     setShowHelp((prev) => !prev);
   };
-
-  // const fetchSavedDPSResults = () => {
-  //   const results = [];
-  //   for (let i = 0; i < localStorage.length; i++) {
-  //     const key = localStorage.key(i);
-  //     const value = localStorage.getItem(key);
-  //     try {
-  //       const dpsData = JSON.parse(value);
-  //       results.push({ key, ...dpsData });
-  //     } catch (e) {
-  //       console.error("Error parsing DPS data from localStorage", e);
-  //     }
-  //   }
-
-  //   // Sort results by DPS in descending order
-  //   results.sort((a, b) => b.dps - a.dps);
-
-  //   setSavedDPSResults(results);
-  // };
 
   const fetchSavedDPSResults = () => {
     const results = [];
@@ -59,7 +41,6 @@ function LogProcessor() {
         const dpsData = JSON.parse(value);
         let dataUpdated = false;
 
-        // Check each skill for an average; if not present, calculate it
         Object.keys(dpsData.skillInfo).forEach((skill) => {
           const details = dpsData.skillInfo[skill];
           if (
@@ -74,7 +55,6 @@ function LogProcessor() {
           }
         });
 
-        // If any data was updated, save the modified result back to local storage
         if (dataUpdated) {
           localStorage.setItem(key, JSON.stringify(dpsData));
         }
@@ -85,9 +65,7 @@ function LogProcessor() {
       }
     }
 
-    // Sort results by DPS in descending order
     results.sort((a, b) => b.dps - a.dps);
-
     setSavedDPSResults(results);
   };
 
@@ -95,35 +73,40 @@ function LogProcessor() {
     fetchSavedDPSResults();
   }, []);
 
+  const clearCalculatedDPS = () => {
+    setDPS(0);
+    setSkillInfo({});
+    setSelectedDPSName("");
+    setVisibleSkills({});
+  };
+
   const handleCalculateDPS = () => {
     console.log("Calculating DPS...");
     let { dpsToShow, skillDamageInfo } = calculateDPS(logs);
     console.log(dpsToShow);
     setDPS(dpsToShow);
-    setSkillInfo(skillDamageInfo); // Update state with new skill damage info
+    setSkillInfo(skillDamageInfo);
   };
 
   const handleSaveDPSResult = () => {
     const dpsData = {
       dps,
       skillInfo,
-      saveName, // The custom name given by the user
+      saveName,
       fightDuration,
     };
 
-    // Save the DPS data to local storage
     localStorage.setItem(saveName, JSON.stringify(dpsData));
-    // alert("DPS Result Saved!");
     showToast("DPS Result Saved!");
-    setSaveName(""); // Clear the save name field
-    fetchSavedDPSResults(); // Refresh the list of saved results
+    setSaveName("");
+    fetchSavedDPSResults();
   };
 
   function calculateDPS(logs) {
     const lines = logs.split("\n");
     let totalDamage = 0;
-    let fightDurationSeconds = fightDuration; // Assuming a fixed duration for simplicity
-    let lastSkillUsed = "Unknown"; // Default skill name
+    let fightDurationSeconds = fightDuration;
+    let lastSkillUsed = "Unknown";
     let nextHitIsCritical = false;
     let skillDamageInfo = {
       Unknown: {
@@ -166,13 +149,10 @@ function LogProcessor() {
       if (damageInfo) {
         const damage = parseInt(damageInfo[1].replace(/,/g, ""), 10);
 
-        // console.log("Damage before applying valid damages:", damage);
         if (damage > 1) {
           totalDamage += damage;
           skillDamageInfo[lastSkillUsed].damageLines.push(line);
           skillDamageInfo[lastSkillUsed].hits += 1;
-          // console.log("Damage:", damage);
-          // Ignore damages of 1 and 0 for min and average calculations
           let skillData = skillDamageInfo[lastSkillUsed];
           skillData.validDamages.push(damage);
           skillData.min = Math.min(skillData.min, damage);
@@ -185,7 +165,6 @@ function LogProcessor() {
       }
     });
 
-    // Update average calculations
     Object.keys(skillDamageInfo).forEach((skill) => {
       const data = skillDamageInfo[skill];
       if (data.validDamages.length > 0) {
@@ -193,8 +172,8 @@ function LogProcessor() {
           data.validDamages.reduce((acc, val) => acc + val, 0) /
           data.validDamages.length;
       } else {
-        data.average = 0; // If no valid damages, average is 0
-        data.min = 0; // If no valid damages, set min to 0
+        data.average = 0;
+        data.min = 0;
       }
     });
 
@@ -202,54 +181,40 @@ function LogProcessor() {
     return { dpsToShow: dps, skillDamageInfo };
   }
 
-  // Toggle the visibility of skill details
   const toggleSkillDetails = (skill) => {
     setVisibleSkills((prev) => ({
       ...prev,
-      [skill]: !prev[skill], // Toggle the boolean value
+      [skill]: !prev[skill],
     }));
   };
 
   const removeDPSResult = (key) => {
     localStorage.removeItem(key);
-    fetchSavedDPSResults(); // Refresh the list
+    fetchSavedDPSResults();
   };
 
   const handleRowClick = (dpsData) => {
-    setLogs(dpsData.logs); // Assuming `logs` is part of the saved data structure
     setDPS(dpsData.dps);
     setSkillInfo(dpsData.skillInfo);
     setSelectedDPSName(dpsData.saveName);
-    // Add other state settings as needed
+    setFightDuration(dpsData.fightDuration || 60);
   };
 
-  //   const handleFileUpload = (event) => {
-  //     const file = event.target.files[0];
-  //     if (file) {
-  //       const reader = new FileReader();
-  //       reader.onload = (e) => {
-  //         const content = e.target.result;
-  //         // Assuming the content of the .log file is suitable for your `logs` state
-  //         setLogs(content);
-  //       };
-  //       reader.readAsText(file);
-  //     }
-  //   };
-
   const handleDragOver = (event) => {
-    event.preventDefault(); // Necessary to allow the drop
-    // Set state to indicate the drag is occurring, if you want to change styles or effects
+    event.preventDefault();
     setDragActive(true);
   };
 
   const handleDrop = (event) => {
     event.preventDefault();
-    const file = event.dataTransfer.files[0]; // Assuming single file drop, adjust as necessary
+    const file = event.dataTransfer.files[0];
     if (file && file.name.endsWith(".log")) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const content = e.target.result;
         setLogs(content);
+        clearCalculatedDPS();
+        showToast("Log loaded! Click Calculate DPS to analyze.");
       };
       reader.readAsText(file);
     } else {
@@ -260,13 +225,11 @@ function LogProcessor() {
 
   const handleDragEnter = (event) => {
     event.preventDefault();
-    // Optional: Adjust state to show visual feedback
   };
 
   const handleDragLeave = (event) => {
     event.preventDefault();
     setDragActive(false);
-    // Optional: Revert visual feedback state
   };
 
   const handleFileUpload = (event) => {
@@ -276,6 +239,8 @@ function LogProcessor() {
       reader.onload = (e) => {
         const content = e.target.result;
         setLogs(content);
+        clearCalculatedDPS();
+        showToast("Log loaded! Click Calculate DPS to analyze.");
       };
       reader.readAsText(file);
     } else {
@@ -307,6 +272,61 @@ function LogProcessor() {
     );
   }, [savedDPSResults]);
 
+  const exportResultsAsImage = useCallback(async () => {
+    const element = document.getElementById("saved-results-container");
+    if (!element) return;
+
+    try {
+      // Hide export buttons and delete buttons temporarily
+      const actionButtons = element.querySelectorAll(".savedResultsActions");
+      const deleteButtons = element.querySelectorAll(".deleteResultButton");
+      actionButtons.forEach((btn) => (btn.style.display = "none"));
+      deleteButtons.forEach((btn) => (btn.style.display = "none"));
+      
+      // Wait a bit for the UI to update
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      const canvas = await html2canvas(element, {
+        backgroundColor: "#0a0c10",
+        scale: 3,
+        useCORS: true,
+        logging: false,
+        removeContainer: false,
+        allowTaint: true,
+        foreignObjectRendering: false,
+      });
+      
+      // Restore buttons
+      actionButtons.forEach((btn) => (btn.style.display = ""));
+      deleteButtons.forEach((btn) => (btn.style.display = ""));
+
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const item = new ClipboardItem({ "image/png": blob });
+          navigator.clipboard.write([item]).then(
+            () => {
+              showToast("Image copied to clipboard!");
+            },
+            (err) => {
+              showToast("Failed to copy image.");
+              console.error("Could not copy image: ", err);
+            }
+          );
+        }
+      }, "image/png", 1.0);
+    } catch (err) {
+      showToast("Failed to generate image.");
+      console.error("Could not generate image: ", err);
+    }
+  }, []);
+
+  const getRankBadge = (index) => {
+    if (index === 0) return { label: "TOP 1", class: "rank-gold" };
+    if (index === 1) return { label: "TOP 2", class: "rank-silver" };
+    if (index === 2) return { label: "TOP 3", class: "rank-bronze" };
+    return null;
+  };
+
   const toggleComparison = (skill, resultKey) => {
     console.log("Toggling comparison for", skill, resultKey);
     setComparisonData((prev) => {
@@ -314,10 +334,8 @@ function LogProcessor() {
         (data) => data.skill === skill && data.key === resultKey
       );
       if (existingSkillIndex >= 0) {
-        // Skill is already in the comparison data, remove it
         return prev.filter((_, index) => index !== existingSkillIndex);
       } else {
-        // Add new skill data
         const result = savedDPSResults.find((res) => res.key === resultKey);
         if (!result) return prev;
         return [
@@ -326,23 +344,6 @@ function LogProcessor() {
         ];
       }
     });
-  };
-
-  const performComparison = () => {
-    const comparisonData = savedDPSResults.map((result) => ({
-      saveName: result.saveName,
-      skills: comparisonSkills.map((skill) => ({
-        skill,
-        data: result.skillInfo[skill],
-      })),
-    }));
-    console.log(comparisonData); // Or display this data in a suitable UI element
-  };
-
-  const displayComparison = () => {
-    // Logic to display or process the comparison data
-    console.log("Comparison Data:", comparisonData);
-    // Further UI rendering logic here
   };
 
   const removeFromComparison = (index) => {
@@ -355,265 +356,332 @@ function LogProcessor() {
 
   return (
     <div className="logProcessorContainer">
+      {/* Toast Notification */}
       <div className={`toast ${toastVisible ? "show" : ""}`}>
         {toastMessage}
       </div>
-      <div className="helpIcon" onClick={toggleHelp}>
-        Help
-        {showHelp && (
-          <div className="helpTooltip">
-            <p>
-              <strong>Keep this in mind:</strong>
-            </p>
-            <p>
-              Command <strong>///textcapture on</strong> will start recording
-              the chat/systemchat
-            </p>
-            <p>
-              Once you're done with it, use{" "}
-              <p>
-                <strong>///textcapture off</strong>
-              </p>
-            </p>
-            <p>
-              You will be able to find the log file in: Lineage2/system folder,
-              under a name like this:{" "}
-              <strong>CharacterName_L2_04_09_23_36.log</strong>
-              <p>You can upload it directly to the L2 DPS Calculator.</p>
-            </p>
-            <p>
-              <strong>
-                Your DPS might vary from gear, build, skill rotation and how
-                good you are.
-              </strong>
-            </p>
-            <p>
-              <strong>You could be doing less DPS than you should.</strong>
-            </p>
-          </div>
-        )}
-      </div>
-      <div
-        className="uploadLogDiv"
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
-      >
-        <label className="logProcessorButtonv2">
-          Upload Log File
-          <input
-            type="file"
-            accept=".log"
-            onChange={handleFileUpload}
-            style={{ display: "none" }}
-          />
-        </label>
-        {/* Optional: Add the class for the div for drag and drop depending on dragActive  */}
-        <div className={`dragDropText ${dragActive ? "dragDropOverlay" : ""}`}>
-          {dragActive ? "Drop the file here" : "or drag and drop the file here"}
 
+      {/* Help Overlay */}
+      <div 
+        className={`helpOverlay ${showHelp ? "visible" : ""}`}
+        onClick={toggleHelp}
+      />
+
+      {/* Header with Help */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+        <div></div>
+        <div className="helpIcon" onClick={toggleHelp}>?</div>
+      </div>
+
+      {/* Help Modal */}
+      <div className={`helpTooltip ${showHelp ? "visible" : ""}`}>
+        <button className="closeHelp" onClick={toggleHelp}>×</button>
+        <p>
+          <strong>Getting Started</strong>
+        </p>
+        <p>
+          Use the command <code>{'///textcapture on'}</code> to start recording combat logs.
+        </p>
+        <p>
+          When finished, use <code>{'///textcapture off'}</code> to stop recording.
+        </p>
+        <p>
+          Log files are saved in your Lineage2/system folder with names like:<br />
+          <code>CharacterName_L2_04_09_23_36.log</code>
+        </p>
+        <p>
+          Upload the file or paste the content directly into the calculator.
+        </p>
+        <p style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+          <strong>Note:</strong> Your DPS varies based on gear, build, skill rotation, and execution.
+        </p>
+      </div>
+
+      {/* Comparison Display - Full Width */}
+      {comparisonData.length > 0 && (
+        <ComparisonDisplay
+          comparisonData={comparisonData}
+          removeFromComparison={removeFromComparison}
+          clearComparisonData={clearComparisonData}
+          showToast={showToast}
+        />
+      )}
+
+      {/* Two Column Layout */}
+      <div className="logProcessorLayout">
+        {/* Left Column - Input */}
+        <div className="inputSection">
+          {/* Upload Section */}
+          <div
+            className={`uploadArea ${dragActive ? "dragActive" : ""}`}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+          >
+            <div className="dragDropIcon">📁</div>
+            <label className="logProcessorButtonv2">
+              Upload Log File
+              <input
+                type="file"
+                accept=".log"
+                onChange={handleFileUpload}
+                style={{ display: "none" }}
+              />
+            </label>
+            <div className="dragDropText">
+              {dragActive ? "Drop the file here" : "or drag and drop your .log file here"}
+            </div>
+          </div>
+
+          {/* Textarea */}
           <textarea
             className="logProcessorTextarea"
             value={logs}
             onChange={(e) => setLogs(e.target.value)}
-            placeholder="Paste your combat logs here..."
-          ></textarea>
-        </div>
-      </div>
-      <p>Enter the fight duration in seconds</p>
-      <input
-        type="number"
-        className="fightDurationInput"
-        value={fightDuration}
-        onChange={(e) => setFightDuration(Number(e.target.value))}
-        placeholder="Secs"
-        min="1"
-        required
-      />
-      <br></br>
-      <button className="logProcessorButton" onClick={handleCalculateDPS}>
-        Calculate DPS
-      </button>
-
-      {/* {comparisonData.length > 0 && (
-        <button onClick={displayComparison} className="logProcessorButtonv3">
-          Show Comparison Results
-        </button>
-      )} */}
-
-      <div>
-        {comparisonData.length > 0 && (
-          <ComparisonDisplay
-            comparisonData={comparisonData}
-            removeFromComparison={removeFromComparison}
-            clearComparisonData={clearComparisonData}
+            placeholder="Or paste your combat logs here..."
           />
-        )}
-      </div>
 
-      {dps > 0 && (
-        <div>
-          <div className="dpsResultContainer">
-            {selectedDPSName && (
-              <>
-                <h2>{selectedDPSName}</h2>
-                <div>Duration: {fightDuration} seconds</div>
-              </>
-            )}
-            <div className="dpsOutput">
-              <span className="dpsLabel">DPS:</span>
-              <span className="dpsValue">
-                {dps.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-              </span>
-            </div>
+          {/* Fight Duration */}
+          <div className="fightDurationSection">
+            <label>Fight Duration:</label>
+            <input
+              type="number"
+              className="fightDurationInput"
+              value={fightDuration}
+              onChange={(e) => setFightDuration(Number(e.target.value))}
+              placeholder="Seconds"
+              min="1"
+              required
+            />
+            <span style={{ color: "#94a3b8" }}>seconds</span>
           </div>
-          <input
-            type="text"
-            className="logProcessorInput"
-            value={saveName}
-            onChange={(e) => setSaveName(e.target.value)}
-            placeholder="Enter a name for your DPS result..."
-          />
-          <button
-            className="logProcessorButtonv3"
-            onClick={handleSaveDPSResult}
-          >
-            Save DPS Result locally
+
+          {/* Calculate Button */}
+          <button className="logProcessorButton" onClick={handleCalculateDPS}>
+            <span>⚡</span> Calculate DPS
           </button>
 
-          <div className="scrollableContent">
-            <div className="skillDetails">
-              {/* Render skill details with conditional className for showing/hiding */}
-              {Object.keys(skillInfo).length > 0 ? (
-                <div>
-                  {Object.entries(skillInfo)
-                    .filter(
-                      ([skill, details]) =>
-                        skill !== "Unknown" && details.hits > 0
-                    ) // Exclude "Unknown" and skills with no hits
-                    .map(
-                      ([
-                        skill,
-                        { min, max, criticalHits, hits, damageLines, average },
-                      ]) => (
-                        <div key={skill} className="skillEntry">
-                          {/* Make the skill name and toggle icon clickable */}
-                          <div
-                            onClick={() => toggleSkillDetails(skill)}
-                            className="skillName"
-                          >
-                            {visibleSkills[skill] ? "-" : "+"} {skill}
-                          </div>
-                          <br></br>
-                          <button
-                            onClick={() =>
-                              toggleComparison(skill, selectedDPSName)
-                            }
-                            className={`logProcessorButtonv2 compareButton ${
-                              comparisonData.some(
-                                (data) =>
-                                  data.skill === skill &&
-                                  data.key === selectedDPSName
-                              )
-                                ? "selected"
-                                : ""
-                            }`}
-                          >
-                            {comparisonData.some(
-                              (data) =>
-                                data.skill === skill &&
-                                data.key === selectedDPSName
-                            )
-                              ? "Remove from Compare"
-                              : "Add to Compare"}
-                          </button>
+          {/* Saved Results - Moved below input on left column */}
+          <div className="savedResultsContainer" id="saved-results-container">
+            <div className="savedResultsHeader">
+              <h2>📂 Saved DPS Results</h2>
+              {savedDPSResults.length > 0 && (
+                <div className="savedResultsActions">
+                  <button
+                    className="logProcessorButton exportImageButton"
+                    onClick={exportResultsAsImage}
+                  >
+                    📷 Image
+                  </button>
+                  <button
+                    className="logProcessorButton"
+                    style={{ padding: "0.6rem 1rem", fontSize: "0.85rem" }}
+                    onClick={exportResultsToClipboard}
+                  >
+                    📋 Copy
+                  </button>
+                </div>
+              )}
+            </div>
 
-                          <div className="skillDetails">
-                            Min:{" "}
-                            {min
-                              .toFixed(0)
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                            | Max:{" "}
-                            {max
-                              .toFixed(0)
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                            | Average:{" "}
-                            {average
-                              ? average
-                                  .toFixed(0)
-                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                              : "N/A"}{" "}
-                            | Hits: {hits}, Critical Hits: {criticalHits},
-                            Critical Hit Rate:{" "}
-                            {hits > 0
-                              ? ((criticalHits / hits) * 100).toFixed(2)
-                              : 0}
-                            %
-                          </div>
-                          {visibleSkills[skill] && (
-                            <div className="scrollableContent">
-                              <ul>
+            {savedDPSResults.length > 0 ? (
+              <div className="savedResultsGrid">
+                {savedDPSResults.map((result, index) => {
+                  const rank = getRankBadge(index);
+                  return (
+                    <div key={index} className="savedResultCard" onClick={() => handleRowClick(result)}>
+                      {rank && (
+                        <div className={`rankBadge ${rank.class}`}>
+                          {rank.label}
+                        </div>
+                      )}
+                      <div className="savedResultInfo">
+                        <div className="savedResultName">{result.saveName}</div>
+                        <div className="savedResultDuration">
+                          Duration: {result.fightDuration || "60"} seconds
+                        </div>
+                      </div>
+                      <div className="savedResultDps">
+                        {result.dps.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      </div>
+                      <button
+                        className="deleteResultButton"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeDPSResult(result.key);
+                        }}
+                        title="Delete"
+                      >
+                        <FontAwesomeIcon icon={faTrashCan} />
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="emptyState" style={{ padding: "2rem" }}>
+                <div className="emptyStateIcon">📝</div>
+                <p>No saved DPS results yet.</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Right Column - Results */}
+        <div className="resultsSection">
+          {dps > 0 ? (
+            <div className="animate-fade-in">
+              <div className="dpsResultContainer">
+                {selectedDPSName && (
+                  <>
+                    <h2>{selectedDPSName}</h2>
+                    <div className="fightDurationDisplay">
+                      Duration: {fightDuration} seconds
+                    </div>
+                  </>
+                )}
+                <div className="dpsOutput">
+                  <span className="dpsLabel">DPS</span>
+                  <span className="dpsValue">
+                    {dps.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  </span>
+                </div>
+              </div>
+
+              {/* Save Section - Only show if not viewing a saved result */}
+              {!selectedDPSName && (
+                <div className="saveSection">
+                  <input
+                    type="text"
+                    className="logProcessorInput"
+                    value={saveName}
+                    onChange={(e) => setSaveName(e.target.value)}
+                    placeholder="Enter a name for your DPS result..."
+                  />
+                  <button
+                    className="logProcessorButtonv3"
+                    onClick={handleSaveDPSResult}
+                  >
+                    💾 Save
+                  </button>
+                </div>
+              )}
+
+              {/* Skill Details */}
+              <div className="skillDetails">
+                <h3 style={{ color: "#f8fafc", marginBottom: "1rem", fontSize: "1.1rem" }}>Skill Breakdown</h3>
+                {Object.keys(skillInfo).length > 0 ? (
+                  <div className="skillDetailsGrid">
+                    {Object.entries(skillInfo)
+                      .filter(
+                        ([skill, details]) =>
+                          skill !== "Unknown" && details.hits > 0
+                      )
+                      .map(
+                        ([
+                          skill,
+                          { min, max, criticalHits, hits, damageLines, average },
+                        ]) => (
+                          <div key={skill} className="skillEntry">
+                            <div className="skillHeader">
+                              <div
+                                onClick={() => toggleSkillDetails(skill)}
+                                className="skillName"
+                                title={skill}
+                              >
+                                <span className="skillToggleIcon">
+                                  {visibleSkills[skill] ? "−" : "+"}
+                                </span>
+                                <span className="skillNameText">{skill}</span>
+                              </div>
+                              <button
+                                onClick={() =>
+                                  toggleComparison(skill, selectedDPSName)
+                                }
+                                className={`logProcessorButtonv2 ${
+                                  comparisonData.some(
+                                    (data) =>
+                                      data.skill === skill &&
+                                      data.key === selectedDPSName
+                                  )
+                                    ? "selected"
+                                    : ""
+                                }`}
+                              >
+                                {comparisonData.some(
+                                  (data) =>
+                                    data.skill === skill &&
+                                    data.key === selectedDPSName
+                                )
+                                  ? "Remove"
+                                  : "Compare"}
+                              </button>
+                            </div>
+
+                            <div className="skillStats">
+                              <div className="statItem">
+                                <span className="statLabel">Min</span>
+                                <span className="statValue">
+                                  {min.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                </span>
+                              </div>
+                              <div className="statItem">
+                                <span className="statLabel">Max</span>
+                                <span className="statValue">
+                                  {max.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                </span>
+                              </div>
+                              <div className="statItem">
+                                <span className="statLabel">Avg</span>
+                                <span className="statValue">
+                                  {average
+                                    ? average.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    : "N/A"}
+                                </span>
+                              </div>
+                              <div className="statItem">
+                                <span className="statLabel">Hits</span>
+                                <span className="statValue">{hits}</span>
+                              </div>
+                              <div className="statItem">
+                                <span className="statLabel">Crits</span>
+                                <span className="statValue">{criticalHits}</span>
+                              </div>
+                              <div className="statItem">
+                                <span className="statLabel">Crit %</span>
+                                <span className="statValue critRate">
+                                  {hits > 0
+                                    ? ((criticalHits / hits) * 100).toFixed(1)
+                                    : 0}%
+                                </span>
+                              </div>
+                            </div>
+
+                            {visibleSkills[skill] && (
+                              <ul className="damageLinesList">
                                 {damageLines.map((line, index) => (
                                   <li key={index}>{line}</li>
                                 ))}
                               </ul>
-                            </div>
-                          )}
-                        </div>
-                      )
-                    )}
-                </div>
-              ) : (
-                <p>No skill damage information available.</p>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-      <div className="savedResultsContainer">
-        <div className="scrollableContent">
-          <h2>Saved DPS Results</h2>
-
-          {savedDPSResults.length > 0 ? (
-            <div>
-              <button
-                className="logProcessorButton"
-                onClick={exportResultsToClipboard}
-              >
-                Copy DPS Results Table to clipboard
-              </button>
-              <table className="savedResultsTable">
-                <tbody>
-                  {savedDPSResults.map((result, index) => (
-                    <tr key={index} onClick={() => handleRowClick(result)}>
-                      <td className="dpsNameColumn">
-                        {result.saveName}
-                        <div className="fightDurationDisplay">
-                          Duration: {result.fightDuration || "60"} seconds
-                        </div>
-                      </td>
-                      <td className="dpsValueColumn">
-                        {result.dps
-                          .toFixed(2)
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                        DPS
-                      </td>
-                      <td className="dpsDeleteColumn">
-                        <button
-                          className="deleteResultButton"
-                          onClick={() => removeDPSResult(result.key)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                            )}
+                          </div>
+                        )
+                      )}
+                  </div>
+                ) : (
+                  <div className="emptyState">
+                    <div className="emptyStateIcon">📊</div>
+                    <p>No skill damage information available.</p>
+                  </div>
+                )}
+              </div>
             </div>
           ) : (
-            <p>No saved DPS results.</p>
+            <div className="emptyState" style={{ marginTop: "3rem" }}>
+              <div className="emptyStateIcon" style={{ fontSize: "4rem" }}>⚡</div>
+              <p style={{ fontSize: "1.1rem" }}>Enter your combat logs and click Calculate DPS to see results</p>
+            </div>
           )}
         </div>
       </div>
@@ -622,3 +690,4 @@ function LogProcessor() {
 }
 
 export default LogProcessor;
+

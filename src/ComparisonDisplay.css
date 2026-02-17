@@ -1,94 +1,351 @@
-h3 {
-  font-size: 1.5em;
-  font-weight: bold;
+/* Lineage 2 Inspired ComparisonDisplay Styles */
+
+.comparisonContainer {
+  background: linear-gradient(180deg, 
+    #1a1f2e 0%, 
+    #121620 100%
+  );
+  border: 1px solid rgba(201, 169, 97, 0.25);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.comparisonContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(201, 169, 97, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+.comparisonHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.15);
+}
+
+.comparisonContainer h3 {
+  color: #e8d5a3;
+  font-size: 1.1rem;
   margin: 0;
-  padding: 0;
-  color: yellowgreen;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* lets add a border to the main div, so it does look like a box */
-
-.comparisonContainer {
-  border: 1px solid yellowgreen;
-  padding: 10px;
-  margin: 10px;
+.comparisonExportButtons {
+  display: flex;
+  gap: 0.5rem;
 }
 
-/* let's update the comparisonTable to have a border and some padding */
-.comparisonTable {
-  padding: 10px;
-  width: 100%;
+.exportImageButton {
+  background: linear-gradient(180deg, 
+    #2a6099 0%, 
+    #1a4069 50%, 
+    #0a3050 100%
+  );
+  color: #f0e6d2;
+  border: 1px solid #4a90d9;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  font-size: 0.8rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(74, 144, 217, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.comparisonContainer {
-  margin-top: 20px;
+.exportImageButton:hover {
+  background: linear-gradient(180deg, #3a70a9 0%, #2a5089 100%);
+  box-shadow: 
+    0 6px 15px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(74, 144, 217, 0.3);
+  transform: translateY(-2px);
+}
+
+.clearAllButton {
+  background: linear-gradient(180deg, 
+    #8b0000 0%, 
+    #600000 100%
+  );
+  color: #f0e6d2;
+  border: 1px solid #a52a2a;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  font-size: 0.8rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(139, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clearAllButton:hover {
+  background: linear-gradient(180deg, #a52a2a 0%, #8b0000 100%);
+  box-shadow: 
+    0 6px 15px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(205, 92, 92, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Comparison Table */
+.comparisonTableWrapper {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(201, 169, 97, 0.1);
+  background: #0a0c10;
 }
 
 .comparisonTable {
   width: 100%;
   border-collapse: collapse;
-  color: #fff;
+  font-size: 0.85rem;
 }
 
-.comparisonTable th,
-.comparisonTable td {
-  border: 1px solid #ddd;
-  padding: 8px;
-
-  text-align: center;
-  vertical-align: middle;
+.comparisonTable thead {
+  background: linear-gradient(180deg, 
+    #2a3040 0%, 
+    #202636 100%
+  );
 }
 
 .comparisonTable th {
-  background-color: #15b500a8;
-}
-
-.clearAllButton,
-.removeRowButton {
+  padding: 0.875rem;
+  text-align: left;
+  font-weight: 700;
+  color: #e8d5a3;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
   cursor: pointer;
-  background-color: #f44336; /* Red */
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  margin: 5px;
-  border-radius: 5px;
-  font-size: 0.8rem;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  user-select: none;
+  font-family: 'Cinzel', serif;
+  border-bottom: 2px solid rgba(201, 169, 97, 0.2);
 }
 
-.clearAllButton {
-  float: right;
-  margin-right: 20px;
+.comparisonTable th:hover {
+  background: rgba(201, 169, 97, 0.1);
+  color: #f0e6d2;
 }
 
-.removeRowButton {
-  color: #fff;
-  background-color: #f44336;
+.comparisonTable th svg {
+  margin-left: 0.25rem;
+  opacity: 0.7;
+  color: #c9a961;
 }
 
-.comparisonContainer {
-  margin-top: 20px;
+.comparisonTable tbody tr {
+  background: #151922;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.05);
+  transition: all 0.15s ease;
 }
 
-.comparisonTable th,
+.comparisonTable tbody tr:hover {
+  background: rgba(201, 169, 97, 0.08);
+}
+
+.comparisonTable tbody tr:last-child {
+  border-bottom: none;
+}
+
 .comparisonTable td {
-  padding: 8px;
+  padding: 0.875rem;
+  color: #b8b0a0;
+  vertical-align: middle;
+  font-family: 'Georgia', serif;
 }
 
-.detailRow .detailsContainer {
-  display: none;
+/* Specific Column Styles */
+.comparisonTable td.skillName {
+  font-weight: 700;
+  color: #4a90d9;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 10px rgba(74, 144, 217, 0.2);
 }
 
-.detailRow.visible .detailsContainer {
-  display: block;
-}
-
-.detailsButton {
-  cursor: pointer;
-  background-color: #0077b5;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  margin: 5px;
-  border-radius: 5px;
+.comparisonTable td.saveName {
+  color: #a89b7c;
   font-size: 0.8rem;
+  font-style: italic;
+}
+
+.comparisonTable td.damageValue {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: #e8d5a3;
+  text-shadow: 0 0 10px rgba(201, 169, 97, 0.1);
+}
+
+.comparisonTable td.critRate {
+  color: #e25822;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  text-shadow: 0 0 10px rgba(226, 88, 34, 0.2);
+}
+
+/* Action Buttons */
+.detailsButton {
+  background: linear-gradient(180deg, #2a3040 0%, #1a2030 100%);
+  color: #c9a961;
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  width: 32px;
+  height: 32px;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.detailsButton:hover {
+  background: linear-gradient(180deg, #3a4050 0%, #2a3040 100%);
+  color: #e8d5a3;
+  border-color: #c9a961;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.removeRowButton {
+  background: linear-gradient(180deg, #8b0000 0%, #600000 100%);
+  color: #f0e6d2;
+  border: 1px solid #a52a2a;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.4);
+}
+
+.removeRowButton:hover {
+  background: linear-gradient(180deg, #a52a2a 0%, #8b0000 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(205, 92, 92, 0.5);
+  transform: scale(1.05);
+}
+
+/* Expanded Row Details */
+.logDetails {
+  background: #0a0c10;
+  border-radius: 0.375rem;
+  padding: 0.875rem;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid rgba(201, 169, 97, 0.1);
+  font-family: 'Consolas', 'Monaco', monospace;
+}
+
+.logDetails > div {
+  padding: 0.2rem 0;
+  font-size: 0.75rem;
+  color: #7a7568;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.05);
+}
+
+.logDetails > div:last-child {
+  border-bottom: none;
+}
+
+/* Bright capture mode for image export */
+.capture-bright {
+  background: linear-gradient(180deg, #32384d 0%, #252a3d 100%) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+.capture-bright .comparisonTableWrapper {
+  background: #1a1f2e !important;
+  border-color: rgba(201, 169, 97, 0.2) !important;
+}
+
+.capture-bright .comparisonTable thead {
+  background: linear-gradient(180deg, #3d4458 0%, #2f3548 100%) !important;
+}
+
+.capture-bright .comparisonTable tbody tr {
+  background: #232838 !important;
+}
+
+.capture-bright .comparisonTable tbody tr:hover {
+  background: #2a3040 !important;
+}
+
+.capture-bright-wrapper {
+  background: #1a1f2e !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comparisonContainer {
+    padding: 1rem;
+  }
+  
+  .comparisonHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .comparisonExportButtons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .comparisonTableWrapper {
+    margin: 0 -0.5rem;
+  }
+  
+  .comparisonTable th,
+  .comparisonTable td {
+    padding: 0.625rem;
+    font-size: 0.75rem;
+  }
+  
+  .comparisonTable td:nth-child(2) {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
