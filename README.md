@@ -1,70 +1,145 @@
-# Getting Started with Create React App
+# L2 DPS Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based web application for calculating Damage Per Second (DPS) statistics from Lineage 2 game combat logs. Supports 10 languages and works on both desktop and mobile devices.
+
+![L2 DPS Calculator](https://xiscob.github.io/l2-dps-calculator/screenshot.png)
+
+## Features
+
+- 📊 **DPS Calculation** - Parse combat logs and calculate DPS with detailed skill breakdowns
+- 🌍 **Multi-Language Support** - Available in 10 languages:
+  - English, Español, Ελληνικά, Português
+  - 简体中文, 한국어, Tiếng Việt, 日本語
+  - Polski, Русский
+- 📱 **Mobile Responsive** - Works on desktop, tablet, and mobile devices
+- 💾 **Save & Compare** - Save multiple DPS results and compare skills across runs
+- 📷 **Export** - Copy results to clipboard or export as images
+- 🎯 **Onboarding** - Interactive tutorial for new users
+- 🌙 **Dark Theme** - Lineage 2 inspired dark UI
+
+## Live Demo
+
+https://xiscob.github.io/l2-dps-calculator
+
+## Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/Xiscob/l2-dps-calculator.git
+cd l2-dps-calculator
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+
+# Build for production
+npm run build
+```
+
+## How to Use
+
+1. **Capture Combat Logs** - In Lineage 2, use `///textcapture on` to start recording
+2. **Upload** - Drag & drop your `.log` file or paste the content
+3. **Set Duration** - Enter the fight duration in seconds
+4. **Calculate** - Click "Calculate DPS" to analyze
+5. **Save** - Name and save your results to compare later
+
+## Project Structure
+
+```
+├── public/                    # Static assets
+├── src/
+│   ├── i18n/                 # Internationalization
+│   │   ├── index.js          # Language configuration
+│   │   ├── LanguageContext.js # React context for i18n
+│   │   ├── en.json           # English translations
+│   │   ├── es.json           # Spanish translations
+│   │   ├── el.json           # Greek translations
+│   │   ├── pt-BR.json        # Portuguese translations
+│   │   ├── zh.json           # Chinese (Simplified) translations
+│   │   ├── ko.json           # Korean translations
+│   │   ├── vi.json           # Vietnamese translations
+│   │   ├── ja.json           # Japanese translations
+│   │   ├── pl.json           # Polish translations
+│   │   └── ru.json           # Russian translations
+│   ├── App.js                # Main app component
+│   ├── App.css               # Main app styles
+│   ├── LogProcessor.js       # Core DPS calculation
+│   ├── LogProcessor.css      # LogProcessor styles
+│   ├── ComparisonDisplay.js  # Skill comparison table
+│   ├── ComparisonDisplay.css
+│   ├── Onboarding.js         # Tutorial/onboarding
+│   ├── Onboarding.css
+│   ├── LanguageSelector.js   # Language dropdown
+│   ├── LanguageSelector.css
+│   ├── BuffDebuffChecker.js  # Placeholder component
+│   └── BuffDebuffChecker.css
+├── package.json
+└── README.md
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+| Command | Description |
+|---------|-------------|
+| `npm start` | Run development server at http://localhost:3000 |
+| `npm run build` | Create production build in `/build` folder |
+| `npm test` | Run tests in interactive watch mode |
+| `npm run deploy` | Deploy to GitHub Pages |
 
-### `npm start`
+## Technology Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Framework**: React 18.2.0
+- **Build Tool**: Create React App
+- **Language**: JavaScript (ES6+)
+- **Styling**: CSS3 with responsive design
+- **Icons**: FontAwesome
+- **Screenshots**: html2canvas
+- **Testing**: Jest with React Testing Library
+- **Deployment**: GitHub Pages
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Adding a New Language
 
-### `npm test`
+To add a new language:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Create a new JSON file in `src/i18n/` (e.g., `fr.json` for French)
+2. Copy the structure from `en.json` and translate all values
+3. Import the file in `src/i18n/index.js`
+4. Add the language to the `languages` object:
 
-### `npm run build`
+```javascript
+import fr from './fr.json';
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export const languages = {
+  // ... existing languages
+  fr: {
+    code: 'fr',
+    name: 'Français',
+    translation: fr
+  }
+};
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The language will automatically appear in the language selector.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Data Storage
 
-### `npm run eject`
+The app uses browser localStorage to persist:
+- Saved DPS results
+- User's language preference
+- App version tracking
+- Onboarding completion status
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## License
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+MIT
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Author
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+@Xiscoteon
 
-## Learn More
+## Contributing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are welcome! Please feel free to submit a Pull Request.

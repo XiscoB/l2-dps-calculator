@@ -8,40 +8,59 @@
 - **Version**: 0.1.0 (app version 1.1.0)
 - **Homepage**: https://xiscob.github.io/l2-dps-calculator
 - **Author**: @Xiscoteon
+- **License**: MIT
 
 ## Technology Stack
 
 - **Framework**: React 18.2.0
 - **Build Tool**: Create React App (react-scripts 5.0.1)
 - **Language**: JavaScript (ES6+)
-- **Styling**: CSS3 with component-specific stylesheets
+- **Styling**: CSS3 with component-specific stylesheets, responsive design
 - **Icons**: FontAwesome (@fortawesome/react-fontawesome)
+- **Screenshots**: html2canvas
 - **Testing**: Jest with React Testing Library
 - **Deployment**: GitHub Pages (gh-pages)
 
 ## Project Structure
 
 ```
-├── public/                 # Static assets
-│   ├── index.html         # HTML template
-│   ├── manifest.json      # PWA manifest
+├── public/                    # Static assets
+│   ├── index.html            # HTML template
+│   ├── manifest.json         # PWA manifest
 │   └── favicon.ico, logo files
-├── src/                   # Source code
-│   ├── App.js             # Main app component, version management
-│   ├── App.css            # Main app styles
-│   ├── index.js           # Application entry point
-│   ├── index.css          # Global styles
-│   ├── LogProcessor.js    # Core DPS calculation component
-│   ├── LogProcessor.css   # LogProcessor styles
-│   ├── ComparisonDisplay.js   # Skill comparison table
+├── src/                      # Source code
+│   ├── i18n/                 # Internationalization
+│   │   ├── index.js          # Language exports and helpers
+│   │   ├── LanguageContext.js # React context for language state
+│   │   ├── en.json           # English translations
+│   │   ├── es.json           # Spanish translations
+│   │   ├── el.json           # Greek translations
+│   │   ├── pt-BR.json        # Portuguese translations
+│   │   ├── zh.json           # Chinese (Simplified) translations
+│   │   ├── ko.json           # Korean translations
+│   │   ├── vi.json           # Vietnamese translations
+│   │   ├── ja.json           # Japanese translations
+│   │   ├── pl.json           # Polish translations
+│   │   └── ru.json           # Russian translations
+│   ├── App.js                # Main app component, version management
+│   ├── App.css               # Main app styles
+│   ├── index.js              # Application entry point
+│   ├── index.css             # Global styles
+│   ├── LogProcessor.js       # Core DPS calculation component
+│   ├── LogProcessor.css      # LogProcessor styles
+│   ├── ComparisonDisplay.js  # Skill comparison table
 │   ├── ComparisonDisplay.css
-│   ├── BuffDebuffChecker.js   # Placeholder component (not active)
+│   ├── Onboarding.js         # Tutorial/onboarding modal
+│   ├── Onboarding.css
+│   ├── LanguageSelector.js   # Language dropdown selector
+│   ├── LanguageSelector.css
+│   ├── BuffDebuffChecker.js  # Placeholder component (not active)
 │   ├── BuffDebuffChecker.css
-│   ├── App.test.js        # Basic test file
-│   ├── setupTests.js      # Test configuration
-│   └── reportWebVitals.js # Performance monitoring
-├── package.json           # Dependencies and scripts
-└── .gitignore            # Git ignore rules
+│   ├── App.test.js           # Basic test file
+│   ├── setupTests.js         # Test configuration
+│   └── reportWebVitals.js    # Performance monitoring
+├── package.json              # Dependencies and scripts
+└── .gitignore               # Git ignore rules
 ```
 
 ## Build and Development Commands
@@ -72,8 +91,11 @@ npm run deploy
 
 ```
 App (root)
-├── LogProcessor (active main component)
-│   └── ComparisonDisplay (skill comparison table)
+├── LanguageProvider (i18n context)
+│   └── LogProcessor (active main component)
+│       ├── Onboarding (tutorial modal)
+│       ├── LanguageSelector (language dropdown)
+│       └── ComparisonDisplay (skill comparison table)
 └── BuffDebuffChecker (placeholder, currently not rendered)
 ```
 
@@ -84,6 +106,24 @@ App (root)
 - Implements version checking against localStorage
 - Handles data clearing for version updates
 - Renders the active component (currently LogProcessor)
+- Wraps app with LanguageProvider for i18n
+
+#### LanguageContext.js / i18n/
+- **Purpose**: Internationalization (i18n) support
+- **Features**:
+  - Supports 10 languages: English, Spanish, Greek, Portuguese, Chinese, Korean, Vietnamese, Japanese, Polish, Russian
+  - Language preference persisted to localStorage
+  - Dynamic language switching
+  - Easy to add new languages
+- **Usage**: Use `useLanguage()` hook to access `t()` translation function
+
+#### LanguageSelector.js
+- **Purpose**: Language selection dropdown
+- **Features**:
+  - Displays current language name
+  - Dropdown with all available languages
+  - No flags (uses language names only for inclusivity)
+  - Mobile-responsive styling
 
 #### LogProcessor.js
 - **Purpose**: Main DPS calculation functionality
@@ -95,7 +135,8 @@ App (root)
   - Critical hit tracking
   - Local storage persistence for saved results
   - Skill comparison across different saved runs
-  - Export results to clipboard
+  - Export results to clipboard as text
+  - Export saved results as image (via html2canvas)
 - **State Management**: Uses React useState and useEffect hooks
 - **Data Storage**: Browser localStorage
 
@@ -106,6 +147,17 @@ App (root)
   - Expandable rows showing raw damage lines
   - Remove individual comparisons
   - Clear all comparisons
+  - Copy comparison as text
+  - Export comparison as image
+
+#### Onboarding.js
+- **Purpose**: First-time user tutorial
+- **Features**:
+  - 6-slide interactive tutorial
+  - Auto-shows on first visit
+  - Can be reopened via Help (?) button
+  - Progress dots and navigation
+  - Fully translatable
 
 #### BuffDebuffChecker.js
 - Placeholder component for future buff/debuff analysis feature
@@ -137,6 +189,13 @@ App (root)
 - CSS class names use camelCase
 - Color scheme uses dark blue theme (`#0a192f` background, `#8892b0` text)
 - Button variants use numbered suffixes (`.logProcessorButton`, `.logProcessorButtonv2`, `.logProcessorButtonv3`)
+- Mobile-first responsive design with media queries at 768px breakpoint
+
+### Internationalization (i18n)
+- All user-facing text must use the `t()` function from `useLanguage()` hook
+- Translation keys use dot notation (e.g., `t('logProcessor.calculateButton')`)
+- Template variables use `{{variable}}` syntax
+- HTML content in translations is supported via `dangerouslySetInnerHTML`
 
 ### Log File Parsing Pattern
 The application expects log files in the following format (from Lineage 2 text capture):
@@ -165,6 +224,8 @@ You have landed a critical hit.
 The application uses browser localStorage for:
 - Saved DPS results (key: user-provided name, value: JSON string)
 - App version tracking (key: `appVersion`)
+- Language preference (key: `l2dps_language`)
+- Onboarding completion status (key: `l2dps_onboarding_completed`)
 
 ### Data Schema (localStorage)
 ```javascript
@@ -207,9 +268,38 @@ Configured via `browserslist` in package.json:
 - Production: >0.2%, not dead, not op_mini all
 - Development: last 1 chrome, firefox, safari versions
 
+The app is responsive and works on:
+- Desktop browsers (Chrome, Firefox, Safari, Edge)
+- Tablets (iPad, Android tablets)
+- Mobile phones (iPhone, Android)
+
+## Adding a New Language
+
+To add support for a new language:
+
+1. **Create translation file** - Copy `src/i18n/en.json` to `src/i18n/[code].json`
+2. **Translate all strings** - Maintain the same JSON structure
+3. **Import in index.js** - Add import at the top of `src/i18n/index.js`:
+   ```javascript
+   import fr from './fr.json';
+   ```
+4. **Add to languages object** - Add to the `languages` export:
+   ```javascript
+   fr: {
+     code: 'fr',
+     name: 'Français',
+     translation: fr
+   }
+   ```
+5. **Test** - Verify the language appears in the dropdown and all text translates correctly
+
 ## Development Notes
 
 1. The `BuffDebuffChecker` component is currently not active in the UI but exists for future expansion
 2. Component switching code exists in App.js but is commented out
 3. The app uses CSS transitions for smooth UI interactions
 4. Toast notifications are implemented for user feedback (3-second timeout)
+5. html2canvas is used for exporting results as images
+6. The onboarding tutorial auto-shows on first visit and can be reopened via the Help (?) button
+7. Language preference is persisted to localStorage and restored on app load
+8. All components support the 10 current languages - test UI layout with longer translations (e.g., Russian, Greek)
