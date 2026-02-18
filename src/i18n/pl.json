@@ -1,0 +1,162 @@
+{
+  "language": {
+    "name": "Polski",
+    "code": "pl"
+  },
+  "app": {
+    "title": "Lineage II Kalkulator DPS",
+    "subtitle": "Subtelna różnica między umiejętnością a ekwipunkiem to różnica między przeciętnym a świetnym graczem.",
+    "version": "Wersja",
+    "storedVersion": "Zapisana Wersja",
+    "madeBy": "Stworzone przez @Xiscoteon",
+    "contribute": "💻 Deweloper? Dołącz do nas!",
+    "reportBug": "🐛 Zgłoś Błąd"
+  },
+  "updateBanner": {
+    "message": "Dodano nowe funkcje, które mogą nie być kompatybilne z zapisanymi danymi. Jeśli napotkasz problemy lub chcesz użyć nowych funkcji, zaktualizuj swoje dane.",
+    "button": "Zaktualizuj i Usuń Dane"
+  },
+  "alert": {
+    "newVersion": "Wykryto nową wersję: {{currentVersion}} vs {{storedVersion}}. Zaktualizuj dane, aby zapewnić kompatybilność."
+  },
+  "logProcessor": {
+    "title": "Kalkulator DPS",
+    "helpTooltip": "Pomoc i Samouczek",
+    "upload": {
+      "button": "Prześlij Plik Logu",
+      "dropHere": "Upuść plik tutaj",
+      "dragDrop": "lub przeciągnij i upuść plik .log tutaj",
+      "icon": "📁"
+    },
+    "textarea": {
+      "placeholder": "Lub wklej logi bojowe tutaj..."
+    },
+    "fightDuration": {
+      "label": "Czas Walki:",
+      "placeholder": "Sekundy",
+      "unit": "sekund"
+    },
+    "calculateButton": "Oblicz DPS",
+    "savedResults": {
+      "title": "📂 Zapisane Wyniki DPS",
+      "imageButton": "📷 Obraz",
+      "copyButton": "📋 Kopiuj",
+      "duration": "Czas:",
+      "seconds": "sekund",
+      "deleteTooltip": "Usuń",
+      "emptyState": {
+        "icon": "📝",
+        "message": "Brak zapisanych wyników DPS."
+      }
+    },
+    "results": {
+      "dpsLabel": "DPS",
+      "saveNamePlaceholder": "Wprowadź nazwę dla wyniku DPS...",
+      "saveButton": "💾 Zapisz",
+      "skillBreakdown": "Szczegóły Umiejętności",
+      "duration": "Czas:",
+      "emptyState": {
+        "icon": "⚡",
+        "message": "Wprowadź logi bojowe i kliknij Oblicz DPS, aby zobaczyć wyniki"
+      }
+    },
+    "skillStats": {
+      "min": "Min",
+      "max": "Maks",
+      "avg": "Śr.",
+      "hits": "Trafienia",
+      "crits": "Krytyki",
+      "critPercent": "% Kryt.",
+      "compareButton": "Porównaj",
+      "removeButton": "Usuń",
+      "noData": "Brak dostępnych informacji o obrażeniach umiejętności.",
+      "noDataIcon": "📊"
+    },
+    "ranks": {
+      "top1": "TOP 1",
+      "top2": "TOP 2",
+      "top3": "TOP 3"
+    },
+    "toast": {
+      "saved": "Wynik DPS Zapisany!",
+      "logLoaded": "Log wczytany! Kliknij Oblicz DPS, aby przeanalizować.",
+      "invalidFile": "Prześlij prawidłowy plik .log",
+      "copied": "Wyniki skopiowane do schowka!",
+      "copyFailed": "Nie udało się skopiować wyników.",
+      "imageCopied": "Obraz skopiowany do schowka!",
+      "imageCopyFailed": "Nie udało się skopiować obrazu.",
+      "imageGenerateFailed": "Nie udało się wygenerować obrazu."
+    }
+  },
+  "comparison": {
+    "title": "⚔️ Wyniki Porównania",
+    "copyButton": "📋 Kopiuj",
+    "imageButton": "📷 Obraz",
+    "clearButton": "🗑️ Wyczyść Wszystko",
+    "table": {
+      "skill": "Umiejętność",
+      "saveName": "Nazwa Zapisu",
+      "minDamage": "Obrażenia Min.",
+      "maxDamage": "Obrażenia Maks.",
+      "average": "Średnia",
+      "hits": "Trafienia",
+      "crits": "Krytyki",
+      "critRate": "Współczynnik Krytyka"
+    },
+    "toast": {
+      "copied": "Skopiowano do schowka!",
+      "copyFailed": "Nie udało się skopiować.",
+      "imageCopied": "Obraz skopiowany do schowka!"
+    }
+  },
+  "onboarding": {
+    "close": "Zamknij",
+    "skip": "Pomiń",
+    "previous": "Wstecz",
+    "next": "Dalej",
+    "getStarted": "Rozpocznij",
+    "slides": {
+      "welcome": {
+        "icon": "⚔️",
+        "title": "Witaj w Kalkulatorze L2 DPS",
+        "content1": "To narzędzie pomaga analizować wydajność bojową w <strong>Lineage II</strong>, analizując logi bojowe i obliczając szczegółowe statystyki DPS.",
+        "content2": "Śledź swoje umiejętności, trafienia krytyczne i porównuj różne buildy lub rotacje, aby zoptymalizować obrażenia."
+      },
+      "capture": {
+        "icon": "📜",
+        "title": "Przechwytywanie Logów Bojowych",
+        "content1": "W grze użyj komendy <code>///textcapture on</code>, aby rozpocząć nagrywanie logów bojowych.",
+        "content2": "Po zakończeniu użyj <code>///textcapture off</code>, aby zatrzymać.",
+        "content3": "Logi są zapisywane w folderze <code>Lineage2/system</code> jako <code>NazwaPostaci_L2_MM_DD_HH_MM.log</code>"
+      },
+      "upload": {
+        "icon": "📁",
+        "title": "Prześlij i Analizuj",
+        "content1": "Prześlij plik <strong>.log</strong>, przeciągając go do obszaru przesyłania lub użyj selektora plików.",
+        "content2": "Możesz też wkleić zawartość logu bezpośrednio w obszarze tekstowym, jeśli wolisz.",
+        "content3": "Ustaw <strong>czas walki</strong> i kliknij <strong>Oblicz DPS</strong>, aby przeanalizować."
+      },
+      "results": {
+        "icon": "📊",
+        "title": "Zobacz Swoje Wyniki",
+        "content1": "Po obliczeniu zobaczysz całkowity <strong>DPS</strong> i szczegółowy podział każdej użytej umiejętności.",
+        "content2": "Kliknij dowolną nazwę umiejętności, aby rozwinąć i zobaczyć poszczególne linie obrażeń. Statystyki obejmują: Min, Maks, Średnia, Trafienia i Współczynnik Trafień Krytycznych."
+      },
+      "save": {
+        "icon": "💾",
+        "title": "Zapisz i Porównaj",
+        "content1": "Nadaj nazwę wynikowi i <strong>zapisz</strong>, aby zbudować kolekcję testów DPS.",
+        "content2": "Użyj przycisku <strong>Porównaj</strong> przy umiejętnościach, aby zobaczyć porównania obok siebie między różnymi zapisanymi przebiegami i śledź postępy."
+      },
+      "ready": {
+        "icon": "🎯",
+        "title": "Gotowy do Rozpoczęcia?",
+        "content1": "Wszystko gotowe! Zacznij analizować swoją wydajność bojową i optymalizuj obrażenia postaci.",
+        "content2": "<strong>Wskazówka:</strong> Możesz ponownie otworzyć ten przewodnik w dowolnym momencie, klikając przycisk <span>?</span> w prawym górnym rogu."
+      }
+    }
+  },
+  "buffDebuffChecker": {
+    "title": "Sprawdzacz Buffów/Debuffów"
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "language": {
+    "name": "简体中文",
+    "code": "zh"
+  },
+  "app": {
+    "title": "Lineage II DPS 计算器",
+    "subtitle": "技巧与装备之间的微妙差距，就是普通玩家与高手之间的区别。",
+    "version": "版本",
+    "storedVersion": "已存储版本",
+    "madeBy": "作者 @Xiscoteon",
+    "contribute": "💻 开发者？来贡献代码！",
+    "reportBug": "🐛 报告错误"
+  },
+  "updateBanner": {
+    "message": "已添加新功能，可能与您的保存数据不兼容。如果遇到问题或想使用新功能，请更新您的数据。",
+    "button": "更新并删除数据"
+  },
+  "alert": {
+    "newVersion": "检测到新版本：{{currentVersion}} vs {{storedVersion}}。请更新您的数据以确保兼容性。"
+  },
+  "logProcessor": {
+    "title": "DPS 计算器",
+    "helpTooltip": "帮助与教程",
+    "upload": {
+      "button": "上传日志文件",
+      "dropHere": "将文件拖放到此处",
+      "dragDrop": "或将您的 .log 文件拖放到此处",
+      "icon": "📁"
+    },
+    "textarea": {
+      "placeholder": "或将您的战斗日志粘贴到此处..."
+    },
+    "fightDuration": {
+      "label": "战斗时长：",
+      "placeholder": "秒",
+      "unit": "秒"
+    },
+    "calculateButton": "计算 DPS",
+    "savedResults": {
+      "title": "📂 已保存的 DPS 结果",
+      "imageButton": "📷 图片",
+      "copyButton": "📋 复制",
+      "duration": "时长：",
+      "seconds": "秒",
+      "deleteTooltip": "删除",
+      "emptyState": {
+        "icon": "📝",
+        "message": "尚未保存任何 DPS 结果。"
+      }
+    },
+    "results": {
+      "dpsLabel": "DPS",
+      "saveNamePlaceholder": "为您的 DPS 结果输入一个名称...",
+      "saveButton": "💾 保存",
+      "skillBreakdown": "技能详情",
+      "duration": "时长：",
+      "emptyState": {
+        "icon": "⚡",
+        "message": "输入您的战斗日志并点击计算 DPS 以查看结果"
+      }
+    },
+    "skillStats": {
+      "min": "最小",
+      "max": "最大",
+      "avg": "平均",
+      "hits": "命中",
+      "crits": "暴击",
+      "critPercent": "暴击%",
+      "compareButton": "对比",
+      "removeButton": "移除",
+      "noData": "没有可用的技能伤害信息。",
+      "noDataIcon": "📊"
+    },
+    "ranks": {
+      "top1": "第1名",
+      "top2": "第2名",
+      "top3": "第3名"
+    },
+    "toast": {
+      "saved": "DPS 结果已保存！",
+      "logLoaded": "日志已加载！点击计算 DPS 进行分析。",
+      "invalidFile": "请上传有效的 .log 文件",
+      "copied": "结果已复制到剪贴板！",
+      "copyFailed": "复制结果失败。",
+      "imageCopied": "图片已复制到剪贴板！",
+      "imageCopyFailed": "复制图片失败。",
+      "imageGenerateFailed": "生成图片失败。"
+    }
+  },
+  "comparison": {
+    "title": "⚔️ 对比结果",
+    "copyButton": "📋 复制",
+    "imageButton": "📷 图片",
+    "clearButton": "🗑️ 清除全部",
+    "table": {
+      "skill": "技能",
+      "saveName": "保存名称",
+      "minDamage": "最小伤害",
+      "maxDamage": "最大伤害",
+      "average": "平均",
+      "hits": "命中",
+      "crits": "暴击",
+      "critRate": "暴击率"
+    },
+    "toast": {
+      "copied": "已复制到剪贴板！",
+      "copyFailed": "复制失败。",
+      "imageCopied": "图片已复制到剪贴板！"
+    }
+  },
+  "onboarding": {
+    "close": "关闭",
+    "skip": "跳过",
+    "previous": "上一步",
+    "next": "下一步",
+    "getStarted": "开始使用",
+    "slides": {
+      "welcome": {
+        "icon": "⚔️",
+        "title": "欢迎使用 L2 DPS 计算器",
+        "content1": "此工具通过解析您的战斗日志并计算详细的 DPS 统计数据，帮助您分析在 <strong>Lineage II</strong> 中的战斗表现。",
+        "content2": "追踪您的技能、暴击，并对比不同的配装或技能循环，以优化您的伤害输出。"
+      },
+      "capture": {
+        "icon": "📜",
+        "title": "捕获战斗日志",
+        "content1": "在游戏中，使用命令 <code>///textcapture on</code> 开始记录您的战斗日志。",
+        "content2": "完成后，使用 <code>///textcapture off</code> 停止记录。",
+        "content3": "日志将保存在您的 <code>Lineage2/system</code> 文件夹中，文件名为 <code>角色名_L2_月_日_时_分.log</code>"
+      },
+      "upload": {
+        "icon": "📁",
+        "title": "上传与分析",
+        "content1": "通过将 <strong>.log</strong> 文件拖放到上传区域或使用文件选择器来上传。",
+        "content2": "您也可以直接将日志内容粘贴到文本区域。",
+        "content3": "设置您的 <strong>战斗时长</strong> 并点击 <strong>计算 DPS</strong> 进行分析。"
+      },
+      "results": {
+        "icon": "📊",
+        "title": "查看您的结果",
+        "content1": "计算完成后，您将看到总的 <strong>DPS</strong> 和每个使用技能的详细分解。",
+        "content2": "点击任意技能名称可展开并查看单独的伤害记录。统计包括：最小、最大、平均、命中和暴击率。"
+      },
+      "save": {
+        "icon": "💾",
+        "title": "保存与对比",
+        "content1": "为您的结果命名并 <strong>保存</strong>，以建立您的 DPS 测试集合。",
+        "content2": "使用技能上的 <strong>对比</strong> 按钮，可以并排对比不同保存记录，追踪您的进步。"
+      },
+      "ready": {
+        "icon": "🎯",
+        "title": "准备好开始了吗？",
+        "content1": "一切就绪！开始分析您的战斗表现，优化您角色的伤害输出。",
+        "content2": "<strong>提示：</strong>您可以随时点击右上角的 <span>?</span> 按钮重新打开此指南。"
+      }
+    }
+  },
+  "buffDebuffChecker": {
+    "title": "增益/减益检查器"
+  }
+}

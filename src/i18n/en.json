@@ -1,0 +1,162 @@
+{
+  "language": {
+    "name": "English",
+    "code": "en"
+  },
+  "app": {
+    "title": "Lineage II DPS Calculator",
+    "subtitle": "The subtle difference between skill and gear is the difference between an average player and a great one.",
+    "version": "Version",
+    "storedVersion": "Stored Version",
+    "madeBy": "Made by @Xiscoteon",
+    "contribute": "💻 Dev? Contribute!",
+    "reportBug": "🐛 Report Bug"
+  },
+  "updateBanner": {
+    "message": "New features have been added that may not be compatible with your saved data. If you encounter issues or want to use new features, please update your data.",
+    "button": "Update and Delete Data"
+  },
+  "alert": {
+    "newVersion": "New version detected: {{currentVersion}} vs {{storedVersion}}. Please update your data to ensure compatibility."
+  },
+  "logProcessor": {
+    "title": "DPS Calculator",
+    "helpTooltip": "Help & Tutorial",
+    "upload": {
+      "button": "Upload Log File",
+      "dropHere": "Drop the file here",
+      "dragDrop": "or drag and drop your .log file here",
+      "icon": "📁"
+    },
+    "textarea": {
+      "placeholder": "Or paste your combat logs here..."
+    },
+    "fightDuration": {
+      "label": "Fight Duration:",
+      "placeholder": "Seconds",
+      "unit": "seconds"
+    },
+    "calculateButton": "Calculate DPS",
+    "savedResults": {
+      "title": "📂 Saved DPS Results",
+      "imageButton": "📷 Image",
+      "copyButton": "📋 Copy",
+      "duration": "Duration:",
+      "seconds": "seconds",
+      "deleteTooltip": "Delete",
+      "emptyState": {
+        "icon": "📝",
+        "message": "No saved DPS results yet."
+      }
+    },
+    "results": {
+      "dpsLabel": "DPS",
+      "saveNamePlaceholder": "Enter a name for your DPS result...",
+      "saveButton": "💾 Save",
+      "skillBreakdown": "Skill Breakdown",
+      "duration": "Duration:",
+      "emptyState": {
+        "icon": "⚡",
+        "message": "Enter your combat logs and click Calculate DPS to see results"
+      }
+    },
+    "skillStats": {
+      "min": "Min",
+      "max": "Max",
+      "avg": "Avg",
+      "hits": "Hits",
+      "crits": "Crits",
+      "critPercent": "Crit %",
+      "compareButton": "Compare",
+      "removeButton": "Remove",
+      "noData": "No skill damage information available.",
+      "noDataIcon": "📊"
+    },
+    "ranks": {
+      "top1": "TOP 1",
+      "top2": "TOP 2",
+      "top3": "TOP 3"
+    },
+    "toast": {
+      "saved": "DPS Result Saved!",
+      "logLoaded": "Log loaded! Click Calculate DPS to analyze.",
+      "invalidFile": "Please upload a valid .log file",
+      "copied": "Results copied to clipboard!",
+      "copyFailed": "Failed to copy results.",
+      "imageCopied": "Image copied to clipboard!",
+      "imageCopyFailed": "Failed to copy image.",
+      "imageGenerateFailed": "Failed to generate image."
+    }
+  },
+  "comparison": {
+    "title": "⚔️ Comparison Results",
+    "copyButton": "📋 Copy",
+    "imageButton": "📷 Image",
+    "clearButton": "🗑️ Clear All",
+    "table": {
+      "skill": "Skill",
+      "saveName": "Save Name",
+      "minDamage": "Min Damage",
+      "maxDamage": "Max Damage",
+      "average": "Average",
+      "hits": "Hits",
+      "crits": "Crits",
+      "critRate": "Crit Rate"
+    },
+    "toast": {
+      "copied": "Copied to clipboard!",
+      "copyFailed": "Failed to copy.",
+      "imageCopied": "Image copied to clipboard!"
+    }
+  },
+  "onboarding": {
+    "close": "Close",
+    "skip": "Skip",
+    "previous": "Previous",
+    "next": "Next",
+    "getStarted": "Get Started",
+    "slides": {
+      "welcome": {
+        "icon": "⚔️",
+        "title": "Welcome to L2 DPS Calculator",
+        "content1": "This tool helps you analyze your combat performance in <strong>Lineage II</strong> by parsing your combat logs and calculating detailed DPS statistics.",
+        "content2": "Track your skills, critical hits, and compare different builds or rotations to optimize your damage output."
+      },
+      "capture": {
+        "icon": "📜",
+        "title": "Capture Combat Logs",
+        "content1": "In-game, use the command <code>///textcapture on</code> to start recording your combat logs.",
+        "content2": "When finished, use <code>///textcapture off</code> to stop.",
+        "content3": "Logs are saved in your <code>Lineage2/system</code> folder as <code>CharacterName_L2_MM_DD_HH_MM.log</code>"
+      },
+      "upload": {
+        "icon": "📁",
+        "title": "Upload & Analyze",
+        "content1": "Upload your <strong>.log</strong> file by dragging and dropping it into the upload area, or use the file picker.",
+        "content2": "You can also paste the log content directly into the text area if you prefer.",
+        "content3": "Set your <strong>fight duration</strong> and click <strong>Calculate DPS</strong> to analyze."
+      },
+      "results": {
+        "icon": "📊",
+        "title": "View Your Results",
+        "content1": "After calculation, you'll see your total <strong>DPS</strong> and a detailed breakdown of each skill used.",
+        "content2": "Click on any skill name to expand and view individual damage lines. Stats include: Min, Max, Average, Hits, and Critical Hit rate."
+      },
+      "save": {
+        "icon": "💾",
+        "title": "Save & Compare",
+        "content1": "Give your result a name and <strong>save</strong> it to build a collection of your DPS tests.",
+        "content2": "Use the <strong>Compare</strong> button on skills to see side-by-side comparisons across different saved runs and track your progress."
+      },
+      "ready": {
+        "icon": "🎯",
+        "title": "Ready to Begin?",
+        "content1": "You're all set! Start analyzing your combat performance and optimize your character's damage output.",
+        "content2": "<strong>Tip:</strong> You can reopen this guide anytime by clicking the <span>?</span> button in the top right."
+      }
+    }
+  },
+  "buffDebuffChecker": {
+    "title": "Buff/Debuff Checker"
+  }
+}

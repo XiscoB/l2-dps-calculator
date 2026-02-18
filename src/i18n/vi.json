@@ -1,0 +1,162 @@
+{
+  "language": {
+    "name": "Tiếng Việt",
+    "code": "vi"
+  },
+  "app": {
+    "title": "Lineage II Máy Tính DPS",
+    "subtitle": "Sự khác biệt tinh tế giữa kỹ năng và trang bị là điều phân biệt ngườichơi bình thường với ngườichơi giỏi.",
+    "version": "Phiên bản",
+    "storedVersion": "Phiên bản đã lưu",
+    "madeBy": "Được tạo bởi @Xiscoteon",
+    "contribute": "💻 Lập trình viên? Đóng góp!",
+    "reportBug": "🐛 Báo cáo lỗi"
+  },
+  "updateBanner": {
+    "message": "Đã thêm các tính năng mới có thể không tương thích với dữ liệu đã lưu của bạn. Nếu gặp sự cố hoặc muốn sử dụng tính năng mới, vui lòng cập nhật dữ liệu của bạn.",
+    "button": "Cập nhật và Xóa Dữ liệu"
+  },
+  "alert": {
+    "newVersion": "Phát hiện phiên bản mới: {{currentVersion}} vs {{storedVersion}}. Vui lòng cập nhật dữ liệu của bạn để đảm bảo tính tương thích."
+  },
+  "logProcessor": {
+    "title": "Máy Tính DPS",
+    "helpTooltip": "Trợ giúp & Hướng dẫn",
+    "upload": {
+      "button": "Tải lên File Nhật ký",
+      "dropHere": "Thả file vào đây",
+      "dragDrop": "hoặc kéo và thả file .log của bạn vào đây",
+      "icon": "📁"
+    },
+    "textarea": {
+      "placeholder": "Hoặc dán nhật ký chiến đấu của bạn vào đây..."
+    },
+    "fightDuration": {
+      "label": "Thờigian Chiến đấu:",
+      "placeholder": "Giây",
+      "unit": "giây"
+    },
+    "calculateButton": "Tính DPS",
+    "savedResults": {
+      "title": "📂 Kết quả DPS Đã Lưu",
+      "imageButton": "📷 Hình ảnh",
+      "copyButton": "📋 Sao chép",
+      "duration": "Thờigian:",
+      "seconds": "giây",
+      "deleteTooltip": "Xóa",
+      "emptyState": {
+        "icon": "📝",
+        "message": "Chưa có kết quả DPS nào được lưu."
+      }
+    },
+    "results": {
+      "dpsLabel": "DPS",
+      "saveNamePlaceholder": "Nhập tên cho kết quả DPS của bạn...",
+      "saveButton": "💾 Lưu",
+      "skillBreakdown": "Phân tích Kỹ năng",
+      "duration": "Thờigian:",
+      "emptyState": {
+        "icon": "⚡",
+        "message": "Nhập nhật ký chiến đấu của bạn và nhấp vào Tính DPS để xem kết quả"
+      }
+    },
+    "skillStats": {
+      "min": "Tối thiểu",
+      "max": "Tối đa",
+      "avg": "Trung bình",
+      "hits": "Đánh trúng",
+      "crits": "Chí mạng",
+      "critPercent": "% Chí mạng",
+      "compareButton": "So sánh",
+      "removeButton": "Xóa bỏ",
+      "noData": "Không có thông tin sát thương kỹ năng nào.",
+      "noDataIcon": "📊"
+    },
+    "ranks": {
+      "top1": "TOP 1",
+      "top2": "TOP 2",
+      "top3": "TOP 3"
+    },
+    "toast": {
+      "saved": "Đã Lưu Kết quả DPS!",
+      "logLoaded": "Đã tải nhật ký! Nhấp vào Tính DPS để phân tích.",
+      "invalidFile": "Vui lòng tải lên file .log hợp lệ",
+      "copied": "Đã sao chép kết quả vào clipboard!",
+      "copyFailed": "Sao chép kết quả thất bại.",
+      "imageCopied": "Đã sao chép hình ảnh vào clipboard!",
+      "imageCopyFailed": "Sao chép hình ảnh thất bại.",
+      "imageGenerateFailed": "Tạo hình ảnh thất bại."
+    }
+  },
+  "comparison": {
+    "title": "⚔️ Kết quả So sánh",
+    "copyButton": "📋 Sao chép",
+    "imageButton": "📷 Hình ảnh",
+    "clearButton": "🗑️ Xóa Tất cả",
+    "table": {
+      "skill": "Kỹ năng",
+      "saveName": "Tên đã lưu",
+      "minDamage": "Sát thương Tối thiểu",
+      "maxDamage": "Sát thương Tối đa",
+      "average": "Trung bình",
+      "hits": "Đánh trúng",
+      "crits": "Chí mạng",
+      "critRate": "Tỷ lệ Chí mạng"
+    },
+    "toast": {
+      "copied": "Đã sao chép vào clipboard!",
+      "copyFailed": "Sao chép thất bại.",
+      "imageCopied": "Đã sao chép hình ảnh vào clipboard!"
+    }
+  },
+  "onboarding": {
+    "close": "Đóng",
+    "skip": "Bỏ qua",
+    "previous": "Trước",
+    "next": "Tiếp",
+    "getStarted": "Bắt đầu",
+    "slides": {
+      "welcome": {
+        "icon": "⚔️",
+        "title": "Chào mừng đến với L2 DPS Calculator",
+        "content1": "Công cụ này giúp bạn phân tích hiệu suất chiến đấu trong <strong>Lineage II</strong> bằng cách phân tích nhật ký chiến đấu và tính toán thống kê DPS chi tiết.",
+        "content2": "Theo dõi kỹ năng, đòn chí mạng của bạn và so sánh các bộ trang bị hoặc chu kỳ kỹ năng khác nhau để tối ưu hóa lượng sát thương."
+      },
+      "capture": {
+        "icon": "📜",
+        "title": "Ghi Nhật ký Chiến đấu",
+        "content1": "Trong trò chơi, sử dụng lệnh <code>///textcapture on</code> để bắt đầu ghi nhật ký chiến đấu của bạn.",
+        "content2": "Khi hoàn tất, sử dụng <code>///textcapture off</code> để dừng.",
+        "content3": "Nhật ký được lưu trong thư mục <code>Lineage2/system</code> dưới dạng <code>TênNhânVật_L2_MM_DD_HH_MM.log</code>"
+      },
+      "upload": {
+        "icon": "📁",
+        "title": "Tải lên & Phân tích",
+        "content1": "Tải lên file <strong>.log</strong> của bạn bằng cách kéo và thả vào khu vực tải lên, hoặc sử dụng bộ chọn file.",
+        "content2": "Bạn cũng có thể dán nộidung nhật ký trực tiếp vào khu vực văn bản nếu muốn.",
+        "content3": "Đặt <strong>thờigian chiến đấu</strong> của bạn và nhấp vào <strong>Tính DPS</strong> để phân tích."
+      },
+      "results": {
+        "icon": "📊",
+        "title": "Xem Kết quả của Bạn",
+        "content1": "Sau khi tính toán, bạn sẽ thấy tổng <strong>DPS</strong> và phân tích chi tiết từng kỹ năng đã sử dụng.",
+        "content2": "Nhấp vào bất kỳ tên kỹ năng nào để mở rộng và xem các dòng sát thương riêng lẻ. Thống kê bao gồm: Tối thiểu, Tối đa, Trung bình, Đánh trúng và Tỷ lệ Chí mạng."
+      },
+      "save": {
+        "icon": "💾",
+        "title": "Lưu & So sánh",
+        "content1": "Đặt tên cho kết quả của bạn và <strong>lưu</strong> để xây dựng bộ sưu tập các bài kiểm tra DPS.",
+        "content2": "Sử dụng nút <strong>So sánh</strong> trên các kỹ năng để xem so sánh cạnh nhau giữa các lần chạy đã lưu khác nhau và theo dõi tiến độ của bạn."
+      },
+      "ready": {
+        "icon": "🎯",
+        "title": "Sẵn sàng Bắt đầu?",
+        "content1": "Mọi thứ đã sẵn sàng! Bắt đầu phân tích hiệu suất chiến đấu của bạn và tối ưu hóa lượng sát thương của nhân vật.",
+        "content2": "<strong>Mẹo:</strong> Bạn có thể mở lại hướng dẫn này bất cứ lúc nào bằng cách nhấp vào nút <span>?</span> ở góc trên bên phải."
+      }
+    }
+  },
+  "buffDebuffChecker": {
+    "title": "Kiểm Tra Buff/Debuff"
+  }
+}

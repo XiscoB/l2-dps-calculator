@@ -9,6 +9,7 @@ import {
   faSortUp,
 } from "@fortawesome/free-solid-svg-icons";
 import html2canvas from "html2canvas";
+import { useLanguage } from "./i18n/LanguageContext";
 
 function ComparisonDisplay({
   comparisonData,
@@ -16,6 +17,7 @@ function ComparisonDisplay({
   clearComparisonData,
   showToast,
 }) {
+  const { t } = useLanguage();
   const [expandedRow, setExpandedRow] = useState(null);
   const [sortField, setSortField] = useState("min");
   const [sortDirection, setSortDirection] = useState("asc");
@@ -42,8 +44,8 @@ function ComparisonDisplay({
   });
 
   const copyComparisonAsText = () => {
-    let text = "⚔️ Comparison Results\n\n";
-    text += "Skill | Save Name | Min Damage | Max Damage | Average | Hits | Crits | Crit Rate\n";
+    let text = t('comparison.title') + "\n\n";
+    text += `${t('comparison.table.skill')} | ${t('comparison.table.saveName')} | ${t('comparison.table.minDamage')} | ${t('comparison.table.maxDamage')} | ${t('comparison.table.average')} | ${t('comparison.table.hits')} | ${t('comparison.table.crits')} | ${t('comparison.table.critRate')}\n`;
     text += "-".repeat(80) + "\n";
     
     sortedData.forEach((item) => {
@@ -60,10 +62,10 @@ function ComparisonDisplay({
     
     navigator.clipboard.writeText(text).then(
       () => {
-        if (showToast) showToast("Copied to clipboard!");
+        if (showToast) showToast(t('comparison.toast.copied'));
       },
       (err) => {
-        if (showToast) showToast("Failed to copy.");
+        if (showToast) showToast(t('comparison.toast.copyFailed'));
         console.error("Could not copy text: ", err);
       }
     );
@@ -92,7 +94,7 @@ function ComparisonDisplay({
         letter-spacing: 0.1em;
         text-transform: uppercase;
         font-weight: bold;
-      ">⚔️ Comparison Results</div>
+      ">${t('comparison.title')}</div>
       <div style="
         background: #0a0c10;
         border-radius: 8px;
@@ -106,14 +108,14 @@ function ComparisonDisplay({
       ">
         <thead>
           <tr style="background: #2a3040;">
-            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Skill</th>
-            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Save Name</th>
-            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Min Damage</th>
-            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Max Damage</th>
-            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Average</th>
-            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Hits</th>
-            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Crits</th>
-            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Crit Rate</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">${t('comparison.table.skill')}</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">${t('comparison.table.saveName')}</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">${t('comparison.table.minDamage')}</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">${t('comparison.table.maxDamage')}</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">${t('comparison.table.average')}</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">${t('comparison.table.hits')}</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">${t('comparison.table.crits')}</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">${t('comparison.table.critRate')}</th>
           </tr>
         </thead>
         <tbody>
@@ -161,12 +163,12 @@ function ComparisonDisplay({
           const item = new ClipboardItem({ "image/png": blob });
           navigator.clipboard.write([item]).then(
             () => {
-              if (showToast) showToast("Image copied to clipboard!");
+              if (showToast) showToast(t('comparison.toast.imageCopied'));
               // Clean up
               document.body.removeChild(tempDiv);
             },
             (err) => {
-              if (showToast) showToast("Failed to copy image.");
+              if (showToast) showToast(t('comparison.toast.copyFailed'));
               console.error("Could not copy image: ", err);
               document.body.removeChild(tempDiv);
             }
@@ -182,16 +184,16 @@ function ComparisonDisplay({
   return (
     <div className="comparisonContainer" id="comparison-results-container">
       <div className="comparisonHeader">
-        <h3>⚔️ Comparison Results</h3>
+        <h3>{t('comparison.title')}</h3>
         <div className="comparisonExportButtons">
           <button onClick={copyComparisonAsText} className="copyTextButton">
-            📋 Copy
+            {t('comparison.copyButton')}
           </button>
           <button onClick={exportComparisonAsImage} className="exportImageButton">
-            📷 Image
+            {t('comparison.imageButton')}
           </button>
           <button onClick={clearComparisonData} className="clearAllButton">
-            🗑️ Clear All
+            {t('comparison.clearButton')}
           </button>
         </div>
       </div>
@@ -200,29 +202,29 @@ function ComparisonDisplay({
         <table className="comparisonTable">
           <thead>
             <tr>
-              <th>Skill</th>
-              <th>Save Name</th>
+              <th>{t('comparison.table.skill')}</th>
+              <th>{t('comparison.table.saveName')}</th>
               <th onClick={() => toggleSort("min")}>
-                Min Damage
+                {t('comparison.table.minDamage')}
                 {sortField === "min" && (
                   <FontAwesomeIcon icon={sortDirection === "asc" ? faSortUp : faSortDown} />
                 )}
               </th>
               <th onClick={() => toggleSort("max")}>
-                Max Damage
+                {t('comparison.table.maxDamage')}
                 {sortField === "max" && (
                   <FontAwesomeIcon icon={sortDirection === "asc" ? faSortUp : faSortDown} />
                 )}
               </th>
               <th onClick={() => toggleSort("average")}>
-                Average
+                {t('comparison.table.average')}
                 {sortField === "average" && (
                   <FontAwesomeIcon icon={sortDirection === "asc" ? faSortUp : faSortDown} />
                 )}
               </th>
-              <th>Hits</th>
-              <th>Crits</th>
-              <th>Crit Rate</th>
+              <th>{t('comparison.table.hits')}</th>
+              <th>{t('comparison.table.crits')}</th>
+              <th>{t('comparison.table.critRate')}</th>
               <th></th>
               <th></th>
             </tr>

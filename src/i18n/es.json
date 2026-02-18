@@ -1,0 +1,162 @@
+{
+  "language": {
+    "name": "Español",
+    "code": "es"
+  },
+  "app": {
+    "title": "Lineage II Calculadora DPS",
+    "subtitle": "La sutil diferencia entre habilidad y equipamiento es la diferencia entre un jugador promedio y uno grandioso.",
+    "version": "Versión",
+    "storedVersion": "Versión Guardada",
+    "madeBy": "Hecho por @Xiscoteon",
+    "contribute": "💻 ¿Dev? ¡Contribuye!",
+    "reportBug": "🐛 Reportar Bug"
+  },
+  "updateBanner": {
+    "message": "Se han añadido nuevas funciones que pueden no ser compatibles con tus datos guardados. Si encuentras problemas o quieres usar las nuevas funciones, por favor actualiza tus datos.",
+    "button": "Actualizar y Borrar Datos"
+  },
+  "alert": {
+    "newVersion": "Nueva versión detectada: {{currentVersion}} vs {{storedVersion}}. Por favor actualiza tus datos para asegurar compatibilidad."
+  },
+  "logProcessor": {
+    "title": "Calculadora DPS",
+    "helpTooltip": "Ayuda y Tutorial",
+    "upload": {
+      "button": "Subir Archivo de Log",
+      "dropHere": "Suelta el archivo aquí",
+      "dragDrop": "o arrastra y suelta tu archivo .log aquí",
+      "icon": "📁"
+    },
+    "textarea": {
+      "placeholder": "O pega tus logs de combate aquí..."
+    },
+    "fightDuration": {
+      "label": "Duración del Combate:",
+      "placeholder": "Segundos",
+      "unit": "segundos"
+    },
+    "calculateButton": "Calcular DPS",
+    "savedResults": {
+      "title": "📂 Resultados DPS Guardados",
+      "imageButton": "📷 Imagen",
+      "copyButton": "📋 Copiar",
+      "duration": "Duración:",
+      "seconds": "segundos",
+      "deleteTooltip": "Eliminar",
+      "emptyState": {
+        "icon": "📝",
+        "message": "No hay resultados DPS guardados aún."
+      }
+    },
+    "results": {
+      "dpsLabel": "DPS",
+      "saveNamePlaceholder": "Introduce un nombre para tu resultado DPS...",
+      "saveButton": "💾 Guardar",
+      "skillBreakdown": "Desglose de Habilidades",
+      "duration": "Duración:",
+      "emptyState": {
+        "icon": "⚡",
+        "message": "Introduce tus logs de combate y haz clic en Calcular DPS para ver los resultados"
+      }
+    },
+    "skillStats": {
+      "min": "Mín",
+      "max": "Máx",
+      "avg": "Med",
+      "hits": "Golpes",
+      "crits": "Críticos",
+      "critPercent": "% Crít",
+      "compareButton": "Comparar",
+      "removeButton": "Quitar",
+      "noData": "No hay información de daño de habilidades disponible.",
+      "noDataIcon": "📊"
+    },
+    "ranks": {
+      "top1": "TOP 1",
+      "top2": "TOP 2",
+      "top3": "TOP 3"
+    },
+    "toast": {
+      "saved": "¡Resultado DPS Guardado!",
+      "logLoaded": "¡Log cargado! Haz clic en Calcular DPS para analizar.",
+      "invalidFile": "Por favor sube un archivo .log válido",
+      "copied": "¡Resultados copiados al portapapeles!",
+      "copyFailed": "Error al copiar resultados.",
+      "imageCopied": "¡Imagen copiada al portapapeles!",
+      "imageCopyFailed": "Error al copiar imagen.",
+      "imageGenerateFailed": "Error al generar imagen."
+    }
+  },
+  "comparison": {
+    "title": "⚔️ Resultados de Comparación",
+    "copyButton": "📋 Copiar",
+    "imageButton": "📷 Imagen",
+    "clearButton": "🗑️ Limpiar Todo",
+    "table": {
+      "skill": "Habilidad",
+      "saveName": "Nombre Guardado",
+      "minDamage": "Daño Mín",
+      "maxDamage": "Daño Máx",
+      "average": "Promedio",
+      "hits": "Golpes",
+      "crits": "Críticos",
+      "critRate": "Tasa Crít"
+    },
+    "toast": {
+      "copied": "¡Copiado al portapapeles!",
+      "copyFailed": "Error al copiar.",
+      "imageCopied": "¡Imagen copiada al portapapeles!"
+    }
+  },
+  "onboarding": {
+    "close": "Cerrar",
+    "skip": "Saltar",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "getStarted": "Empezar",
+    "slides": {
+      "welcome": {
+        "icon": "⚔️",
+        "title": "Bienvenido a L2 DPS Calculator",
+        "content1": "Esta herramienta te ayuda a analizar tu rendimiento en combate en <strong>Lineage II</strong> analizando tus logs de combate y calculando estadísticas DPS detalladas.",
+        "content2": "Rastrea tus habilidades, golpes críticos y compara diferentes builds o rotaciones para optimizar tu daño."
+      },
+      "capture": {
+        "icon": "📜",
+        "title": "Capturar Logs de Combate",
+        "content1": "En el juego, usa el comando <code>///textcapture on</code> para empezar a grabar tus logs de combate.",
+        "content2": "Cuando termines, usa <code>///textcapture off</code> para detener.",
+        "content3": "Los logs se guardan en tu carpeta <code>Lineage2/system</code> como <code>CharacterName_L2_MM_DD_HH_MM.log</code>"
+      },
+      "upload": {
+        "icon": "📁",
+        "title": "Subir y Analizar",
+        "content1": "Sube tu archivo <strong>.log</strong> arrastrándolo y soltándolo en el área de subida, o usa el selector de archivos.",
+        "content2": "También puedes pegar el contenido del log directamente en el área de texto si prefieres.",
+        "content3": "Establece tu <strong>duración de combate</strong> y haz clic en <strong>Calcular DPS</strong> para analizar."
+      },
+      "results": {
+        "icon": "📊",
+        "title": "Ver Tus Resultados",
+        "content1": "Después del cálculo, verás tu <strong>DPS</strong> total y un desglose detallado de cada habilidad usada.",
+        "content2": "Haz clic en cualquier nombre de habilidad para expandir y ver líneas de daño individuales. Las estadísticas incluyen: Mín, Máx, Promedio, Golpes y Tasa de Golpe Crítico."
+      },
+      "save": {
+        "icon": "💾",
+        "title": "Guardar y Comparar",
+        "content1": "Dale un nombre a tu resultado y <strong>guárdalo</strong> para construir una colección de tus pruebas DPS.",
+        "content2": "Usa el botón <strong>Comparar</strong> en las habilidades para ver comparaciones lado a lado entre diferentes ejecuciones guardadas y rastrea tu progreso."
+      },
+      "ready": {
+        "icon": "🎯",
+        "title": "¿Listo para Empezar?",
+        "content1": "¡Todo listo! Empieza a analizar tu rendimiento en combate y optimiza el daño de tu personaje.",
+        "content2": "<strong>Consejo:</strong> Puedes reabrir esta guía en cualquier momento haciendo clic en el botón <span>?</span> en la esquina superior derecha."
+      }
+    }
+  },
+  "buffDebuffChecker": {
+    "title": "Comprobador de Buff/Debuff"
+  }
+}

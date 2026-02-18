@@ -1,121 +1,120 @@
 import React, { useState, useEffect } from "react";
 import "./Onboarding.css";
+import { useLanguage } from "./i18n/LanguageContext";
 
 const ONBOARDING_KEY = "l2dps_onboarding_completed";
 
-const slides = [
-  {
-    id: "welcome",
-    icon: "⚔️",
-    title: "Welcome to L2 DPS Calculator",
-    content: (
-      <>
-        <p>
-          This tool helps you analyze your combat performance in <strong>Lineage II</strong> by
-          parsing your combat logs and calculating detailed DPS statistics.
-        </p>
-        <p style={{ marginTop: "1rem" }}>
-          Track your skills, critical hits, and compare different builds or rotations
-          to optimize your damage output.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: "capture",
-    icon: "📜",
-    title: "Capture Combat Logs",
-    content: (
-      <>
-        <p>
-          In-game, use the command <code>{"///textcapture on"}</code> to start
-          recording your combat logs.
-        </p>
-        <p style={{ marginTop: "1rem" }}>
-          When finished, use <code>{"///textcapture off"}</code> to stop.
-        </p>
-        <p style={{ marginTop: "1rem", fontSize: "0.9rem", color: "#7a7568" }}>
-          Logs are saved in your <code>Lineage2/system</code> folder as{" "}
-          <code>CharacterName_L2_MM_DD_HH_MM.log</code>
-        </p>
-      </>
-    ),
-  },
-  {
-    id: "upload",
-    icon: "📁",
-    title: "Upload & Analyze",
-    content: (
-      <>
-        <p>
-          Upload your <strong>.log</strong> file by dragging and dropping it into the
-          upload area, or use the file picker.
-        </p>
-        <p style={{ marginTop: "1rem" }}>
-          You can also paste the log content directly into the text area if you prefer.
-        </p>
-        <p style={{ marginTop: "1rem" }}>
-          Set your <strong>fight duration</strong> and click <strong>Calculate DPS</strong> to analyze.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: "results",
-    icon: "📊",
-    title: "View Your Results",
-    content: (
-      <>
-        <p>
-          After calculation, you'll see your total <strong>DPS</strong> and a detailed
-          breakdown of each skill used.
-        </p>
-        <p style={{ marginTop: "1rem" }}>
-          Click on any skill name to expand and view individual damage lines.
-          Stats include: Min, Max, Average, Hits, and Critical Hit rate.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: "save",
-    icon: "💾",
-    title: "Save & Compare",
-    content: (
-      <>
-        <p>
-          Give your result a name and <strong>save</strong> it to build a collection
-          of your DPS tests.
-        </p>
-        <p style={{ marginTop: "1rem" }}>
-          Use the <strong>Compare</strong> button on skills to see side-by-side comparisons
-          across different saved runs and track your progress.
-        </p>
-      </>
-    ),
-  },
-  {
-    id: "ready",
-    icon: "🎯",
-    title: "Ready to Begin?",
-    content: (
-      <>
-        <p>
-          You're all set! Start analyzing your combat performance and optimize
-          your character's damage output.
-        </p>
-        <p style={{ marginTop: "1rem", fontSize: "0.9rem", color: "#7a7568" }}>
-          <strong>Tip:</strong> You can reopen this guide anytime by clicking the{" "}
-          <span style={{ color: "#4a90d9" }}>?</span> button in the top right.
-        </p>
-      </>
-    ),
-  },
-];
+// Helper component to render HTML content
+function HtmlContent({ html }) {
+  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+}
 
 function Onboarding({ isOpen, onClose, forceOpen = false }) {
+  const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+
+  // Define slides using translation keys
+  const getSlides = () => [
+    {
+      id: "welcome",
+      icon: t('onboarding.slides.welcome.icon'),
+      title: t('onboarding.slides.welcome.title'),
+      content: (
+        <>
+          <p>
+            <HtmlContent html={t('onboarding.slides.welcome.content1')} />
+          </p>
+          <p style={{ marginTop: "1rem" }}>
+            {t('onboarding.slides.welcome.content2')}
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "capture",
+      icon: t('onboarding.slides.capture.icon'),
+      title: t('onboarding.slides.capture.title'),
+      content: (
+        <>
+          <p>
+            <HtmlContent html={t('onboarding.slides.capture.content1')} />
+          </p>
+          <p style={{ marginTop: "1rem" }}>
+            <HtmlContent html={t('onboarding.slides.capture.content2')} />
+          </p>
+          <p style={{ marginTop: "1rem", fontSize: "0.9rem", color: "#7a7568" }}>
+            <HtmlContent html={t('onboarding.slides.capture.content3')} />
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "upload",
+      icon: t('onboarding.slides.upload.icon'),
+      title: t('onboarding.slides.upload.title'),
+      content: (
+        <>
+          <p>
+            <HtmlContent html={t('onboarding.slides.upload.content1')} />
+          </p>
+          <p style={{ marginTop: "1rem" }}>
+            {t('onboarding.slides.upload.content2')}
+          </p>
+          <p style={{ marginTop: "1rem" }}>
+            <HtmlContent html={t('onboarding.slides.upload.content3')} />
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "results",
+      icon: t('onboarding.slides.results.icon'),
+      title: t('onboarding.slides.results.title'),
+      content: (
+        <>
+          <p>
+            <HtmlContent html={t('onboarding.slides.results.content1')} />
+          </p>
+          <p style={{ marginTop: "1rem" }}>
+            {t('onboarding.slides.results.content2')}
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "save",
+      icon: t('onboarding.slides.save.icon'),
+      title: t('onboarding.slides.save.title'),
+      content: (
+        <>
+          <p>
+            <HtmlContent html={t('onboarding.slides.save.content1')} />
+          </p>
+          <p style={{ marginTop: "1rem" }}>
+            <HtmlContent html={t('onboarding.slides.save.content2')} />
+          </p>
+        </>
+      ),
+    },
+    {
+      id: "ready",
+      icon: t('onboarding.slides.ready.icon'),
+      title: t('onboarding.slides.ready.title'),
+      content: (
+        <>
+          <p>
+            {t('onboarding.slides.ready.content1')}
+          </p>
+          <p style={{ marginTop: "1rem", fontSize: "0.9rem", color: "#7a7568" }}>
+            <HtmlContent html={t('onboarding.slides.ready.content2')} />
+          </p>
+        </>
+      ),
+    },
+  ];
+
+  const slides = getSlides();
 
   useEffect(() => {
     // Check if this is the first visit
@@ -175,14 +174,14 @@ function Onboarding({ isOpen, onClose, forceOpen = false }) {
       {/* Modal */}
       <div className="onboardingModal">
         {/* Close button */}
-        <button className="onboardingClose" onClick={handleClose} title="Close">
+        <button className="onboardingClose" onClick={handleClose} title={t('onboarding.close')}>
           ×
         </button>
 
         {/* Skip button */}
         {!isLastSlide && (
           <button className="onboardingSkip" onClick={handleSkip}>
-            Skip
+            {t('onboarding.skip')}
           </button>
         )}
 
@@ -212,13 +211,13 @@ function Onboarding({ isOpen, onClose, forceOpen = false }) {
             onClick={handlePrev}
             disabled={isFirstSlide}
           >
-            Previous
+            {t('onboarding.previous')}
           </button>
           <button
             className="onboardingBtn onboardingBtnNext"
             onClick={handleNext}
           >
-            {isLastSlide ? "Get Started" : "Next"}
+            {isLastSlide ? t('onboarding.getStarted') : t('onboarding.next')}
           </button>
         </div>
       </div>

@@ -243,9 +243,10 @@
   position: relative;
   z-index: 1;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem 2rem;
   padding: 1.5rem;
   background: linear-gradient(180deg, 
     transparent 0%,
@@ -257,6 +258,14 @@
   color: #7a7568;
   font-family: 'Cinzel', serif;
   letter-spacing: 0.1em;
+}
+
+/* Language Selector Row in Footer */
+.footerRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
 }
 
 .App-footer p {

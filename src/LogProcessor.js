@@ -5,8 +5,10 @@ import Onboarding from "./Onboarding";
 import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { useLanguage } from "./i18n/LanguageContext";
 
 function LogProcessor() {
+  const { t } = useLanguage();
   const [logs, setLogs] = useState("");
   const [dps, setDPS] = useState(0);
   const [skillInfo, setSkillInfo] = useState({});
@@ -14,7 +16,6 @@ function LogProcessor() {
   const [saveName, setSaveName] = useState("");
   const [savedDPSResults, setSavedDPSResults] = useState([]);
   const [selectedDPSName, setSelectedDPSName] = useState("");
-  const [showHelp, setShowHelp] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
@@ -99,7 +100,7 @@ function LogProcessor() {
     };
 
     localStorage.setItem(saveName, JSON.stringify(dpsData));
-    showToast("DPS Result Saved!");
+    showToast(t('logProcessor.toast.saved'));
     setSaveName("");
     fetchSavedDPSResults();
   };
@@ -216,11 +217,11 @@ function LogProcessor() {
         const content = e.target.result;
         setLogs(content);
         clearCalculatedDPS();
-        showToast("Log loaded! Click Calculate DPS to analyze.");
+        showToast(t('logProcessor.toast.logLoaded'));
       };
       reader.readAsText(file);
     } else {
-      showToast("Please upload a valid .log file");
+      showToast(t('logProcessor.toast.invalidFile'));
     }
     setDragActive(false);
   };
@@ -242,22 +243,22 @@ function LogProcessor() {
         const content = e.target.result;
         setLogs(content);
         clearCalculatedDPS();
-        showToast("Log loaded! Click Calculate DPS to analyze.");
+        showToast(t('logProcessor.toast.logLoaded'));
       };
       reader.readAsText(file);
     } else {
-      showToast("Please upload a valid .log file");
+      showToast(t('logProcessor.toast.invalidFile'));
     }
   };
 
   const exportResultsToClipboard = useCallback(() => {
-    let resultsText = "**Saved DPS Results**\n\n";
+    let resultsText = "**" + t('logProcessor.savedResults.title').replace('📂 ', '') + "**\n\n";
     resultsText += savedDPSResults
       .map(
         (result, index) =>
-          `- ${index + 1}: ${result.saveName}, Duration: ${
+          `- ${index + 1}: ${result.saveName}, ${t('logProcessor.savedResults.duration').replace(':', '')}: ${
             result.fightDuration || "60"
-          } seconds, DPS: ${result.dps
+          } ${t('logProcessor.savedResults.seconds')}, DPS: ${result.dps
             .toFixed(2)
             .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`
       )
@@ -265,14 +266,14 @@ function LogProcessor() {
 
     navigator.clipboard.writeText(resultsText).then(
       () => {
-        showToast("Results copied to clipboard!");
+        showToast(t('logProcessor.toast.copied'));
       },
       (err) => {
-        showToast("Failed to copy results.");
+        showToast(t('logProcessor.toast.copyFailed'));
         console.error("Could not copy text: ", err);
       }
     );
-  }, [savedDPSResults]);
+  }, [savedDPSResults, t]);
 
   const exportResultsAsImage = useCallback(async () => {
     const element = document.getElementById("saved-results-container");
@@ -307,25 +308,25 @@ function LogProcessor() {
           const item = new ClipboardItem({ "image/png": blob });
           navigator.clipboard.write([item]).then(
             () => {
-              showToast("Image copied to clipboard!");
+              showToast(t('logProcessor.toast.imageCopied'));
             },
             (err) => {
-              showToast("Failed to copy image.");
+              showToast(t('logProcessor.toast.imageCopyFailed'));
               console.error("Could not copy image: ", err);
             }
           );
         }
       }, "image/png", 1.0);
     } catch (err) {
-      showToast("Failed to generate image.");
+      showToast(t('logProcessor.toast.imageGenerateFailed'));
       console.error("Could not generate image: ", err);
     }
-  }, []);
+  }, [t]);
 
   const getRankBadge = (index) => {
-    if (index === 0) return { label: "TOP 1", class: "rank-gold" };
-    if (index === 1) return { label: "TOP 2", class: "rank-silver" };
-    if (index === 2) return { label: "TOP 3", class: "rank-bronze" };
+    if (index === 0) return { label: t('logProcessor.ranks.top1'), class: "rank-gold" };
+    if (index === 1) return { label: t('logProcessor.ranks.top2'), class: "rank-silver" };
+    if (index === 2) return { label: t('logProcessor.ranks.top3'), class: "rank-bronze" };
     return null;
   };
 
@@ -372,7 +373,7 @@ function LogProcessor() {
       {/* Header with Help */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
         <div></div>
-        <div className="helpIcon" onClick={toggleHelp} title="Help & Tutorial">?</div>
+        <div className="helpIcon" onClick={toggleHelp} title={t('logProcessor.helpTooltip')}>?</div>
       </div>
 
       {/* Comparison Display - Full Width */}
@@ -397,9 +398,9 @@ function LogProcessor() {
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
           >
-            <div className="dragDropIcon">📁</div>
+            <div className="dragDropIcon">{t('logProcessor.upload.icon')}</div>
             <label className="logProcessorButtonv2">
-              Upload Log File
+              {t('logProcessor.upload.button')}
               <input
                 type="file"
                 accept=".log"
@@ -408,7 +409,7 @@ function LogProcessor() {
               />
             </label>
             <div className="dragDropText">
-              {dragActive ? "Drop the file here" : "or drag and drop your .log file here"}
+              {dragActive ? t('logProcessor.upload.dropHere') : t('logProcessor.upload.dragDrop')}
             </div>
           </div>
 
@@ -417,47 +418,47 @@ function LogProcessor() {
             className="logProcessorTextarea"
             value={logs}
             onChange={(e) => setLogs(e.target.value)}
-            placeholder="Or paste your combat logs here..."
+            placeholder={t('logProcessor.textarea.placeholder')}
           />
 
           {/* Fight Duration */}
           <div className="fightDurationSection">
-            <label>Fight Duration:</label>
+            <label>{t('logProcessor.fightDuration.label')}</label>
             <input
               type="number"
               className="fightDurationInput"
               value={fightDuration}
               onChange={(e) => setFightDuration(Number(e.target.value))}
-              placeholder="Seconds"
+              placeholder={t('logProcessor.fightDuration.placeholder')}
               min="1"
               required
             />
-            <span style={{ color: "#94a3b8" }}>seconds</span>
+            <span style={{ color: "#94a3b8" }}>{t('logProcessor.fightDuration.unit')}</span>
           </div>
 
           {/* Calculate Button */}
           <button className="logProcessorButton" onClick={handleCalculateDPS}>
-            <span>⚡</span> Calculate DPS
+            <span>⚡</span> {t('logProcessor.calculateButton')}
           </button>
 
           {/* Saved Results - Moved below input on left column */}
           <div className="savedResultsContainer" id="saved-results-container">
             <div className="savedResultsHeader">
-              <h2>📂 Saved DPS Results</h2>
+              <h2>{t('logProcessor.savedResults.title')}</h2>
               {savedDPSResults.length > 0 && (
                 <div className="savedResultsActions">
                   <button
                     className="logProcessorButton exportImageButton"
                     onClick={exportResultsAsImage}
                   >
-                    📷 Image
+                    {t('logProcessor.savedResults.imageButton')}
                   </button>
                   <button
                     className="logProcessorButton"
                     style={{ padding: "0.6rem 1rem", fontSize: "0.85rem" }}
                     onClick={exportResultsToClipboard}
                   >
-                    📋 Copy
+                    {t('logProcessor.savedResults.copyButton')}
                   </button>
                 </div>
               )}
@@ -477,7 +478,7 @@ function LogProcessor() {
                       <div className="savedResultInfo">
                         <div className="savedResultName">{result.saveName}</div>
                         <div className="savedResultDuration">
-                          Duration: {result.fightDuration || "60"} seconds
+                          {t('logProcessor.savedResults.duration')} {result.fightDuration || "60"} {t('logProcessor.savedResults.seconds')}
                         </div>
                       </div>
                       <div className="savedResultDps">
@@ -489,7 +490,7 @@ function LogProcessor() {
                           e.stopPropagation();
                           removeDPSResult(result.key);
                         }}
-                        title="Delete"
+                        title={t('logProcessor.savedResults.deleteTooltip')}
                       >
                         <FontAwesomeIcon icon={faTrashCan} />
                       </button>
@@ -499,8 +500,8 @@ function LogProcessor() {
               </div>
             ) : (
               <div className="emptyState" style={{ padding: "2rem" }}>
-                <div className="emptyStateIcon">📝</div>
-                <p>No saved DPS results yet.</p>
+                <div className="emptyStateIcon">{t('logProcessor.savedResults.emptyState.icon')}</div>
+                <p>{t('logProcessor.savedResults.emptyState.message')}</p>
               </div>
             )}
           </div>
@@ -515,12 +516,12 @@ function LogProcessor() {
                   <>
                     <h2>{selectedDPSName}</h2>
                     <div className="fightDurationDisplay">
-                      Duration: {fightDuration} seconds
+                      {t('logProcessor.results.duration')} {fightDuration} {t('logProcessor.savedResults.seconds')}
                     </div>
                   </>
                 )}
                 <div className="dpsOutput">
-                  <span className="dpsLabel">DPS</span>
+                  <span className="dpsLabel">{t('logProcessor.results.dpsLabel')}</span>
                   <span className="dpsValue">
                     {dps.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </span>
@@ -535,20 +536,20 @@ function LogProcessor() {
                     className="logProcessorInput"
                     value={saveName}
                     onChange={(e) => setSaveName(e.target.value)}
-                    placeholder="Enter a name for your DPS result..."
+                    placeholder={t('logProcessor.results.saveNamePlaceholder')}
                   />
                   <button
                     className="logProcessorButtonv3"
                     onClick={handleSaveDPSResult}
                   >
-                    💾 Save
+                    {t('logProcessor.results.saveButton')}
                   </button>
                 </div>
               )}
 
               {/* Skill Details */}
               <div className="skillDetails">
-                <h3 style={{ color: "#f8fafc", marginBottom: "1rem", fontSize: "1.1rem" }}>Skill Breakdown</h3>
+                <h3 style={{ color: "#f8fafc", marginBottom: "1rem", fontSize: "1.1rem" }}>{t('logProcessor.results.skillBreakdown')}</h3>
                 {Object.keys(skillInfo).length > 0 ? (
                   <div className="skillDetailsGrid">
                     {Object.entries(skillInfo)
@@ -592,26 +593,26 @@ function LogProcessor() {
                                     data.skill === skill &&
                                     data.key === selectedDPSName
                                 )
-                                  ? "Remove"
-                                  : "Compare"}
+                                  ? t('logProcessor.skillStats.removeButton')
+                                  : t('logProcessor.skillStats.compareButton')}
                               </button>
                             </div>
 
                             <div className="skillStats">
                               <div className="statItem">
-                                <span className="statLabel">Min</span>
+                                <span className="statLabel">{t('logProcessor.skillStats.min')}</span>
                                 <span className="statValue">
                                   {min.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                 </span>
                               </div>
                               <div className="statItem">
-                                <span className="statLabel">Max</span>
+                                <span className="statLabel">{t('logProcessor.skillStats.max')}</span>
                                 <span className="statValue">
                                   {max.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                 </span>
                               </div>
                               <div className="statItem">
-                                <span className="statLabel">Avg</span>
+                                <span className="statLabel">{t('logProcessor.skillStats.avg')}</span>
                                 <span className="statValue">
                                   {average
                                     ? average.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -619,15 +620,15 @@ function LogProcessor() {
                                 </span>
                               </div>
                               <div className="statItem">
-                                <span className="statLabel">Hits</span>
+                                <span className="statLabel">{t('logProcessor.skillStats.hits')}</span>
                                 <span className="statValue">{hits}</span>
                               </div>
                               <div className="statItem">
-                                <span className="statLabel">Crits</span>
+                                <span className="statLabel">{t('logProcessor.skillStats.crits')}</span>
                                 <span className="statValue">{criticalHits}</span>
                               </div>
                               <div className="statItem">
-                                <span className="statLabel">Crit %</span>
+                                <span className="statLabel">{t('logProcessor.skillStats.critPercent')}</span>
                                 <span className="statValue critRate">
                                   {hits > 0
                                     ? ((criticalHits / hits) * 100).toFixed(1)
@@ -649,8 +650,8 @@ function LogProcessor() {
                   </div>
                 ) : (
                   <div className="emptyState">
-                    <div className="emptyStateIcon">📊</div>
-                    <p>No skill damage information available.</p>
+                    <div className="emptyStateIcon">{t('logProcessor.skillStats.noDataIcon')}</div>
+                    <p>{t('logProcessor.skillStats.noData')}</p>
                   </div>
                 )}
               </div>
@@ -658,7 +659,7 @@ function LogProcessor() {
           ) : (
             <div className="emptyState" style={{ marginTop: "3rem" }}>
               <div className="emptyStateIcon" style={{ fontSize: "4rem" }}>⚡</div>
-              <p style={{ fontSize: "1.1rem" }}>Enter your combat logs and click Calculate DPS to see results</p>
+              <p style={{ fontSize: "1.1rem" }}>{t('logProcessor.results.emptyState.message')}</p>
             </div>
           )}
         </div>
@@ -668,4 +669,3 @@ function LogProcessor() {
 }
 
 export default LogProcessor;
-

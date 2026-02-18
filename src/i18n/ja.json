@@ -1,0 +1,162 @@
+{
+  "language": {
+    "name": "日本語",
+    "code": "ja"
+  },
+  "app": {
+    "title": "Lineage II DPS 計算機",
+    "subtitle": "スキルと装備の微妙な違いが、平均的なプレイヤーと優れたプレイヤーを分けるのです。",
+    "version": "バージョン",
+    "storedVersion": "保存されたバージョン",
+    "madeBy": "作成者 @Xiscoteon",
+    "contribute": "💻 開発者？貢献しよう！",
+    "reportBug": "🐛 バグを報告"
+  },
+  "updateBanner": {
+    "message": "保存されたデータと互換性がない可能性のある新機能が追加されました。問題が発生した場合や新機能を使用したい場合は、データを更新してください。",
+    "button": "更新してデータを削除"
+  },
+  "alert": {
+    "newVersion": "新しいバージョンを検出：{{currentVersion}} vs {{storedVersion}}。互換性を確保するためにデータを更新してください。"
+  },
+  "logProcessor": {
+    "title": "DPS 計算機",
+    "helpTooltip": "ヘルプとチュートリアル",
+    "upload": {
+      "button": "ログファイルをアップロード",
+      "dropHere": "ここにファイルをドロップ",
+      "dragDrop": "または .log ファイルをここにドラッグ＆ドロップ",
+      "icon": "📁"
+    },
+    "textarea": {
+      "placeholder": "または戦闘ログをここに貼り付け..."
+    },
+    "fightDuration": {
+      "label": "戦闘時間：",
+      "placeholder": "秒",
+      "unit": "秒"
+    },
+    "calculateButton": "DPS を計算",
+    "savedResults": {
+      "title": "📂 保存された DPS 結果",
+      "imageButton": "📷 画像",
+      "copyButton": "📋 コピー",
+      "duration": "時間：",
+      "seconds": "秒",
+      "deleteTooltip": "削除",
+      "emptyState": {
+        "icon": "📝",
+        "message": "まだ保存された DPS 結果はありません。"
+      }
+    },
+    "results": {
+      "dpsLabel": "DPS",
+      "saveNamePlaceholder": "DPS 結果の名前を入力...",
+      "saveButton": "💾 保存",
+      "skillBreakdown": "スキル詳細",
+      "duration": "時間：",
+      "emptyState": {
+        "icon": "⚡",
+        "message": "戦闘ログを入力して DPS を計算をクリックして結果を表示"
+      }
+    },
+    "skillStats": {
+      "min": "最小",
+      "max": "最大",
+      "avg": "平均",
+      "hits": "ヒット",
+      "crits": "クリティカル",
+      "critPercent": "クリティカル%",
+      "compareButton": "比較",
+      "removeButton": "削除",
+      "noData": "利用可能なスキルダメージ情報はありません。",
+      "noDataIcon": "📊"
+    },
+    "ranks": {
+      "top1": "1位",
+      "top2": "2位",
+      "top3": "3位"
+    },
+    "toast": {
+      "saved": "DPS 結果を保存しました！",
+      "logLoaded": "ログを読み込みました！分析するには DPS を計算をクリックしてください。",
+      "invalidFile": "有効な .log ファイルをアップロードしてください",
+      "copied": "結果をクリップボードにコピーしました！",
+      "copyFailed": "結果のコピーに失敗しました。",
+      "imageCopied": "画像をクリップボードにコピーしました！",
+      "imageCopyFailed": "画像のコピーに失敗しました。",
+      "imageGenerateFailed": "画像の生成に失敗しました。"
+    }
+  },
+  "comparison": {
+    "title": "⚔️ 比較結果",
+    "copyButton": "📋 コピー",
+    "imageButton": "📷 画像",
+    "clearButton": "🗑️ すべてクリア",
+    "table": {
+      "skill": "スキル",
+      "saveName": "保存名",
+      "minDamage": "最小ダメージ",
+      "maxDamage": "最大ダメージ",
+      "average": "平均",
+      "hits": "ヒット",
+      "crits": "クリティカル",
+      "critRate": "クリティカル率"
+    },
+    "toast": {
+      "copied": "クリップボードにコピーしました！",
+      "copyFailed": "コピーに失敗しました。",
+      "imageCopied": "画像をクリップボードにコピーしました！"
+    }
+  },
+  "onboarding": {
+    "close": "閉じる",
+    "skip": "スキップ",
+    "previous": "前へ",
+    "next": "次へ",
+    "getStarted": "始める",
+    "slides": {
+      "welcome": {
+        "icon": "⚔️",
+        "title": "L2 DPS 計算機へようこそ",
+        "content1": "このツールは戦闘ログを解析し、詳細な DPS 統計を計算することで、<strong>Lineage II</strong> での戦闘パフォーマンスを分析するのに役立ちます。",
+        "content2": "スキル、クリティカルヒットを追跡し、異なるビルドやローテーションを比較してダメージ出力を最適化してください。"
+      },
+      "capture": {
+        "icon": "📜",
+        "title": "戦闘ログのキャプチャ",
+        "content1": "ゲーム内で <code>///textcapture on</code> コマンドを使用して戦闘ログの記録を開始します。",
+        "content2": "完了したら、<code>///textcapture off</code> を使用して停止します。",
+        "content3": "ログは <code>Lineage2/system</code> フォルダに <code>キャラクター名_L2_月_日_時_分.log</code> として保存されます。"
+      },
+      "upload": {
+        "icon": "📁",
+        "title": "アップロードと解析",
+        "content1": "アップロードエリアに <strong>.log</strong> ファイルをドラッグ＆ドロップするか、ファイル選択器を使用してアップロードします。",
+        "content2": "ログの内容をテキストエリアに直接貼り付けることもできます。",
+        "content3": "<strong>戦闘時間</strong>を設定し、<strong>DPS を計算</strong>をクリックして解析します。"
+      },
+      "results": {
+        "icon": "📊",
+        "title": "結果を表示",
+        "content1": "計算後、合計 <strong>DPS</strong> と使用した各スキルの詳細な内訳が表示されます。",
+        "content2": "スキル名をクリックして展開し、個別のダメージ行を表示します。統計には最小、最大、平均、ヒット、クリティカル率が含まれます。"
+      },
+      "save": {
+        "icon": "💾",
+        "title": "保存と比較",
+        "content1": "結果に名前を付けて <strong>保存</strong>し、DPS テストのコレクションを構築します。",
+        "content2": "スキルの <strong>比較</strong> ボタンを使用して、異なる保存済みランを並べて比較し、進捗を追跡します。"
+      },
+      "ready": {
+        "icon": "🎯",
+        "title": "始める準備はできましたか？",
+        "content1": "すべての準備が整いました！戦闘パフォーマンスの分析を開始し、キャラクターのダメージ出力を最適化してください。",
+        "content2": "<strong>ヒント：</strong>右上の <span>?</span> ボタンをクリックすると、いつでもこのガイドを再度開くことができます。"
+      }
+    }
+  },
+  "buffDebuffChecker": {
+    "title": "バフ/デバフチェッカー"
+  }
+}
