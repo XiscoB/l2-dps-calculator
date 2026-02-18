@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
-import "./App.css"; // Make sure your main styles are imported
+import "./App.css";
 import LogProcessor from "./LogProcessor";
 import BuffDebuffChecker from "./BuffDebuffChecker";
-import logo from "./logo.png"; // Import the logo
+import LanguageSelector from "./LanguageSelector";
+import { useLanguage } from "./i18n/LanguageContext";
+import logo from "./logo.png";
 
 function App() {
+  const { t } = useLanguage();
   const currentVersion = "1.1.0";
 
-  const [activeComponent, setActiveComponent] = useState("logProcessor"); // This state controls which component is displayed
+  // eslint-disable-next-line no-unused-vars
+  const [activeComponent, setActiveComponent] = useState("logProcessor");
   const [showUpdateButton, setShowUpdateButton] = useState(false);
   const storedVersion = localStorage.getItem("appVersion");
+
   useEffect(() => {
     const storedVersion = localStorage.getItem("appVersion");
 
     if (!storedVersion) {
-      //alert("No version data found. It's recommended to update your data.");
       setShowUpdateButton(true);
       return;
     }
@@ -26,20 +30,18 @@ function App() {
       .split(".")
       .map((num) => parseInt(num, 10));
 
-    // Check if major version has increased, or if the same major version but minor version has increased
     if (majorNew > majorOld || (majorNew === majorOld && minorNew > minorOld)) {
       alert(
-        `New version detected: ${currentVersion} vs ${storedVersion}. Please update your data to ensure compatibility.`
+        t('alert.newVersion', { currentVersion, storedVersion })
       );
       setShowUpdateButton(true);
     } else if (currentVersion !== storedVersion) {
-      // Update to the current version without forcing data refresh
       localStorage.setItem("appVersion", currentVersion);
       console.log(
-        "Minor update within the same subversion, version updated in storage."
+        "Minor update within the same subversion, version updated in storage.",
       );
     }
-  }, []); // This ensures the code runs only once when the component mounts
+  }, [t, currentVersion]);
 
   const handleClearData = () => {
     localStorage.clear();
@@ -47,42 +49,51 @@ function App() {
     window.location.reload();
   };
 
-  // Call this function early in the app's initialization phase
-  //checkDataVersion();
-
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} alt="Logo" width={"100px"} height={"100px"} />
-        <h1>L2 DPS Calculator</h1>
+        <img src={logo} alt="L2 DPS Calculator Logo" />
+        <h1>{t('app.title')}</h1>
+        <p className="subtitle">
+          "{t('app.subtitle')}"
+        </p>
       </header>
+
       <div>
         {showUpdateButton && (
-          <div>
-            <p className="warning">
-              New features have been added that may not be compatible with your
-              saved data. If you encounter issues or want to use new features,
-              please update your data.
-            </p>
-            <button onClick={handleClearData}>Update and Delete Data</button>
+          <div className="warning-banner">
+            <p>{t('updateBanner.message')}</p>
+            <button onClick={handleClearData}>{t('updateBanner.button')}</button>
           </div>
         )}
-        {/* Your regular app components go here */}
+
+        {activeComponent === "logProcessor" && <LogProcessor />}
+        {activeComponent === "buffDebuffChecker" && <BuffDebuffChecker />}
       </div>
-      {/* <nav className="ComponentSwitch">
-        <button onClick={() => setActiveComponent("logProcessor")}>
-          DPS Calculator
-        </button>
-        <button onClick={() => setActiveComponent("buffDebuffChecker")}>
-          Buff/Debuff Checker
-        </button>
-      </nav> */}
-      {activeComponent === "logProcessor" && <LogProcessor />}
-      {activeComponent === "buffDebuffChecker" && <BuffDebuffChecker />}
+
       <footer className="App-footer">
-        <p>Version {currentVersion}</p>
-        <p>Stored Version {storedVersion}</p>
-        <p>Made by @Xiscoteon</p>
+        <div className="footerRow">
+          <LanguageSelector />
+        </div>
+        <p>{t('app.version')} {currentVersion}</p>
+        <p>{t('app.storedVersion')} {storedVersion || "None"}</p>
+        <p>{t('app.madeBy')}</p>
+        <a
+          href="https://github.com/Xiscob/l2-dps-calculator"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="collaborateLink"
+        >
+          {t('app.contribute')}
+        </a>
+        <a
+          href="https://github.com/Xiscob/l2-dps-calculator/issues/new?title=%5BBug%5D+&body=%23%23+Description%0ADescribe+the+bug+here...%0A%0A%23%23+Steps+to+Reproduce%0A1.+Go+to+...%0A2.+Click+on+...%0A3.+See+error%0A%0A%23%23+Expected+Behavior%0AWhat+did+you+expect+to+happen%3F%0A%0A%23%23+Actual+Behavior%0AWhat+actually+happened%3F%0A%0A%23%23+Environment%0A-+App+Version%3A+{currentVersion}%0A-+Browser%3A+...%0A-+OS%3A+...%0A%0A%23%23+Additional+Context%0AAdd+any+other+context+or+screenshots+here.%0A"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bugReportLink"
+        >
+          {t('app.reportBug')}
+        </a>
       </footer>
     </div>
   );

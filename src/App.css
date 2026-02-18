@@ -1,102 +1,413 @@
-html,
-body {
+/* Lineage 2 Inspired App Styles */
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #0a0c10;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Animated Magical Background */
+.App::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  margin: 0;
-  overflow: auto;
-}
-
-.App {
-  min-height: 100vh; /* At least the full height of the viewport */
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
-  justify-content: center;
-  align-items: center;
-  background-color: #0a192f; /* Dark blue background */
-  overflow: auto; /* Enable scrolling if content overflows */
-}
-
-.App-logo {
-  height: 40vmin;
+  background: 
+    radial-gradient(ellipse at 20% 80%, rgba(74, 144, 217, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(201, 169, 97, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(226, 88, 34, 0.05) 0%, transparent 70%);
   pointer-events: none;
+  z-index: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Animated Particles */
+.App::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(201, 169, 97, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 60% 70%, rgba(74, 144, 217, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 80% 40%, rgba(226, 88, 34, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(201, 169, 97, 0.2) 1px, transparent 1px);
+  background-size: 300px 300px, 400px 400px, 350px 350px, 450px 450px;
+  animation: particle 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
 }
 
-.scrollableContent {
-  max-height: 500px; /* Or whatever maximum height you want */
-  overflow-y: auto; /* Enable vertical scrolling within this container */
-  color: #8892b0; /* Light grey text for contrast */
-}
 
-.App-link {
-  color: #61dafb;
-}
-
-.App {
-  text-align: center;
-  height: "auto";
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #0a192f; /* Dark blue background */
-}
 
 .App-header {
-  padding: 2em;
-  border-radius: 10px;
-  transition: 0.3s;
-  width: 50%; /* Or whatever width you prefer */
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(180deg, 
+    rgba(18, 22, 32, 0.95) 0%, 
+    rgba(18, 22, 32, 0.7) 50%,
+    transparent 100%
+  );
+  border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Ancient Rune Decoration */
+.App-header::before,
+.App-header::after {
+  content: '❖';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: rgba(201, 169, 97, 0.4);
+  animation: runeGlow 3s ease-in-out infinite;
 }
 
+.App-header::before {
+  left: 2rem;
+}
+
+.App-header::after {
+  right: 2rem;
+}
+
+.App-header img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #c9a961;
+  box-shadow: 
+    0 0 20px rgba(201, 169, 97, 0.4),
+    0 0 40px rgba(201, 169, 97, 0.2),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  animation: powerPulse 4s ease-in-out infinite;
+  object-fit: cover;
+  background: linear-gradient(135deg, #1a1f2e 0%, #0a0c10 100%);
+}
+
+.App-header img:hover {
+  transform: scale(1.1);
+  box-shadow: 
+    0 0 30px rgba(201, 169, 97, 0.6),
+    0 0 60px rgba(201, 169, 97, 0.3),
+    inset 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Lineage 2 Style Title */
+.App-header h1 {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, 
+    #e8d5a3 0%, 
+    #c9a961 30%, 
+    #8b7355 60%,
+    #c9a961 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 
+    0 2px 10px rgba(201, 169, 97, 0.3),
+    0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: runeGlow 4s ease-in-out infinite;
+  position: relative;
+}
+
+/* Decorative underline */
+.App-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    #c9a961 20%,
+    #e8d5a3 50%,
+    #c9a961 80%,
+    transparent 100%
+  );
+}
+
+/* Subtitle */
+.App-header .subtitle {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #7a7568;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-style: italic;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* Main Content Area */
+.App > div:not(.App-header):not(.App-footer) {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+}
+
+/* Version Warning Banner - Ancient Scroll Style */
+.warning-banner {
+  background: linear-gradient(135deg, 
+    rgba(139, 69, 19, 0.2) 0%, 
+    rgba(160, 82, 45, 0.15) 50%,
+    rgba(139, 69, 19, 0.2) 100%
+  );
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.3),
+    0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.warning-banner::before,
+.warning-banner::after {
+  content: '⚜';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(201, 169, 97, 0.5);
+  font-size: 1.2rem;
+}
+
+.warning-banner::before {
+  left: 1rem;
+}
+
+.warning-banner::after {
+  right: 1rem;
+}
+
+.warning-banner p {
+  color: #e8d5a3;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.warning-banner button {
+  background: linear-gradient(180deg, #8b4513 0%, #a0522d 50%, #8b4513 100%);
+  color: #f0e6d2;
+  border: 1px solid #c9a961;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.warning-banner button:hover {
+  background: linear-gradient(180deg, #a0522d 0%, #cd853f 50%, #a0522d 100%);
+  box-shadow: 
+    0 6px 15px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(201, 169, 97, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Footer - Ancient Tome Style */
 .App-footer {
-  color: #8892b0; /* Light grey text for contrast */
-  font-size: 0.8rem; /* Smaller font size for footer text */
-  text-align: right; /* Align text to the right */
-  padding: 10px; /* Padding for aesthetic spacing */
-  position: absolute; /* Fixed position to keep footer at the bottom-right */
-  bottom: 0; /* At the bottom of the page */
-  right: 0; /* Align to the right */
-  margin-right: 10%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(180deg, 
+    transparent 0%,
+    rgba(18, 22, 32, 0.8) 50%,
+    rgba(18, 22, 32, 0.95) 100%
+  );
+  border-top: 1px solid rgba(201, 169, 97, 0.2);
+  font-size: 0.8rem;
+  color: #7a7568;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
 }
 
-h1 {
+/* Language Selector Row in Footer */
+.footerRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.App-footer p {
   margin: 0;
-  padding: 20px 0; /* Space above and below the title */
-  color: #ffffff; /* White text for the title */
-  font-size: 2rem; /* Larger font size for the title */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #8b7355;
 }
 
-p {
-  color: #8892b0; /* Light grey text for contrast */
+.App-footer p::before {
+  content: '◆';
+  color: #c9a961;
+  font-size: 0.6rem;
 }
 
+.App-footer p:first-child::before {
+  display: none;
+}
+
+/* Bug Report Link */
+.bugReportLink {
+  color: #c9a961;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(201, 169, 97, 0.4);
+  border-radius: 0.375rem;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  background: rgba(201, 169, 97, 0.1);
+}
+
+.bugReportLink:hover {
+  background: rgba(201, 169, 97, 0.2);
+  border-color: rgba(201, 169, 97, 0.6);
+  box-shadow: 0 0 15px rgba(201, 169, 97, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Collaborate Link */
+.collaborateLink {
+  color: #4a90d9;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(74, 144, 217, 0.4);
+  border-radius: 0.375rem;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  background: rgba(74, 144, 217, 0.1);
+}
+
+.collaborateLink:hover {
+  background: rgba(74, 144, 217, 0.2);
+  border-color: rgba(74, 144, 217, 0.6);
+  box-shadow: 0 0 15px rgba(74, 144, 217, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Component Switch */
 .ComponentSwitch {
-  margin-bottom: 20px;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  background: rgba(18, 22, 32, 0.8);
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: 0.5rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .ComponentSwitch button {
-  padding: 10px;
-  margin-right: 5px;
-  background-color: #0077b5;
-  color: white;
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  color: #8b7355;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.375rem;
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .ComponentSwitch button:hover {
-  background-color: #005691;
+  color: #c9a961;
+  background: rgba(201, 169, 97, 0.1);
+}
+
+.ComponentSwitch button.active {
+  background: linear-gradient(180deg, #c9a961 0%, #8b7355 100%);
+  color: #0a0c10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .App-header {
+    padding: 1.5rem 1rem;
+  }
+  
+  .App-header::before,
+  .App-header::after {
+    display: none;
+  }
+  
+  .App-header img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .App-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .App > div:not(.App-header):not(.App-footer) {
+    padding: 1rem;
+  }
+  
+  .App-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .warning-banner::before,
+  .warning-banner::after {
+    display: none;
+  }
 }

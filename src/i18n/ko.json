@@ -1,0 +1,162 @@
+{
+  "language": {
+    "name": "한국어",
+    "code": "ko"
+  },
+  "app": {
+    "title": "Lineage II DPS 계산기",
+    "subtitle": "스킬과 장비의 미묘한 차이가 평범한 플레이어와 뛰어난 플레이어를 구분합니다.",
+    "version": "버전",
+    "storedVersion": "저장된 버전",
+    "madeBy": "제작 @Xiscoteon",
+    "contribute": "💻 개발자? 기여하기!",
+    "reportBug": "🐛 버그 신고"
+  },
+  "updateBanner": {
+    "message": "저장된 데이터와 호환되지 않을 수 있는 새로운 기능이 추가되었습니다. 문제가 발생하거나 새로운 기능을 사용하려면 데이터를 업데이트하세요.",
+    "button": "업데이트 및 데이터 삭제"
+  },
+  "alert": {
+    "newVersion": "새 버전 감지됨: {{currentVersion}} vs {{storedVersion}}. 호환성을 보장하기 위해 데이터를 업데이트하세요."
+  },
+  "logProcessor": {
+    "title": "DPS 계산기",
+    "helpTooltip": "도움말 및 튜토리얼",
+    "upload": {
+      "button": "로그 파일 업로드",
+      "dropHere": "파일을 여기에 놓으세요",
+      "dragDrop": "또는 .log 파일을 여기에 끌어다 놓으세요",
+      "icon": "📁"
+    },
+    "textarea": {
+      "placeholder": "또는 전투 로그를 여기에 붙여넣으세요..."
+    },
+    "fightDuration": {
+      "label": "전투 시간:",
+      "placeholder": "초",
+      "unit": "초"
+    },
+    "calculateButton": "DPS 계산",
+    "savedResults": {
+      "title": "📂 저장된 DPS 결과",
+      "imageButton": "📷 이미지",
+      "copyButton": "📋 복사",
+      "duration": "시간:",
+      "seconds": "초",
+      "deleteTooltip": "삭제",
+      "emptyState": {
+        "icon": "📝",
+        "message": "아직 저장된 DPS 결과가 없습니다."
+      }
+    },
+    "results": {
+      "dpsLabel": "DPS",
+      "saveNamePlaceholder": "DPS 결과의 이름을 입력하세요...",
+      "saveButton": "💾 저장",
+      "skillBreakdown": "스킬 세부정보",
+      "duration": "시간:",
+      "emptyState": {
+        "icon": "⚡",
+        "message": "전투 로그를 입력하고 DPS 계산을 클릭하여 결과를 확인하세요"
+      }
+    },
+    "skillStats": {
+      "min": "최소",
+      "max": "최대",
+      "avg": "평균",
+      "hits": "타격",
+      "crits": "치명타",
+      "critPercent": "치명타%",
+      "compareButton": "비교",
+      "removeButton": "제거",
+      "noData": "사용 가능한 스킬 데미지 정보가 없습니다.",
+      "noDataIcon": "📊"
+    },
+    "ranks": {
+      "top1": "1위",
+      "top2": "2위",
+      "top3": "3위"
+    },
+    "toast": {
+      "saved": "DPS 결과가 저장되었습니다!",
+      "logLoaded": "로그가 로드되었습니다! 분석하려면 DPS 계산을 클릭하세요.",
+      "invalidFile": "유효한 .log 파일을 업로드하세요",
+      "copied": "결과가 클립보드에 복사되었습니다!",
+      "copyFailed": "결과 복사에 실패했습니다.",
+      "imageCopied": "이미지가 클립보드에 복사되었습니다!",
+      "imageCopyFailed": "이미지 복사에 실패했습니다.",
+      "imageGenerateFailed": "이미지 생성에 실패했습니다."
+    }
+  },
+  "comparison": {
+    "title": "⚔️ 비교 결과",
+    "copyButton": "📋 복사",
+    "imageButton": "📷 이미지",
+    "clearButton": "🗑️ 모두 지우기",
+    "table": {
+      "skill": "스킬",
+      "saveName": "저장 이름",
+      "minDamage": "최소 데미지",
+      "maxDamage": "최대 데미지",
+      "average": "평균",
+      "hits": "타격",
+      "crits": "치명타",
+      "critRate": "치명타율"
+    },
+    "toast": {
+      "copied": "클립보드에 복사되었습니다!",
+      "copyFailed": "복사에 실패했습니다.",
+      "imageCopied": "이미지가 클립보드에 복사되었습니다!"
+    }
+  },
+  "onboarding": {
+    "close": "닫기",
+    "skip": "건너뛰기",
+    "previous": "이전",
+    "next": "다음",
+    "getStarted": "시작하기",
+    "slides": {
+      "welcome": {
+        "icon": "⚔️",
+        "title": "L2 DPS 계산기에 오신 것을 환영합니다",
+        "content1": "이 도구는 전투 로그를 분석하고 상세한 DPS 통계를 계산하여 <strong>Lineage II</strong>에서의 전투 성능을 분석하는 데 도움을 줍니다.",
+        "content2": "스킬, 치명타를 추적하고 다양한 빌드나 로테이션을 비교하여 데미지 출력을 최적화하세요."
+      },
+      "capture": {
+        "icon": "📜",
+        "title": "전투 로그 캡처",
+        "content1": "게임 내에서 <code>///textcapture on</code> 명령어를 사용하여 전투 로그 기록을 시작하세요.",
+        "content2": "완료되면 <code>///textcapture off</code>를 사용하여 중지하세요.",
+        "content3": "로그는 <code>Lineage2/system</code> 폴더에 <code>캐릭터명_L2_월_일_시_분.log</code>로 저장됩니다."
+      },
+      "upload": {
+        "icon": "📁",
+        "title": "업로드 및 분석",
+        "content1": "<strong>.log</strong> 파일을 업로드 영역에 끌어다 놓거나 파일 선택기를 사용하여 업로드하세요.",
+        "content2": "원하시면 로그 내용을 텍스트 영역에 직접 붙여넣을 수도 있습니다.",
+        "content3": "<strong>전투 시간</strong>을 설정하고 <strong>DPS 계산</strong>을 클릭하여 분석하세요."
+      },
+      "results": {
+        "icon": "📊",
+        "title": "결과 확인",
+        "content1": "계산 후, 총 <strong>DPS</strong>와 사용된 각 스킬의 상세 분석을 확인할 수 있습니다.",
+        "content2": "스킬 이름을 클릭하여 확장하고 개별 데미지 기록을 확인하세요. 통계에는 최소, 최대, 평균, 타격 및 치명타율이 포함됩니다."
+      },
+      "save": {
+        "icon": "💾",
+        "title": "저장 및 비교",
+        "content1": "결과에 이름을 지정하고 <strong>저장</strong>하여 DPS 테스트 컬렉션을 구축하세요.",
+        "content2": "스킬의 <strong>비교</strong> 버튼을 사용하여 다른 저장된 기록을 나란히 비교하고 진행 상황을 추적하세요."
+      },
+      "ready": {
+        "icon": "🎯",
+        "title": "시작할 준비가 되셨나요?",
+        "content1": "모든 준비가 완료되었습니다! 전투 성능을 분석하고 캐릭터의 데미지 출력을 최적화하세요.",
+        "content2": "<strong>팁:</strong> 오른쪽 상단의 <span>?</span> 버튼을 클릭하여 언제든지 이 가이드를 다시 열 수 있습니다."
+      }
+    }
+  },
+  "buffDebuffChecker": {
+    "title": "버프/디버프 확인기"
+  }
+}

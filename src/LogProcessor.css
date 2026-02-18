@@ -1,319 +1,982 @@
-/* LogProcessor.css */
+/* Lineage 2 Inspired LogProcessor Styles */
 
 .logProcessorContainer {
-  background-color: #0a192f; /* Dark blue background */
-  color: #8892b0; /* Light grey text for contrast */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-  width: 50%;
-}
-
-.logProcessorTextarea {
+  background: rgba(18, 22, 32, 0.85);
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   width: 100%;
-  background-color: #112240;
-  color: #8892b0;
-  border: 1px solid #2c3e50;
-  border-radius: 4px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.logProcessorButton {
-  background-color: #0077b5; /* A shade of blue for buttons */
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.logProcessorButton:hover {
-  background-color: #005691;
-}
-
-.logProcessorButtonv2 {
-  background-color: #15b500a8; /* A shade of blue for buttons */
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.logProcessorButtonv2:hover {
-  background-color: #0f7901a8;
-}
-
-.dragDropText {
-  color: #8892b0;
-  font-size: 0.8rem;
-  margin-bottom: 10px;
-  margin-top: 20px;
-}
-
-.dragDropOverlay {
-  border: 2px dashed #8892b0;
-  border-radius: 8px;
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: border-color 0.3s ease;
-}
-
-.logProcessorButtonv3 {
-  background-color: #741ee5; /* A shade of blue for buttons */
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-left: 10px;
-}
-
-.logProcessorButtonv3:hover {
-  background-color: #5615ac;
-}
-
-.skillDetails {
-  margin-top: 15px;
-}
-
-.skillToggleButton {
-  background-color: #264653;
-  color: #e9c46a;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 10px;
-}
-
-.skillToggleButton:hover {
-  background-color: #2a9d8f;
-}
-
-.skillName {
-  font-weight: bold;
-  color: #e9c46a;
-  display: inline-block; /* Allows the div to be clickable */
-  margin-right: 5px;
-  color: #fcaf01; /* Style as needed */
-}
-
-.damageLine {
-  color: #a8dadc;
-}
-.skillEntry {
-  /* Your styles for the skill entry */
-  cursor: pointer; /* This makes it clear that you can click on the skill name */
-  margin-bottom: 10px;
-}
-
-.skillDetails {
-  color: #fff;
-}
-
-.dpsOutput {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #1c2331; /* Slightly lighter than the background for contrast */
-  border-radius: 4px;
-  color: #fcaf01; /* A shade of blue for the DPS output */
-  font-size: 1.2rem;
-}
-
-.dpsLabel {
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.dpsValue {
-  font-weight: lighter;
-}
-
-.savedResultEntry {
-  padding: 10px;
-  border-bottom: 1px solid #2c3e50; /* Adds a subtle line between items */
-  display: flex;
-  justify-content: space-between; /* Separates the DPS result and delete button */
-  align-items: center;
-}
-
-.deleteResultButton {
-  background-color: #e63946; /* A reddish tone for deletion */
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.deleteResultButton:hover {
-  background-color: #d62839; /* Darker shade on hover */
-}
-.logProcessorInput {
-  width: calc(100% - 22px); /* Adjust width to account for padding and border */
-  background-color: #112240;
-  color: #8892b0;
-  border: 1px solid #2c3e50;
-  border-radius: 4px;
-  padding: 8px; /* Slightly less padding than the textarea for a refined look */
-  margin-bottom: 10px; /* Space between the input and the next element */
-  font-family: inherit; /* Ensures the font matches the rest of the UI */
-  font-size: 0.9rem; /* Slightly smaller font size than the textarea */
-}
-
-.savedResultsTable {
-  width: 100%;
-  border-collapse: collapse; /* Ensures that table borders are collapsed into a single border */
-}
-
-.savedResultsTable th,
-.savedResultsTable td {
-  text-align: left; /* Align text to the left side of the cell */
-  padding: 10px; /* Padding inside each cell */
-  border-bottom: 1px solid #2c3e50; /* A subtle line between rows */
-}
-
-.savedResultsTable .dpsNameColumn {
-  width: 60%; /* Allocate 60% width to the DPS name column */
-}
-
-.savedResultsTable .dpsValueColumn {
-  width: 30%; /* Allocate 30% width to the DPS value column */
-}
-
-.savedResultsTable .dpsDeleteColumn {
-  width: 10%; /* Allocate 10% width to the delete button column */
-  text-align: right; /* Align the delete button to the right */
-}
-
-.deleteResultButton {
-  background-color: #e63946; /* A reddish tone for deletion */
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.savedResultsTable tr {
-  cursor: pointer; /* Shows a pointer cursor to indicate the row is clickable */
-  transition: background-color 0.3s ease;
-}
-
-.savedResultsTable tr:hover {
-  background-color: #112240; /* A subtle hover effect */
-}
-
-/* Ensure that the delete button cell doesn't show pointer cursor */
-.savedResultsTable .dpsDeleteColumn {
-  cursor: default;
-}
-
-.deleteResultButton:hover {
-  background-color: #d62839; /* Darker shade on hover */
-}
-
-h2 {
-  color: #fcaf01;
-}
-.helpIcon {
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease;
   position: relative;
-  cursor: pointer;
-  display: inline-block;
-  margin-left: 10px;
-  background-color: #2c3e50;
-  padding: 20px;
-  border-radius: 20%;
-  color: white;
-  font-size: 1rem;
-  text-align: center;
-  line-height: 1;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  justify-content: center;
-  align-self: center;
-  margin-bottom: 20px;
 }
 
+/* Ancient Border Corners */
+.logProcessorContainer::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(135deg, 
+    rgba(201, 169, 97, 0.5) 0%, 
+    transparent 10%, 
+    transparent 90%, 
+    rgba(201, 169, 97, 0.5) 100%
+  );
+  border-radius: 0.75rem;
+  z-index: -1;
+}
+
+/* Two Column Layout for Desktop */
+.logProcessorLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 1200px) {
+  .logProcessorLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Help Icon - Ancient Rune Style */
+.helpIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #4a90d9 0%, #2a6099 100%);
+  border: 2px solid #6ab0f9;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #f0e6d2;
+  font-family: 'Cinzel', serif;
+  transition: all 0.25s ease;
+  box-shadow: 
+    0 0 20px rgba(74, 144, 217, 0.4),
+    inset 0 0 10px rgba(255, 255, 255, 0.1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.helpIcon:hover {
+  transform: scale(1.1);
+  box-shadow: 
+    0 0 30px rgba(74, 144, 217, 0.6),
+    inset 0 0 15px rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #5aa0e9 0%, #3a70a9 100%);
+}
+
+/* Help Tooltip - Ancient Scroll Style */
 .helpTooltip {
-  position: fixed; /* Position relative to the viewport */
-  z-index: 100;
-  width: 300px; /* Adjust width as needed */
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Offset the position correctly */
-  background-color: #f9f9f9;
-  color: #333;
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  text-align: left;
-  /* Hide the tooltip when not hovered */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 480px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #1a1f2e 0%, #121620 100%);
+  border: 2px solid #c9a961;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(201, 169, 97, 0.2);
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition: all 0.25s ease;
 }
 
-.helpIcon:hover .helpTooltip {
-  /* Show the tooltip when hovering over the icon */
+.helpTooltip.visible {
   opacity: 1;
   visibility: visible;
 }
 
-.toast {
-  visibility: hidden; /* Hidden by default */
-  min-width: 250px; /* Set a minimum width */
-  margin-left: -125px; /* Displace to the left by half of the width */
-  background-color: #333; /* Dark background for visibility */
-  color: #fff; /* Light text color */
-  text-align: center;
-  border-radius: 2px;
-  padding: 16px;
+.helpTooltip p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  color: #b8b0a0;
+  font-family: 'Georgia', serif;
+}
+
+.helpTooltip strong {
+  color: #e8d5a3;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+}
+
+.helpTooltip code {
+  background: #0a0c10;
+  border: 1px solid #4a90d9;
+  color: #6ab0f9;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: 'Consolas', monospace;
+}
+
+.helpOverlay {
   position: fixed;
-  z-index: 1;
-  left: 50%; /* Center horizontally */
-  bottom: 50%; /* Lift from bottom */
-  font-size: 17px;
-  transition: visibility 0.5s, opacity 0.5s linear;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
 }
 
-.toast.show {
-  visibility: visible; /* Show the toast */
-  opacity: 1; /* From transparent to opaque */
+.helpOverlay.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
-.toast.hide {
-  visibility: hidden; /* Hide the toast */
-  opacity: 0; /* From opaque to transparent */
+.closeHelp {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(139, 69, 19, 0.3);
+  border: 1px solid #8b4513;
+  color: #c9a961;
+  cursor: pointer;
+  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  transition: all 0.15s ease;
 }
 
-.uploadLogDiv {
-  margin-bottom: 30px;
+.closeHelp:hover {
+  background: rgba(201, 169, 97, 0.2);
+  color: #e8d5a3;
+}
+
+/* Upload Section - Ancient Altar Style */
+.uploadArea {
+  border: 2px dashed rgba(201, 169, 97, 0.3);
+  border-radius: 0.75rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.25s ease;
+  background: linear-gradient(180deg, 
+    rgba(26, 31, 46, 0.5) 0%, 
+    rgba(18, 22, 32, 0.8) 100%
+  );
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.uploadArea::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(201, 169, 97, 0.3) 50%,
+    transparent 100%
+  );
+}
+
+.uploadArea.dragActive {
+  border-color: #c9a961;
+  background: rgba(201, 169, 97, 0.1);
+  box-shadow: 
+    inset 0 0 30px rgba(201, 169, 97, 0.1),
+    0 0 20px rgba(201, 169, 97, 0.2);
+}
+
+.dragDropIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 10px rgba(201, 169, 97, 0.3));
+}
+
+.dragDropText {
+  color: #7a7568;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+/* Textarea - Ancient Parchment Style */
+.logProcessorTextarea {
+  width: 100%;
+  min-height: 200px;
+  background: #0a0c10;
+  color: #c9a961;
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logProcessorTextarea:focus {
+  outline: none;
+  border-color: #c9a961;
+  box-shadow: 
+    inset 0 2px 10px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(201, 169, 97, 0.2);
+}
+
+.logProcessorTextarea::placeholder {
+  color: #4a4538;
+}
+
+/* Input - Ancient Text Field */
+.logProcessorInput {
+  width: 100%;
+  background: #0a0c10;
+  color: #e8d5a3;
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.95rem;
+  font-family: 'Cinzel', serif;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.logProcessorInput:focus {
+  outline: none;
+  border-color: #c9a961;
+  box-shadow: 
+    inset 0 2px 5px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(201, 169, 97, 0.2);
+}
+
+/* Fight Duration */
+.fightDurationSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.fightDurationSection label {
+  color: #b8b0a0;
+  font-size: 0.95rem;
+  font-family: 'Cinzel', serif;
 }
 
 .fightDurationInput {
-  width: 5em; /* Adjust the width to fit 3-4 digits */
-  margin-bottom: 10px; /* Space below the input */
-  color: #8892b0; /* Light grey text color for consistency */
-  background-color: #112240; /* Dark background color */
-  border: 1px solid #2c3e50; /* Border color */
-  border-radius: 4px; /* Rounded corners */
-  padding: 8px; /* Padding inside the input */
-  font-family: inherit; /* Inherit the font from the body */
-  font-size: 0.9rem; /* Font size */
+  width: 100px;
+  background: #0a0c10;
+  color: #e8d5a3;
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+.fightDurationInput:focus {
+  outline: none;
+  border-color: #c9a961;
+  box-shadow: 
+    inset 0 2px 5px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(201, 169, 97, 0.2);
+}
+
+/* Primary Button - Ancient Weapon Style */
+.logProcessorButton {
+  background: linear-gradient(180deg, 
+    #8b7355 0%, 
+    #6b5344 50%, 
+    #4a3a32 100%
+  );
+  color: #f0e6d2;
+  border: 2px solid #c9a961;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(201, 169, 97, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.logProcessorButton:hover {
+  background: linear-gradient(180deg, 
+    #a08060 0%, 
+    #806050 50%, 
+    #604840 100%
+  );
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(201, 169, 97, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.logProcessorButton:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button - Magical Style */
+.logProcessorButtonv2 {
+  background: linear-gradient(135deg, #2a6099 0%, #1a4069 100%);
+  color: #f0e6d2;
+  border: 1px solid #4a90d9;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(74, 144, 217, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.logProcessorButtonv2:hover {
+  background: linear-gradient(135deg, #3a70a9 0%, #2a5089 100%);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(74, 144, 217, 0.4);
+  transform: translateY(-2px);
+}
+
+.logProcessorButtonv2.selected {
+  background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+  border-color: #cd853f;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(205, 133, 63, 0.3);
+}
+
+/* Tertiary Button - Dark Stone Style */
+.logProcessorButtonv3 {
+  background: linear-gradient(180deg, #2a3040 0%, #1a2030 100%);
+  color: #c9a961;
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.logProcessorButtonv3:hover {
+  background: linear-gradient(180deg, #3a4050 0%, #2a3040 100%);
+  border-color: #c9a961;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 15px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(201, 169, 97, 0.2);
+}
+
+/* DPS Result - Ancient Relic Style */
+.dpsResultContainer {
+  background: linear-gradient(180deg, 
+    rgba(26, 31, 46, 0.9) 0%, 
+    rgba(18, 22, 32, 0.95) 100%
+  );
+  border: 2px solid rgba(201, 169, 97, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+}
+
+.dpsResultContainer::before {
+  content: '◆';
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(201, 169, 97, 0.3);
+  font-size: 0.8rem;
+}
+
+.dpsResultContainer h2 {
+  color: #e8d5a3;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+}
+
 .fightDurationDisplay {
-  color: #8892b0; /* Light grey text for contrast */
-  font-size: 0.8rem; /* Smaller font size */
-  margin-top: 0.5em; /* Space from the name */
+  color: #7a7568;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.dpsOutput {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: #0a0c10;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(201, 169, 97, 0.2);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.dpsLabel {
+  font-size: 1rem;
+  color: #7a7568;
+  font-weight: 500;
+  font-family: 'Cinzel', serif;
+}
+
+.dpsValue {
+  font-size: 2.5rem;
+  font-weight: 800;
+  font-family: 'Cinzel', serif;
+  background: linear-gradient(180deg, 
+    #e8d5a3 0%, 
+    #c9a961 30%, 
+    #8b7355 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 10px rgba(201, 169, 97, 0.3);
+  animation: runeGlow 3s ease-in-out infinite;
+}
+
+/* Save Section */
+.saveSection {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.saveSection input {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Skill Details - Ancient Tablet Style */
+.skillDetails {
+  margin-top: 1.5rem;
+}
+
+.skillDetails h3 {
+  color: #e8d5a3;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.skillDetailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.skillEntry {
+  background: linear-gradient(180deg, 
+    rgba(26, 31, 46, 0.8) 0%, 
+    rgba(18, 22, 32, 0.9) 100%
+  );
+  border: 1px solid rgba(201, 169, 97, 0.15);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+  animation: slideIn 0.4s ease backwards;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.skillEntry:hover {
+  border-color: rgba(201, 169, 97, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 15px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(201, 169, 97, 0.1);
+}
+
+.skillHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+}
+
+.skillName {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #c9a961;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  min-width: 0;
+  flex: 1;
+}
+
+.skillName > span:first-child {
+  flex-shrink: 0;
+}
+
+.skillNameText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Custom Tooltip for Skill Names - Lineage 2 Style */
+.skillName {
+  position: relative;
+}
+
+.skillName:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  background: linear-gradient(180deg, #1a1f2e 0%, #121620 100%);
+  color: #e8d5a3;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(201, 169, 97, 0.5);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(201, 169, 97, 0.15);
+  pointer-events: none;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.skillName:hover::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 3px);
+  left: 1rem;
+  border-width: 5px 5px 0;
+  border-style: solid;
+  border-color: rgba(201, 169, 97, 0.5) transparent transparent;
+  z-index: 1001;
+  pointer-events: none;
+}
+
+.skillName:hover {
+  color: #e8d5a3;
+}
+
+.skillToggleIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: rgba(201, 169, 97, 0.1);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  border-radius: 0.25rem;
+  font-size: 0.7rem;
+  color: #c9a961;
+  transition: all 0.15s ease;
+}
+
+.skillStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: center;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
+  border: 1px solid rgba(201, 169, 97, 0.05);
+}
+
+.statLabel {
+  font-size: 0.65rem;
+  color: #7a7568;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'Cinzel', serif;
+}
+
+.statValue {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f0e6d2;
+  font-family: 'Cinzel', serif;
+}
+
+.statValue.critRate {
+  color: #e25822;
+  font-weight: 700;
+}
+
+/* Damage Lines - Ancient Script */
+.damageLinesList {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #0a0c10;
+  border-radius: 0.25rem;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid rgba(201, 169, 97, 0.1);
+  font-family: 'Consolas', monospace;
+}
+
+.damageLinesList li {
+  padding: 0.2rem 0;
+  color: #8b7355;
+  font-size: 0.75rem;
+  border-bottom: 1px solid rgba(201, 169, 97, 0.05);
+  list-style: none;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.damageLinesList li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: #c9a961;
+}
+
+/* Saved Results - Ancient Relics */
+.savedResultsContainer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(201, 169, 97, 0.1);
+}
+
+.savedResultsContainer h2 {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e8d5a3;
+  font-size: 1rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+}
+
+.savedResultsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.savedResultsActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.exportImageButton {
+  background: linear-gradient(180deg, 
+    #2a6099 0%, 
+    #1a4069 50%, 
+    #0a3050 100%
+  ) !important;
+  border-color: #4a90d9 !important;
+}
+
+.savedResultsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.savedResultCard {
+  background: linear-gradient(180deg, 
+    rgba(40, 45, 60, 0.9) 0%, 
+    rgba(28, 32, 45, 0.95) 100%
+  );
+  border: 1px solid rgba(201, 169, 97, 0.25);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Rank Badges */
+.rankBadge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  border-bottom-right-radius: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.rank-gold {
+  background: linear-gradient(135deg, #ffd700 0%, #c9a961 50%, #8b7355 100%);
+  color: #1a1508;
+  box-shadow: 0 2px 10px rgba(201, 169, 97, 0.4);
+}
+
+.rank-silver {
+  background: linear-gradient(135deg, #e8e8e8 0%, #a8b5c4 50%, #6a7580 100%);
+  color: #0a0c10;
+  box-shadow: 0 2px 10px rgba(168, 181, 196, 0.3);
+}
+
+.rank-bronze {
+  background: linear-gradient(135deg, #cd7f32 0%, #a0522d 50%, #6b4423 100%);
+  color: #1a0f05;
+  box-shadow: 0 2px 10px rgba(205, 127, 50, 0.3);
+}
+
+.savedResultCard:hover {
+  background: linear-gradient(180deg, 
+    rgba(36, 41, 56, 0.9) 0%, 
+    rgba(28, 32, 42, 0.95) 100%
+  );
+  border-color: rgba(201, 169, 97, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 15px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(201, 169, 97, 0.1);
+}
+
+.savedResultInfo {
+  flex: 1;
+  padding-top: 0.75rem;
+}
+
+.savedResultName {
+  font-weight: 700;
+  color: #f0e6d2;
+  font-size: 1rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.savedResultDuration {
+  color: #a89b7c;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.savedResultDps {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  color: #e8d5a3;
+  font-size: 1.1rem;
+  margin-right: 0.75rem;
+  text-shadow: 0 0 10px rgba(201, 169, 97, 0.3);
+}
+
+.deleteResultButton {
+  background: linear-gradient(180deg, #8b0000 0%, #600000 100%);
+  color: #f0e6d2;
+  border: 2px solid #a52a2a;
+  padding: 0.4rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.4);
+  min-width: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteResultButton:hover {
+  background: linear-gradient(180deg, #a52a2a 0%, #8b0000 100%);
+  border-color: #cd5c5c;
+  box-shadow: 0 4px 12px rgba(205, 92, 92, 0.5);
+  transform: scale(1.05);
+}
+
+/* Toast Notification - Top Center, Ancient Style */
+.toast {
+  position: fixed;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: rgba(18, 22, 32, 0.85);
+  backdrop-filter: blur(10px);
+  color: #e8d5a3;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(201, 169, 97, 0.4);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(201, 169, 97, 0.15);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+}
+
+.toast::before {
+  content: '✓';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #c9a961 0%, #8b7355 100%);
+  border-radius: 50%;
+  font-size: 0.7rem;
+  color: #0a0c10;
+  font-weight: 700;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Empty State */
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  color: #5a5448;
+}
+
+.emptyStateIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.4;
+  filter: drop-shadow(0 0 10px rgba(201, 169, 97, 0.2));
+}
+
+/* Input Section (Left Column) */
+.inputSection {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Results Section (Right Column) */
+.resultsSection {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logProcessorContainer {
+    padding: 1rem;
+  }
+  
+  .dpsValue {
+    font-size: 2rem;
+  }
+  
+  .saveSection {
+    flex-direction: column;
+  }
+  
+  .skillHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .skillStats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .savedResultsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .skillDetailsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .uploadArea {
+    padding: 1.5rem 1rem;
+  }
 }
