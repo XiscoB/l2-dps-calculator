@@ -77,6 +77,22 @@ function App() {
         <p>Version {currentVersion}</p>
         <p>Stored Version {storedVersion || "None"}</p>
         <p>Made by @Xiscoteon</p>
+        <a
+          href="https://github.com/Xiscob/l2-dps-calculator"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="collaborateLink"
+        >
+          💻 Dev? Contribute!
+        </a>
+        <a
+          href="https://github.com/Xiscob/l2-dps-calculator/issues/new?title=%5BBug%5D+&body=%23%23+Description%0ADescribe+the+bug+here...%0A%0A%23%23+Steps+to+Reproduce%0A1.+Go+to+...%0A2.+Click+on+...%0A3.+See+error%0A%0A%23%23+Expected+Behavior%0AWhat+did+you+expect+to+happen%3F%0A%0A%23%23+Actual+Behavior%0AWhat+actually+happened%3F%0A%0A%23%23+Environment%0A-+App+Version%3A+{currentVersion}%0A-+Browser%3A+...%0A-+OS%3A+...%0A%0A%23%23+Additional+Context%0AAdd+any+other+context+or+screenshots+here.%0A"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bugReportLink"
+        >
+          🐛 Report Bug
+        </a>
       </footer>
     </div>
   );

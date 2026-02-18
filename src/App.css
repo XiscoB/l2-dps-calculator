@@ -277,6 +277,52 @@
   display: none;
 }
 
+/* Bug Report Link */
+.bugReportLink {
+  color: #c9a961;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(201, 169, 97, 0.4);
+  border-radius: 0.375rem;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  background: rgba(201, 169, 97, 0.1);
+}
+
+.bugReportLink:hover {
+  background: rgba(201, 169, 97, 0.2);
+  border-color: rgba(201, 169, 97, 0.6);
+  box-shadow: 0 0 15px rgba(201, 169, 97, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Collaborate Link */
+.collaborateLink {
+  color: #4a90d9;
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(74, 144, 217, 0.4);
+  border-radius: 0.375rem;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  background: rgba(74, 144, 217, 0.1);
+}
+
+.collaborateLink:hover {
+  background: rgba(74, 144, 217, 0.2);
+  border-color: rgba(74, 144, 217, 0.6);
+  box-shadow: 0 0 15px rgba(74, 144, 217, 0.3);
+  transform: translateY(-1px);
+}
+
 /* Component Switch */
 .ComponentSwitch {
   display: flex;
