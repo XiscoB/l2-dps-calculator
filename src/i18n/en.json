@@ -158,5 +158,10 @@
   },
   "buffDebuffChecker": {
     "title": "Buff/Debuff Checker"
+  },
+  "seo": {
+    "title": "L2 DPS Calculator",
+    "description": "Free Lineage 2 DPS Calculator - Parse combat logs, calculate Damage Per Second, analyze skills with min/max/average damage and critical hit rates. Supports 10 languages.",
+    "keywords": "Lineage 2, L2, DPS calculator, combat log, damage calculator, MMORPG, skill analyzer"
   }
 }

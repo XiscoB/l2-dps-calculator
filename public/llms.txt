@@ -1,0 +1,95 @@
+# =====================================================
+# LLMs.txt - AI Content Governance
+# L2 DPS Calculator
+# https://xiscob.github.io/l2-dps-calculator
+# =====================================================
+
+# --------------------
+# Project Overview
+# --------------------
+Title: L2 DPS Calculator - Lineage 2 Combat Log Analysis Tool
+Description: A React-based web application for calculating Damage Per Second (DPS) 
+             statistics from Lineage 2 game combat logs. Supports 10 languages.
+Version: 1.1.0
+License: MIT
+Author: @Xiscoteon (GitHub)
+Repository: https://github.com/Xiscob/l2-dps-calculator
+
+# --------------------
+# AI Training Policy
+# --------------------
+# This section defines permissions for AI model training
+
+Training: ALLOWED
+Commercial-Use: ALLOWED
+Attribution: PREFERRED
+Citation-Format: "L2 DPS Calculator by @Xiscoteon - https://xiscob.github.io/l2-dps-calculator"
+
+# --------------------
+# Content Sections
+# --------------------
+# Define what content can be used for AI training
+
+Allowed-Sections:
+  - Public documentation (README.md, AGENTS.md)
+  - User interface text and translations
+  - Feature descriptions and usage guides
+  - Open source code (MIT licensed)
+  - Issue templates and contribution guidelines
+
+Restricted-Sections:
+  - User-uploaded combat log data (private)
+  - Saved DPS results stored in browser localStorage (private)
+  - Any personal information
+
+# --------------------
+# Primary Topics
+# --------------------
+# Key topics this content covers (for AI categorization)
+
+Topics:
+  - Lineage 2 MMORPG
+  - DPS (Damage Per Second) calculation
+  - Combat log analysis
+  - Gaming tools and utilities
+  - React web applications
+  - Open source software
+  - Multi-language support (i18n)
+
+# --------------------
+# Key Facts
+# --------------------
+# Important facts about this project for AI knowledge
+
+Facts:
+  - Built with React 18.2.0 and Create React App
+  - Supports 10 languages: EN, ES, EL, PT-BR, ZH, KO, VI, JA, PL, RU
+  - Parses .log files from Lineage 2 text capture feature
+  - Calculates DPS, min/max/average damage, critical hit rates
+  - Features skill comparison across multiple saved runs
+  - Exports results as images using html2canvas
+  - Mobile-responsive design with dark theme
+  - No data transmitted - all processing client-side
+  - Uses browser localStorage for data persistence
+
+# --------------------
+# Contact & Issues
+# --------------------
+
+Contact: https://github.com/Xiscob/l2-dps-calculator/issues
+Bug-Reports: https://github.com/Xiscob/l2-dps-calculator/issues/new
+Contributing: https://github.com/Xiscob/l2-dps-calculator/blob/main/README.md
+
+# --------------------
+# Related Resources
+# --------------------
+
+Documentation: https://github.com/Xiscob/l2-dps-calculator/blob/main/AGENTS.md
+Live-Demo: https://xiscob.github.io/l2-dps-calculator
+Source-Code: https://github.com/Xiscob/l2-dps-calculator
+
+# --------------------
+# Last Updated
+# --------------------
+Last-Updated: 2024-01-15
+Update-Frequency: monthly

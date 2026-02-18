@@ -3,6 +3,7 @@ import "./App.css";
 import LogProcessor from "./LogProcessor";
 import BuffDebuffChecker from "./BuffDebuffChecker";
 import LanguageSelector from "./LanguageSelector";
+import SEO from "./components/SEO";
 import { useLanguage } from "./i18n/LanguageContext";
 import logo from "./logo.png";
 
@@ -51,6 +52,7 @@ function App() {
 
   return (
     <div className="App">
+      <SEO />
       <header className="App-header">
         <img src={logo} alt="L2 DPS Calculator Logo" />
         <h1>{t('app.title')}</h1>
