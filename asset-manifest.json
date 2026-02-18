@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/l2-dps-calculator/static/css/main.c96cdc6f.css",
-    "main.js": "/l2-dps-calculator/static/js/main.fc3e1808.js",
-    "static/js/453.77f683a9.chunk.js": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js",
-    "static/media/logo.png": "/l2-dps-calculator/static/media/logo.4965a81423248eab0e92.png",
-    "index.html": "/l2-dps-calculator/index.html",
-    "main.c96cdc6f.css.map": "/l2-dps-calculator/static/css/main.c96cdc6f.css.map",
-    "main.fc3e1808.js.map": "/l2-dps-calculator/static/js/main.fc3e1808.js.map",
-    "453.77f683a9.chunk.js.map": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js.map"
+    "main.css": "https://xiscob.github.io/l2-dps-calculator/static/css/main.c96cdc6f.css",
+    "main.js": "https://xiscob.github.io/l2-dps-calculator/static/js/main.61d35246.js",
+    "static/js/453.77f683a9.chunk.js": "https://xiscob.github.io/l2-dps-calculator/static/js/453.77f683a9.chunk.js",
+    "static/media/logo.png": "https://xiscob.github.io/l2-dps-calculator/static/media/logo.4965a81423248eab0e92.png",
+    "index.html": "https://xiscob.github.io/l2-dps-calculator/index.html",
+    "main.c96cdc6f.css.map": "https://xiscob.github.io/l2-dps-calculator/static/css/main.c96cdc6f.css.map",
+    "main.61d35246.js.map": "https://xiscob.github.io/l2-dps-calculator/static/js/main.61d35246.js.map",
+    "453.77f683a9.chunk.js.map": "https://xiscob.github.io/l2-dps-calculator/static/js/453.77f683a9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c96cdc6f.css",
-    "static/js/main.fc3e1808.js"
+    "static/js/main.61d35246.js"
   ]
 }
