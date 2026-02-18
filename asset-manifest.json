@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/l2-dps-calculator/static/css/main.ed391beb.css",
-    "main.js": "/l2-dps-calculator/static/js/main.4fed462f.js",
+    "main.css": "/l2-dps-calculator/static/css/main.c96cdc6f.css",
+    "main.js": "/l2-dps-calculator/static/js/main.512b2503.js",
     "static/js/453.77f683a9.chunk.js": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js",
     "static/media/logo.png": "/l2-dps-calculator/static/media/logo.4965a81423248eab0e92.png",
     "index.html": "/l2-dps-calculator/index.html",
-    "main.ed391beb.css.map": "/l2-dps-calculator/static/css/main.ed391beb.css.map",
-    "main.4fed462f.js.map": "/l2-dps-calculator/static/js/main.4fed462f.js.map",
+    "main.c96cdc6f.css.map": "/l2-dps-calculator/static/css/main.c96cdc6f.css.map",
+    "main.512b2503.js.map": "/l2-dps-calculator/static/js/main.512b2503.js.map",
     "453.77f683a9.chunk.js.map": "/l2-dps-calculator/static/js/453.77f683a9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ed391beb.css",
-    "static/js/main.4fed462f.js"
+    "static/css/main.c96cdc6f.css",
+    "static/js/main.512b2503.js"
   ]
 }
