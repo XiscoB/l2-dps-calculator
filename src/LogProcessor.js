@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./LogProcessor.css";
 import ComparisonDisplay from "./ComparisonDisplay";
+import Onboarding from "./Onboarding";
 import html2canvas from "html2canvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +15,7 @@ function LogProcessor() {
   const [savedDPSResults, setSavedDPSResults] = useState([]);
   const [selectedDPSName, setSelectedDPSName] = useState("");
   const [showHelp, setShowHelp] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [toastVisible, setToastVisible] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [fightDuration, setFightDuration] = useState(60);
@@ -29,7 +31,7 @@ function LogProcessor() {
   };
 
   const toggleHelp = () => {
-    setShowHelp((prev) => !prev);
+    setShowOnboarding((prev) => !prev);
   };
 
   const fetchSavedDPSResults = () => {
@@ -361,40 +363,16 @@ function LogProcessor() {
         {toastMessage}
       </div>
 
-      {/* Help Overlay */}
-      <div 
-        className={`helpOverlay ${showHelp ? "visible" : ""}`}
-        onClick={toggleHelp}
+      {/* Onboarding Modal */}
+      <Onboarding 
+        isOpen={showOnboarding} 
+        onClose={() => setShowOnboarding(false)} 
       />
 
       {/* Header with Help */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
         <div></div>
-        <div className="helpIcon" onClick={toggleHelp}>?</div>
-      </div>
-
-      {/* Help Modal */}
-      <div className={`helpTooltip ${showHelp ? "visible" : ""}`}>
-        <button className="closeHelp" onClick={toggleHelp}>×</button>
-        <p>
-          <strong>Getting Started</strong>
-        </p>
-        <p>
-          Use the command <code>{'///textcapture on'}</code> to start recording combat logs.
-        </p>
-        <p>
-          When finished, use <code>{'///textcapture off'}</code> to stop recording.
-        </p>
-        <p>
-          Log files are saved in your Lineage2/system folder with names like:<br />
-          <code>CharacterName_L2_04_09_23_36.log</code>
-        </p>
-        <p>
-          Upload the file or paste the content directly into the calculator.
-        </p>
-        <p style={{ marginTop: "1rem", paddingTop: "1rem", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
-          <strong>Note:</strong> Your DPS varies based on gear, build, skill rotation, and execution.
-        </p>
+        <div className="helpIcon" onClick={toggleHelp} title="Help & Tutorial">?</div>
       </div>
 
       {/* Comparison Display - Full Width */}

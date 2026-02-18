@@ -1,33 +1,12 @@
 /* Lineage 2 Inspired ComparisonDisplay Styles */
 
 .comparisonContainer {
-  background: linear-gradient(180deg, 
-    #1a1f2e 0%, 
-    #121620 100%
-  );
   border: 1px solid rgba(201, 169, 97, 0.25);
   border-radius: 0.75rem;
   padding: 1.25rem;
   margin-bottom: 1.5rem;
   animation: fadeIn 0.5s ease;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
-}
-
-.comparisonContainer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, 
-    transparent 0%,
-    rgba(201, 169, 97, 0.5) 50%,
-    transparent 100%
-  );
 }
 
 .comparisonHeader {
@@ -51,7 +30,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .comparisonExportButtons {
@@ -92,6 +70,39 @@
   transform: translateY(-2px);
 }
 
+.copyTextButton {
+  background: linear-gradient(180deg, 
+    #4a5568 0%, 
+    #2d3748 50%, 
+    #1a202c 100%
+  );
+  color: #f0e6d2;
+  border: 1px solid #718096;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  font-size: 0.8rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(113, 128, 150, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copyTextButton:hover {
+  background: linear-gradient(180deg, #5a6578 0%, #3d4758 100%);
+  box-shadow: 
+    0 6px 15px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(113, 128, 150, 0.3);
+  transform: translateY(-2px);
+}
+
 .clearAllButton {
   background: linear-gradient(180deg, 
     #8b0000 0%, 
@@ -128,8 +139,14 @@
 .comparisonTableWrapper {
   overflow-x: auto;
   border-radius: 0.5rem;
-  border: 1px solid rgba(201, 169, 97, 0.1);
-  background: #0a0c10;
+  border: 1px solid rgba(201, 169, 97, 0.25);
+  background: linear-gradient(180deg, 
+    #1a1f2e 0%, 
+    #121620 100%
+  );
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .comparisonTable {
@@ -287,33 +304,6 @@
 
 .logDetails > div:last-child {
   border-bottom: none;
-}
-
-/* Bright capture mode for image export */
-.capture-bright {
-  background: linear-gradient(180deg, #32384d 0%, #252a3d 100%) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
-}
-
-.capture-bright .comparisonTableWrapper {
-  background: #1a1f2e !important;
-  border-color: rgba(201, 169, 97, 0.2) !important;
-}
-
-.capture-bright .comparisonTable thead {
-  background: linear-gradient(180deg, #3d4458 0%, #2f3548 100%) !important;
-}
-
-.capture-bright .comparisonTable tbody tr {
-  background: #232838 !important;
-}
-
-.capture-bright .comparisonTable tbody tr:hover {
-  background: #2a3040 !important;
-}
-
-.capture-bright-wrapper {
-  background: #1a1f2e !important;
 }
 
 /* Responsive */

@@ -8,7 +8,7 @@ function App() {
   const currentVersion = "1.1.0";
 
   // eslint-disable-next-line no-unused-vars
-const [activeComponent, setActiveComponent] = useState("logProcessor");
+  const [activeComponent, setActiveComponent] = useState("logProcessor");
   const [showUpdateButton, setShowUpdateButton] = useState(false);
   const storedVersion = localStorage.getItem("appVersion");
 
@@ -29,13 +29,13 @@ const [activeComponent, setActiveComponent] = useState("logProcessor");
 
     if (majorNew > majorOld || (majorNew === majorOld && minorNew > minorOld)) {
       alert(
-        `New version detected: ${currentVersion} vs ${storedVersion}. Please update your data to ensure compatibility.`
+        `New version detected: ${currentVersion} vs ${storedVersion}. Please update your data to ensure compatibility.`,
       );
       setShowUpdateButton(true);
     } else if (currentVersion !== storedVersion) {
       localStorage.setItem("appVersion", currentVersion);
       console.log(
-        "Minor update within the same subversion, version updated in storage."
+        "Minor update within the same subversion, version updated in storage.",
       );
     }
   }, []);
@@ -51,9 +51,12 @@ const [activeComponent, setActiveComponent] = useState("logProcessor");
       <header className="App-header">
         <img src={logo} alt="L2 DPS Calculator Logo" />
         <h1>Lineage II DPS Calculator</h1>
-        <p className="subtitle">"For Glory and Honor"</p>
+        <p className="subtitle">
+          "The subtle difference between skill and gear is the difference
+          between an average player and a great one."
+        </p>
       </header>
-      
+
       <div>
         {showUpdateButton && (
           <div className="warning-banner">
@@ -65,11 +68,11 @@ const [activeComponent, setActiveComponent] = useState("logProcessor");
             <button onClick={handleClearData}>Update and Delete Data</button>
           </div>
         )}
-        
+
         {activeComponent === "logProcessor" && <LogProcessor />}
         {activeComponent === "buffDebuffChecker" && <BuffDebuffChecker />}
       </div>
-      
+
       <footer className="App-footer">
         <p>Version {currentVersion}</p>
         <p>Stored Version {storedVersion || "None"}</p>

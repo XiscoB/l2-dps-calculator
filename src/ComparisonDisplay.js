@@ -7,7 +7,6 @@ import {
   faMinusSquare,
   faSortDown,
   faSortUp,
-  faCamera,
 } from "@fortawesome/free-solid-svg-icons";
 import html2canvas from "html2canvas";
 
@@ -42,48 +41,120 @@ function ComparisonDisplay({
     }
   });
 
+  const copyComparisonAsText = () => {
+    let text = "⚔️ Comparison Results\n\n";
+    text += "Skill | Save Name | Min Damage | Max Damage | Average | Hits | Crits | Crit Rate\n";
+    text += "-".repeat(80) + "\n";
+    
+    sortedData.forEach((item) => {
+      const critRate = item.data.hits > 0 
+        ? ((item.data.criticalHits / item.data.hits) * 100).toFixed(2) + "%"
+        : "0%";
+      
+      text += `${item.skill} | ${item.key} | `;
+      text += `${item.data.min.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} | `;
+      text += `${item.data.max.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")} | `;
+      text += `${item.data.average ? item.data.average.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "N/A"} | `;
+      text += `${item.data.hits} | ${item.data.criticalHits} | ${critRate}\n`;
+    });
+    
+    navigator.clipboard.writeText(text).then(
+      () => {
+        if (showToast) showToast("Copied to clipboard!");
+      },
+      (err) => {
+        if (showToast) showToast("Failed to copy.");
+        console.error("Could not copy text: ", err);
+      }
+    );
+  };
+
   const exportComparisonAsImage = async () => {
-    const element = document.getElementById("comparison-results-container");
-    if (!element) return;
+    // Create a temporary element for capture with bright styling
+    const tempDiv = document.createElement("div");
+    tempDiv.id = "comparison-capture-temp";
+    tempDiv.style.cssText = `
+      position: fixed;
+      top: -9999px;
+      left: -9999px;
+      width: 1200px;
+      background: #1a1f2e;
+      padding: 20px;
+      font-family: 'Cinzel', 'Georgia', serif;
+    `;
+
+    // Build the table HTML manually with bright colors
+    let tableHTML = `
+      <div style="
+        color: #e8d5a3;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: bold;
+      ">⚔️ Comparison Results</div>
+      <div style="
+        background: #0a0c10;
+        border-radius: 8px;
+        border: 1px solid rgba(201, 169, 97, 0.3);
+        overflow: hidden;
+      ">
+      <table style="
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      ">
+        <thead>
+          <tr style="background: #2a3040;">
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Skill</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Save Name</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Min Damage</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Max Damage</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Average</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Hits</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Crits</th>
+            <th style="padding: 12px; text-align: left; color: #e8d5a3; font-weight: bold;">Crit Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    sortedData.forEach((item, index) => {
+      const bgColor = index % 2 === 0 ? "#151922" : "#1a1f2e";
+      const critRate = item.data.hits > 0 
+        ? ((item.data.criticalHits / item.data.hits) * 100).toFixed(2) 
+        : "0";
+      
+      tableHTML += `
+        <tr style="background: ${bgColor};">
+          <td style="padding: 12px; color: #4a90d9; font-weight: bold;">${item.skill}</td>
+          <td style="padding: 12px; color: #a89b7c;">${item.key}</td>
+          <td style="padding: 12px; color: #e8d5a3; font-weight: bold;">${item.data.min.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+          <td style="padding: 12px; color: #e8d5a3; font-weight: bold;">${item.data.max.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+          <td style="padding: 12px; color: #e8d5a3; font-weight: bold;">${item.data.average ? item.data.average.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "N/A"}</td>
+          <td style="padding: 12px; color: #b8b0a0;">${item.data.hits}</td>
+          <td style="padding: 12px; color: #b8b0a0;">${item.data.criticalHits}</td>
+          <td style="padding: 12px; color: #e25822; font-weight: bold;">${critRate}%</td>
+        </tr>
+      `;
+    });
+
+    tableHTML += `
+        </tbody>
+      </table>
+      </div>
+    `;
+
+    tempDiv.innerHTML = tableHTML;
+    document.body.appendChild(tempDiv);
 
     try {
-      // Temporarily hide export buttons and action buttons
-      const exportButtons = element.querySelectorAll(".comparisonExportButtons");
-      const actionButtons = element.querySelectorAll(".detailsButton, .removeRowButton");
-      exportButtons.forEach((btn) => (btn.style.display = "none"));
-      actionButtons.forEach((btn) => (btn.style.display = "none"));
-
-      // Store original classes and add bright capture class
-      const originalContainerClass = element.className;
-      element.classList.add("capture-bright");
-      
-      // Brighten the table wrapper
-      const tableWrapper = element.querySelector(".comparisonTableWrapper");
-      const originalWrapperClass = tableWrapper ? tableWrapper.className : "";
-      if (tableWrapper) {
-        tableWrapper.classList.add("capture-bright-wrapper");
-      }
-      
-      // Wait a bit for the UI to update
-      await new Promise(resolve => setTimeout(resolve, 150));
-
-      const canvas = await html2canvas(element, {
-        backgroundColor: "#1a1f2e",
-        scale: 3,
+      const canvas = await html2canvas(tempDiv, {
+        backgroundColor: "#0a0c10",
+        scale: 2,
         useCORS: true,
         logging: false,
-        removeContainer: false,
-        allowTaint: true,
-        foreignObjectRendering: false,
       });
-
-      // Restore original classes
-      exportButtons.forEach((btn) => (btn.style.display = ""));
-      actionButtons.forEach((btn) => (btn.style.display = ""));
-      element.className = originalContainerClass;
-      if (tableWrapper) {
-        tableWrapper.className = originalWrapperClass;
-      }
 
       canvas.toBlob((blob) => {
         if (blob) {
@@ -91,16 +162,20 @@ function ComparisonDisplay({
           navigator.clipboard.write([item]).then(
             () => {
               if (showToast) showToast("Image copied to clipboard!");
+              // Clean up
+              document.body.removeChild(tempDiv);
             },
             (err) => {
               if (showToast) showToast("Failed to copy image.");
               console.error("Could not copy image: ", err);
+              document.body.removeChild(tempDiv);
             }
           );
         }
       }, "image/png", 1.0);
     } catch (err) {
       console.error("Could not generate image: ", err);
+      document.body.removeChild(tempDiv);
     }
   };
 
@@ -109,11 +184,14 @@ function ComparisonDisplay({
       <div className="comparisonHeader">
         <h3>⚔️ Comparison Results</h3>
         <div className="comparisonExportButtons">
+          <button onClick={copyComparisonAsText} className="copyTextButton">
+            📋 Copy
+          </button>
           <button onClick={exportComparisonAsImage} className="exportImageButton">
-            <FontAwesomeIcon icon={faCamera} /> Image
+            📷 Image
           </button>
           <button onClick={clearComparisonData} className="clearAllButton">
-            <FontAwesomeIcon icon={faTrashAlt} /> Clear All
+            🗑️ Clear All
           </button>
         </div>
       </div>
